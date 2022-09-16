@@ -1,0 +1,93 @@
+import Code from '../../../Code'
+
+# tokens
+
+Data to render the mannys.game tokens. 
+
+<h2 style={{ marginTop: 0 }}>Usage</h2>
+
+<Code language="js">
+{`import mannyTokens from 'fixtures/tokens';
+// ...
+const token = mannyTokens.find((mt) => mt.token_id === 404);
+\{mannyProjects.map((project) => <ProjectCpt {...project} />)\}`}
+</Code>
+
+## Return Value
+
+An array of objects representing tokens.
+
+<Code language="js">
+{`[
+  {
+    ...project
+  }
+]`}
+</Code>
+
+## Token Props
+
+### animation_url
+
+<Code language="js">
+{`string // url to render token viewer iframe`}
+</Code>
+
+### attributes
+
+<Code language="js">
+{`[
+  {
+    "trait_type": string, // type of trait
+    "value": string // value of trait
+  }
+]`}
+</Code>
+
+### description
+
+<Code language="js">
+{`string // copy for token description`}
+</Code>
+
+### external_url
+
+<Code language="js">
+{`string // URL to link out to`}
+</Code>
+
+### iframe_url
+
+<Code language="js">
+{`string // URL to use for token iframe view`}
+</Code>
+
+### image
+
+<Code language="js">
+{`string // URL to use for token image`}
+</Code>
+
+### name
+
+<Code language="js">
+{`string // user friendly name of token`}
+</Code>
+
+### texture_url
+
+<Code language="js">
+{`string // URL to use for loading token texture`}
+</Code>
+
+### texture_url_hd
+
+<Code language="js">
+{`string // URL to use for loading high resolution token texture`}
+</Code>
+
+### token_id
+
+<Code language="js">
+{`integer // numerical id of the token`}
+</Code>

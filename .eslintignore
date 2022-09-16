@@ -1,0 +1,5 @@
+# folders
+build/
+node_modules/
+contracts/
+Frogger.js

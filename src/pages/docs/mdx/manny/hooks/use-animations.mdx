@@ -1,0 +1,39 @@
+import Code from '../../../Code';
+
+# useAnimations
+
+Hook for loading animation assets and appending them to the manny model's
+animation mixer.
+
+## Usage
+
+<Code language="js">
+  {`const mannyObj = manny();
+const paths = {
+  walk: 'https://myhost.com/walk.fbx',
+  run: 'https://myhost.com/run.fbx',
+  jump: 'https://myhost.com/jump.fbx',
+}
+const { actions } = useAnimations(mannyObj, paths);`}
+</Code>
+
+## Return Value
+
+`useAnimations` will return an object including `actions` which is an object
+mapping the keys of `paths` to three.js animation actions you can play, pause,
+loop etc.
+
+<Code language="js">
+  {`{
+  actions: {
+    [name]: THREE.AnimationAction
+  }
+}`}
+</Code>
+<br />
+<a
+  href="https://threejs.org/docs/#api/en/animation/AnimationAction"
+  target="_blank"
+>
+  Read more about THREE.AnimationAction
+</a>

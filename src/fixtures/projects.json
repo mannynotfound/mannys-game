@@ -1,0 +1,311 @@
+[
+  {
+    "name": "Friends With Benefits",
+    "url": "https://fwb.help/",
+    "logo": "fwb.png",
+    "logoSize": "60%"
+  },
+  {
+    "name": "Superlayer",
+    "url": "https://www.superlayer.io/",
+    "logo": "superlayer.png"
+  },
+  {
+    "name": "RTO+P",
+    "url": "https://rtop.com/",
+    "logo": "RTO+P.png",
+    "logoSize": "70%"
+  },
+  {
+    "name": "Rainbow",
+    "url": "https://rainbow.me/",
+    "logo": "rainbow.png",
+    "logoSize": "40%"
+  },
+  {
+    "name": "oncyber",
+    "url": "https://oncyber.io/",
+    "logo": "oncyber.png",
+    "logoSize": "50%"
+  },
+  {
+    "name": "OKPC",
+    "url": "https://okpc.app/",
+    "logo": "okpc.png",
+    "logoSize": "40%"
+  },
+  {
+    "name": "Jam3",
+    "url": "https://www.jam3.com/",
+    "logo": "jam3.png",
+    "logoSize": "65%"
+  },
+  {
+    "name": "wagmi",
+    "url": "https://wagmi.sh/",
+    "logo": "wagmi.png",
+    "logoSize": "70%"
+  },
+  {
+    "name": "GAWDS",
+    "url": "gawds.xyz",
+    "logo": "gawds.png",
+    "logoSize": "70%"
+  },
+  {
+    "name": "Catalog",
+    "url": "https://catalog.works/",
+    "logo": "catalogworks.png",
+    "logoSize": "50%"
+  },
+  {
+    "name": "hyaliko",
+    "url": "https://www.hyaliko.com/",
+    "logo": "hyaliko.png",
+    "logoSize": "65%"
+  },
+  {
+    "name": "Dapper Labs",
+    "url": "https://www.dapperlabs.com/",
+    "logo": "dapper.png",
+    "logoSize": "70%"
+  },
+  {
+    "name": "Allstarz",
+    "url": "https://allstarz.world/",
+    "logo": "allstarz.png"
+  },
+  {
+    "name": "Juicebox",
+    "url": "https://www.juicebox.money/",
+    "logo": "juicebox.png",
+    "logoSize": "40%"
+  },
+  {
+    "name": "Zora",
+    "url": "https://zora.co/",
+    "logo": "zora.png",
+    "logoSize": "70%"
+  },
+  {
+    "name": "Big Head",
+    "url": "https://www.bighead.club/",
+    "logo": "big-head.png",
+    "logoSize": "40%"
+  },
+  {
+    "name": "Epic Games",
+    "url": "https://www.epicgames.com/site/",
+    "logo": "epic-games.png",
+    "logoSize": "40%"
+  },
+  {
+    "name": "Sunspot",
+    "url": "https://sunspot.gg/",
+    "logo": "sunspot.png"
+  },
+  {
+    "name": "pssssd",
+    "url": "https://p4sd.com/",
+    "logo": "pssssd.png"
+  },
+  {
+    "name": "Context",
+    "url": "https://context.app/",
+    "logo": "context.png"
+  },
+  {
+    "name": "Substack",
+    "url": "https://substack.com/",
+    "logo": "substack.png"
+  },
+  {
+    "name": "sup",
+    "url": "https://sup.xyz/",
+    "logo": "sup.png",
+    "logoSize": "50%"
+  },
+  {
+    "name": "Blitmap",
+    "url": "https://www.blitmap.com/",
+    "logo": "blitmap.png"
+  },
+  {
+    "name": "Chain Runners",
+    "url": "https://www.chainrunners.xyz/",
+    "logo": "chainrunners.png"
+  },
+  {
+    "name": "Nifty Island",
+    "url": "https://www.niftyisland.com/",
+    "logo": "nifty-island.png"
+  },
+  {
+    "name": "Art Blocks",
+    "url": "https://www.artblocks.io/",
+    "logo": "artblocks.png",
+    "logoSize": "60%"
+  },
+  {
+    "name": "Developer Dao",
+    "url": "https://www.developerdao.com/",
+    "logo": "developer-dao.png"
+  },
+  {
+    "name": "Twitter",
+    "url": "https://twitter.com/",
+    "logo": "twitter.png",
+    "logoSize": "40%"
+  },
+  {
+    "name": "Felt Zine",
+    "url": "https://www.feltzine.art/",
+    "logo": "felt-zine.png",
+    "logoSize": "55%"
+  },
+  {
+    "name": "Mirror",
+    "url": "https://mirror.xyz/",
+    "logo": "mirror.png",
+    "logoSize": "70%"
+  },
+  {
+    "name": "Crypto Packaged Goods",
+    "url": "https://www.cryptopackagedgoods.com/",
+    "logo": "cpg.png",
+    "logoSize": "60%"
+  },
+  {
+    "name": "Loot",
+    "url": "https://www.lootproject.com/",
+    "logo": "loot.png",
+    "logoSize": "60%"
+  },
+  {
+    "name": "Uniswap",
+    "url": "https://uniswap.org/",
+    "logo": "uniswap.png",
+    "logoSize": "60%"
+  },
+  {
+    "name": "Party DAO",
+    "url": "https://party.mirror.xyz/",
+    "logo": "party-dao.png",
+    "logoSize": "50%"
+  },
+  {
+    "name": "Google",
+    "url": "https://www.google.com/",
+    "logo": "google.png",
+    "logoSize": "70%"
+  },
+  {
+    "name": "PleasrDAO",
+    "url": "https://pleasr.org/",
+    "logo": "pleasrdao.png",
+    "logoSize": "70%"
+  },
+  {
+    "name": "Snap",
+    "url": "https://www.snap.com/",
+    "logo": "snap.png",
+    "logoSize": "45%"
+  },
+  {
+    "name": "Nike",
+    "url": "https://www.nike.com/",
+    "logo": "nike.png",
+    "logoSize": "60%"
+  },
+  {
+    "name": "Ledger",
+    "url": "https://www.ledger.com/",
+    "logo": "ledger.png"
+  },
+  {
+    "name": "Gitcoin",
+    "url": "https://gitcoin.co/",
+    "logo": "gitcoin.png",
+    "logoSize": "60%"
+  },
+  {
+    "name": "Worldcoin",
+    "url": "https://worldcoin.org/",
+    "logo": "worldcoin.png"
+  },
+  {
+    "name": "Omakasea",
+    "url": "https://omakasea.com/",
+    "logo": "omakasea.png"
+  },
+  {
+    "name": "Delphi Digital",
+    "url": "https://delphidigital.io/",
+    "logo": "delphi-digital.png",
+    "logoSize": "60%"
+  },
+  {
+    "name": "JPG",
+    "url": "https://jpg.space/",
+    "logo": "jpg.png",
+    "logoSize": "70%"
+  },
+  {
+    "name": "Botto",
+    "url": "https://www.botto.com/",
+    "logo": "botto.png",
+    "logoSize": "60%"
+  },
+  {
+    "name": "Seed Club",
+    "url": "https://www.seedclub.xyz/",
+    "logo": "seed-club.png",
+    "logoSize": "45%"
+  },
+  {
+    "name": "Crypto Coven",
+    "url": "https://www.cryptocoven.xyz/",
+    "logo": "crypto-coven.png"
+  },
+  {
+    "name": "Metaverse HQ",
+    "url": "https://www.mvhq.io/",
+    "logo": "mvhq.png",
+    "logoSize": "75%"
+  },
+  {
+    "name": "Tellie",
+    "url": "https://join.tell.ie/",
+    "logo": "tellie.png",
+    "logoSize": "70%"
+  },
+  {
+    "name": "Sushi",
+    "url": "https://sushi.com/",
+    "logo": "sushi.png",
+    "logoSize": "70%"
+  },
+  {
+    "name": "Evaluate.market",
+    "url": "https://evaluate.market/",
+    "logo": "evaluate.market.png"
+  },
+  {
+    "name": "Void Runners",
+    "url": "https://voidrunners.io/",
+    "logo": "voidrunners.png",
+    "logoSize": "55%"
+  },
+  {
+    "name": "Legend Maps",
+    "url": "https://legendmaps.io/",
+    "logo": "legendmaps.png",
+    "logoSize": "60%"
+  },
+  {
+    "name": "Fleek",
+    "url": "https://fleek.co/",
+    "logo": "fleek.png",
+    "logoSize": "70%"
+  }
+]

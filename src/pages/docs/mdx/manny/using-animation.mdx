@@ -1,0 +1,59 @@
+import Code from '../../Code';
+
+# Using Animation
+
+manny is using the <a href="https://www.mixamo.com" target="_blank">mixamo</a> rig 
+and supports loading animations in .fbx or .glb format. To use your own animations,
+define them in the `paths` property of `animationOptions` with the animation name
+and url as key/value pairs.
+
+<Code language="js">
+{`const Manny = () => {
+  const mannyObj = manny({
+    animationOptions: {
+      active: 'idle',
+      paths: {
+        idle: 'https://yourhost.com/animations/idle.fbx',
+      },
+    },
+  });
+
+  return (
+    <group position={[0, -90, 0]}>
+      <primitive object={mannyObj} dispose={null} />
+    </group>
+  );
+}`}
+
+</Code>
+
+If no `animationOptions` are provided, the returned manny object will not
+have an animation mixer and will be in a static default pose with arms resting
+at the side, useful if using custom animation state logic.
+
+## Loading Animations Lazily
+
+Defining all possible animations in `paths` might make your manny bloated and slow to
+load, so to avoid this you can include just the `paths` you want to load, and manny
+will cache any loaded animations after rendering.
+
+<Code language="js">
+{`const paths = { ... };
+
+const Manny = ({ animation }) => {
+  const mannyObj = manny({
+    animationOptions: {
+      active: animation,
+      paths: {
+        [animation]: paths[animation],
+      },
+    },
+  });
+
+  return (
+    <group position={[0, -90, 0]}>
+      <primitive object={mannyObj} dispose={null} />
+    </group>
+  );
+}`}
+</Code>

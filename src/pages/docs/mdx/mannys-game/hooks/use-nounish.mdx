@@ -1,0 +1,26 @@
+import Code from '../../../Code'
+
+# useNounish
+
+Hook for determining if provided address owns any of the following tokens:
+
+- CrypToadz
+- Nouns
+- Lil Nouns
+
+<h2 style={{ marginTop: 0 }}>Usage</h2>
+
+<Code language="js">
+{`const { provider } = useWeb3();
+const address = "0xF3A45Ee798fc560CE080d143D12312185f84aa72";
+const hasNouns = useNounish(provider, address);`}
+</Code>
+
+## Return Value
+
+<Code language="js">
+{`boolean // true if user has any of the tokens listed`}
+</Code>
+
+
+

@@ -1,0 +1,13 @@
+import Code from '../../../Code';
+
+# BUILD_TARGET
+
+Type of app to build depending on deploy environment, as defined in the .env file. 
+Defaults to "app" which builds the code for mannys.game. If set to "view", the app 
+will compile the code for "Viewer" mode which is used to render NFTs for iframes. 
+
+<Code language="js">
+{'string // process.env.REACT_APP_BUILD_TARGET '}
+</Code>
+
+

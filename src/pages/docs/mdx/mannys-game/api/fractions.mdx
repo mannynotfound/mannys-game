@@ -1,0 +1,30 @@
+import Code from '../../../Code'
+
+# /fractions
+
+## /:drop-id
+
+Gets all the fraction owners for any fractionalized assets. Currently there is 
+only one fractionalized drop (drop-1).
+
+<h3 style={{ marginTop: 0 }}>Usage</h3>
+
+<Code language="js">
+{`fetch('/api/fractions/drop-1'`}
+</Code>
+
+### Return Value
+
+An array of objects representing fraction owners.
+
+<Code language="js">
+{`[
+  {
+    "owner": string, // address of fraction owner
+    "name": string, // friendly name of fraction owner
+    "drop_id": integer, // id of drop
+    "token_id": integer, // token id of fraction owned
+    "message": string, // message input by owner when claiming
+  },
+]`}
+</Code>

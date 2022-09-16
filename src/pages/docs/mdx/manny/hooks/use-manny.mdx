@@ -1,0 +1,22 @@
+import Code from '../../../Code';
+
+# useManny
+
+Hook for loading the manny model path and texture url and
+combining the two into a new model clone.
+
+## Usage
+
+<Code language="js">
+  {`const modelPath = "https://myhost.com/mannymodel.fbx";
+const textureUrl = "https://myhost.com/texture.jpg";
+const mannyObj = useManny(modelPath, textureUrl);`}
+</Code>
+
+## Return Value
+
+<Code language="js">{'THREE.Object3D'}</Code>
+<br />
+<a href="https://threejs.org/docs/#api/en/core/Object3D" target="_blank">
+  Read more about THREE.Object3D
+</a>

@@ -1,0 +1,136 @@
+import Code from '../../Code';
+import { Link } from 'react-router-dom';
+
+# Adding Controls
+
+## Orbit Controls
+
+A popular solution, OrbitControls allows you to rotate, pan, and
+zoom the camera around your manny model.
+
+Install the helpers library that includes
+it:
+
+<Code language="bash">{'npm install @react-three/drei'}</Code>
+
+Then add `OrbitControls` to your react-three-fiber canvas:
+
+<Code language="js">
+{`import React, { Suspense } from "react";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
+import manny from "manny";
+
+const Manny = () => (
+  <group position={[0, -90, 0]}>
+    <primitive object={manny()} dispose={null} />
+  </group>
+);
+
+const App = () => (
+  <Canvas flat camera={{ fov: 45, position: [25, 100, 200] }}>
+    <Suspense fallback={null}>
+      <Manny />
+    </Suspense>
+    <OrbitControls
+      rotateSpeed={1}
+      target={[0, 0, 0]}
+      minDistance={100}
+      maxDistance={1000}
+    />
+    <hemisphereLight groundColor={0x444444} />
+    <directionalLight castShadow intensity={0.25} position={[0, 200, 100]} />
+  </Canvas>
+);
+
+export default App;`}
+</Code>
+
+You can see an example of OrbitControls on the page for any given <Link to="/1">manny NFT</Link>.
+
+## Third Person Controls
+
+With the help of the <a href="https://twitter.com/KnavETH" target="_blank">chainrunners</a>
+team, manny has written a react-three-fiber library for adding 3rd person style camera
+controls and physics to your scene.{' '}
+
+Install the library and its dependencies:
+
+<Code language="bash">
+  {'npm install react-three-third-person @react-three/cannon'}
+</Code>
+
+Then add `react-three-third-person` and `@react-three/cannon` to your
+react-three-fiber canvas:
+
+<Code language="js">
+{`import React, { Suspense } from "react";
+import { Canvas } from "@react-three/fiber";
+import ThirdPersonCharacterControls from "react-three-third-person";
+import { Physics, useBox } from "@react-three/cannon";
+import manny from "manny";
+
+const paths = {
+  idle: '...',
+  walk: '...',
+  run: '...',
+  jump: '...',
+  landing: '...',
+  inAir: '...',
+  backpedal: '...',
+  turnLeft: '...',
+  turnRight: '...',
+  strafeLeft: '...',
+  strafeRight: '...',
+};
+
+const Manny = () => (
+  <ThirdPersonCharacterControls
+    cameraOptions={{
+      yOffset: 1.6,
+      minDistance: 0.6,
+      maxDistance: 7,
+      collisionFilterMask: 2,
+    }}
+    characterObj={manny()}
+    animationPaths={paths}
+  />
+);
+
+// create a floor for manny to walk on
+const Floor = () => {
+  const [ref] = useBox(() => ({
+    type: "Static",
+    args: [25, 0.2, 25],
+    mass: 0,
+    material: {
+      friction: 0,
+      name: "floor",
+    },
+    collisionFilterGroup: 2,
+  }));
+
+  return (
+    <group>
+      <mesh ref={ref}>
+        <boxGeometry name="floor-box" />
+        <meshPhongMaterial opacity={0} transparent />
+      </mesh>
+      <gridHelper args={[25, 25]} />
+    </group>
+  );
+}
+
+const App = () => (
+  <Canvas flat camera={{ fov: 45, position: [25, 100, 200] }}>
+    <Physics gravity={[0, -35, 0]}>
+      <Manny />
+      <Floor />
+    </Physics>
+    <hemisphereLight groundColor={0x444444} />
+    <directionalLight castShadow intensity={0.25} position={[0, 200, 100]} />
+  </Canvas>
+);
+
+export default App;`}
+</Code>

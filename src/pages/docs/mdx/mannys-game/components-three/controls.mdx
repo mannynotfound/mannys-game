@@ -1,0 +1,79 @@
+import Code from '../../../Code'
+
+# Controls
+
+Adds `THREE.OrbitControls` to a scene with configurable options.
+
+<h2 style={{ marginTop: 0}}>Usage</h2>
+
+<Code language="js">
+{`<Canvas>
+  <Controls
+    enableZoom={false}
+    enablePan={false}
+    target={[0, 80, 0]}
+  />
+</Canvas>`}
+</Code>
+
+## Props
+  
+### autoRotate
+
+<Code language="js">
+{`boolean // if true, controls will auto rotate at autoRotateSpeed`}
+</Code>
+
+### autoRotateSpeed
+
+<Code language="js">
+{`float // controls speed at which autoRotate moves`}
+</Code>
+
+### enablePan
+
+<Code language="js">
+{`boolean // if true, user can pan camera on x/y axis`}
+</Code>
+
+### enableZoom
+
+<Code language="js">
+{`boolean // if true, user can zoom in and out on z axis`}
+</Code>
+
+### maxDistance
+
+<Code language="js">
+{`integer // furthest user can zoom out`}
+</Code>
+
+### minDistance
+
+<Code language="js">
+{`integer // closest user can zoom in`}
+</Code>
+
+### target
+
+<Code language="js">
+{`[integer] // x/y/z coords for OrbitControls.target`}
+</Code>
+
+### zoomedIn
+
+<Code language="js">
+{`boolean // if true, sets target to zoomedInTarget`}
+</Code>
+
+### zoomedInTarget
+
+<Code language="js">
+{`[integer] // x/y/z coords for zoomed in OrbitControls.target`}
+</Code>
+
+### zoomedInCameraPosition
+
+<Code language="js">
+{`[integer] // x/y/z coords or camera position when zoomedIn`}
+</Code>

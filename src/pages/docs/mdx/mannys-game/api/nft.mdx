@@ -1,0 +1,37 @@
+import Code from '../../../Code'
+
+# /nft
+
+## /image-upload
+
+Upload a new image for a given NFT, updating it's `image` metadata property.
+
+<h3 style={{ marginTop: 0 }}>Usage</h3>
+
+Requires a `POST` request with a `body` that contains `token`, `sig`, and `file`.
+
+<Code language="js">
+{`fetch('/api/nft/image-upload', {
+  method: 'POST',
+  mode: 'cors',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    token: integer, // token of message signer
+    sig: string, // message signed by owner of token id
+    file: string, // dataURI of new image to upload
+  }),
+})`}
+</Code>
+
+### Return Value
+
+An object representing the success/failure of the image upload.
+
+<Code language="js">
+{`{
+  "message": string, // success or fail message
+  "newImage": string, // url of newly uploaded image
+}`}
+</Code>

@@ -1,0 +1,56 @@
+import Code from '../../../Code'
+
+# gamer-plaques
+
+Data to render mannys.game golden gamer plaques. 
+
+<h2 style={{ marginTop: 0 }}>Usage</h2>
+
+<Code language="js">
+{`import gamerPlaques from 'fixtures/gamer-plaques';
+// ...
+const plaqueId = "1";
+const plaque = gamerPlaques[plaqueId];`}
+</Code>
+
+## Return Value
+
+An object where each key is the tokenId of that specific plaque.
+
+<Code language="js">
+{`{
+  "1": { ...plaque }
+}`}
+</Code>
+
+## Plaque Props
+
+### address
+
+<Code language="js">
+{`string // wallet address of plaque winner`}
+</Code>
+
+### dateEarned
+
+<Code language="js">
+{`integer // unix timestamp of when plaque was earned`}
+</Code>
+
+### name
+
+<Code language="js">
+{`string // user friendly name of plaque winnerj`}
+</Code>
+
+### posX
+
+<Code language="js">
+{`integer // position.x of plaque winner name`}
+</Code>
+
+### posY
+
+<Code language="js">
+{`integer // position.y of plaque winner name`}
+</Code>

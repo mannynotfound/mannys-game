@@ -1,0 +1,28 @@
+import Code from '../../../Code'
+
+# Page
+
+Wrapper component for most of the pages on mannys.game, which 
+adds padding top to compensate for the fixed site navigation.
+
+<h2 style={{ marginTop: 0}}>Usage</h2>
+
+<Code language="js">
+{`<Page className="text-green">
+  <Body />
+</Page>`}
+</Code>
+
+## Props
+
+### children
+
+<Code language="js">
+{`React.Component // rendered inside of the page container`}
+</Code>
+
+### className
+
+<Code language="js">
+{`string // added to the outer page container`}
+</Code>

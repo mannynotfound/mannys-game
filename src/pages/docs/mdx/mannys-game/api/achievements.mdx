@@ -1,0 +1,63 @@
+import Code from '../../../Code'
+
+# /achievements
+
+## /gamer/:address
+
+Gets all the achievements earned by a specified gamer address.
+
+<h3 style={{ marginTop: 0 }}>Usage</h3>
+
+<Code language="js">
+{'const address = "0xF3A45Ee798fc560CE080d143D12312185f84aa72";\nfetch(`/api/achievements/gamer/${address}`)'}
+</Code>
+
+### Return Value
+
+An array of objects representing earned achievements.
+
+<Code language="js">
+{`[
+  {
+    achievement_id: integer,
+    date_earned: integer, // unix timestamp
+    requirements: [
+      {
+        tx_hash: string,
+        requirement_id: integer,
+      }
+    ]
+  }
+]`}
+</Code>
+
+## /id/:achievement-id
+
+Gets all the gamers who've earned a specific achievement.
+
+<h3 style={{ marginTop: 0 }}>Usage</h3>
+
+<Code language="js">
+{'const achievementId = 30001;\nfetch(`/api/achievements/id/${achievementId}`)'}
+</Code>
+
+### Return Value
+
+An array of objects representing achievement earners.
+
+<Code language="js">
+{`[
+  {
+    gamer: string, // address of gamer
+    name: string, // friendly name of gamer
+    achievement_id: integer,
+    date_earned: integer, // unix timestamp
+    requirements: [
+      {
+        tx_hash: string,
+        requirement_id: integer,
+      }
+    ]
+  }
+]`}
+</Code>

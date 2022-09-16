@@ -1,0 +1,28 @@
+import Code from '../../../Code';
+
+# useAccessories
+
+Hook for accessories onto a manny model object.
+
+<h2 style={{ marginTop: 0 }}>Usage</h2>
+
+`accessories` is expected to be an obejct where each key is a character "slot" of possible options: 
+
+- Head
+- Eyes
+- Back
+- Right Hand
+- Left Hand
+- Ears
+- Nose
+- Mouth
+
+Each key value is an array of accessory ids on the slot.
+
+<Code language="js">
+{`const mannyObj = manny();
+const accessories = {
+  'Head': ['monocle']
+};
+useAccessories(mannyObj, accessories);`}
+</Code>

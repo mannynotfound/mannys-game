@@ -1,0 +1,32 @@
+import Code from '../../../Code'
+
+# /leaderboard
+
+## /
+
+Gets the leaderboard data for mannys.game. 
+Currently, the leaderboard is calculated daily.
+
+<h3 style={{ marginTop: 0 }}>Usage</h3>
+
+<Code language="js">
+{`fetch('/api/leaderboard')`}
+</Code>
+
+### Return Value
+
+An object containing the leaderboard data and last update time.
+
+<Code language="js">
+{`{
+  "data": [
+    {
+      "owner": string, // wallet address of gamer
+      "name": string, // friendly name of gamer
+      "tokens": [integer], // token ids owned by gamer
+      "score": integer // achievement points + tokens owned 
+    }
+  ],
+  "updated_at": integer, // unix timestamp
+}`}
+</Code>

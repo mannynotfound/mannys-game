@@ -1,0 +1,33 @@
+import Code from '../../../Code'
+
+# ForwardControls
+
+Adds `THREE.OrbitControls` to a scene but with a forwarded `React.useRef()`. 
+Useful when you need to share a reference to the controls object with another 
+component, for example in the manny tattoo editor.
+
+<h2 style={{ marginTop: 0}}>Usage</h2>
+
+<Code language="js">
+{`const controlsRef = React.useRef();
+// ...
+<Canvas>
+  <ForwardControls
+    ref={controlsRef}
+    // any other props will get passed to OrbitControls
+    target={[0, 45, 0]}
+    minDistance={100}
+    maxDistance={1000}
+    enableDamping={false}
+  />
+  <AnotherComponent controlsRef={controlsRef} />
+</Canvas>`}
+</Code>
+
+## Props
+  
+### ref
+
+<Code language="js">
+{`React.useRef() // passed to OrbitControls`}
+</Code>

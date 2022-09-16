@@ -1,0 +1,29 @@
+import Code from '../../../Code'
+
+# useAchievements
+
+Hook for getting achievements earned by specified addresses.
+
+<h2 style={{ marginTop: 0 }}>Usage</h2>
+
+<Code language="js">
+{`const { data, load } = useAchievements();
+// ...
+const address = "0xF3A45Ee798fc560CE080d143D12312185f84aa72";
+load(address);
+// ...
+{data[address].map(ach => <Achievement {...ach} />)}`}
+</Code>
+
+## Return Value
+
+<Code language="js">
+{`{
+  data: {
+    [address]: [achievements]
+  },
+  load: function, // takes address as argument and loads achievements
+  loading: boolean, // true if achievements request is loading
+  error: string, // error message if request fails
+}`}
+</Code>

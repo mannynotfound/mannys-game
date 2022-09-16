@@ -1,0 +1,101 @@
+# Configuration
+
+<>
+  <table>
+    <thead>
+      <tr>
+        <th align="center">Prop</th>
+        <th align="center">Type</th>
+        <th align="center">Default</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>modelPath</td>
+        <td>string</td>
+        <td>manny.fbx</td>
+      </tr>
+      <tr>
+        <td>textureUrl</td>
+        <td>string</td>
+        <td>manny_body_texture.jpg</td>
+      </tr>
+      <tr>
+        <td>animationOptions</td>
+        <td>object</td>
+        <td>{'{}'}</td>
+      </tr>
+    </tbody>
+  </table>
+</>
+
+## modelPath
+
+Url for loading manny model - defaults to a path hosted by manny himself but useful if
+using your own custom model or hosting solution.
+
+## textureUrl
+
+Url for loading manny skin texture - defaults to the basic manny texture but useful if
+using a custom texture such as an NFT manny.
+
+## animationOptions
+
+<>
+  <table>
+    <thead>
+      <tr>
+        <th align="center">Prop</th>
+        <th align="center">Type</th>
+        <th align="center">Default</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>paths</td>
+        <td>object</td>
+        <td>{`{ idle: 'idle.fbx' }`}</td>
+      </tr>
+      <tr>
+        <td>active</td>
+        <td>string</td>
+        <td>undefined</td>
+      </tr>
+      <tr>
+        <td>fadeIn</td>
+        <td>float</td>
+        <td>0.2</td>
+      </tr>
+      <tr>
+        <td>fadeOut</td>
+        <td>float</td>
+        <td>0.2</td>
+      </tr>
+      <tr>
+        <td>paused</td>
+        <td>boolean</td>
+        <td>false</td>
+      </tr>
+    </tbody>
+  </table>
+</>
+
+### paths
+
+Object where keys represent animation name, and values represent animation asset url to load.
+
+### active
+
+Key of active animation to play.
+
+### fadeIn
+
+Duration in seconds to transition in new animation.
+
+### fadeOut
+
+Duration in seconds to transition out new animation.
+
+### paused
+
+Toggle animations pause state.

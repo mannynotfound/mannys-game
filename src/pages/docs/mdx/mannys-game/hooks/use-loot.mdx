@@ -1,0 +1,22 @@
+import Code from '../../../Code'
+
+# useLoot
+
+Hook for determining if a given address owns any Loot or More Loot tokens.
+
+<h2 style={{ marginTop: 0 }}>Usage</h2>
+
+<Code language="js">
+{`const { provider } = useWeb3();
+const address = "0xF3A45Ee798fc560CE080d143D12312185f84aa72";
+const { lootBalance, mLootBalance } = useLoot(provider, address);`}
+</Code>
+
+## Return Value
+
+<Code language="js">
+{`{
+  lootBalance: boolean, // true if address has any Loot
+  mLootBalance: boolean, // true if address has any More Loot
+}`}
+</Code>

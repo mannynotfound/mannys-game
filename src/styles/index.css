@@ -1,0 +1,284 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+.toggle-switch {
+  position: relative;
+  width: 40px;
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  text-align: left;
+}
+
+.toggle-switch-checkbox {
+  display: none;
+}
+
+.toggle-switch-label {
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  border: 0 solid #bbb;
+  border-radius: 20px;
+  margin: 0;
+}
+
+.toggle-switch-inner {
+  display: block;
+  width: 200%;
+  margin-left: -100%;
+  transition: margin 0.1s ease-in 0s;
+}
+
+.toggle-switch-inner:before,
+.toggle-switch-inner:after {
+  content: '';
+  height: 20px;
+  line-height: 20px;
+  display: block;
+  float: left;
+  width: 50%;
+  padding: 0;
+  font-size: 14px;
+  color: white;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+
+.toggle-switch-inner:before {
+  content: '';
+  text-transform: uppercase;
+  padding-left: 10px;
+  background-color: #70bf44;
+  color: #fff;
+}
+
+.toggle-switch-disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+.toggle-switch-disabled:before {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+.toggle-switch-inner:after {
+  content: '';
+  text-transform: uppercase;
+  padding-right: 10px;
+  background-color: #bbb;
+  color: #fff;
+  text-align: right;
+}
+
+.toggle-switch-switch {
+  display: block;
+  width: 16px;
+  margin: 2px;
+  background: #fff;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 20px;
+  border: 0 solid #bbb;
+  border-radius: 20px;
+  transition: all 0.1s ease-in 0s;
+}
+
+.toggle-switch-checkbox:checked + .toggle-switch-label .toggle-switch-inner {
+  margin-left: 0;
+}
+
+.toggle-switch-checkbox:checked + .toggle-switch-label .toggle-switch-switch {
+  right: 0px;
+}
+
+.fraction-image img {
+  filter: grayscale(1);
+}
+
+.fraction-image.fraction-match img {
+  filter: none;
+}
+
+.fraction-image.fraction-match:hover img {
+  filter: grayscale(1);
+}
+
+.fraction-detail {
+  transition: opacity 0.5s;
+  opacity: 0;
+}
+
+.fraction-image:hover .fraction-detail {
+  opacity: 1;
+}
+
+.about-token-overlay {
+  transition: opacity 0.5s;
+}
+
+.about-token:hover .about-token-overlay {
+  opacity: 1 !important;
+}
+
+.highlight {
+  background: -moz-radial-gradient(
+    center,
+    ellipse cover,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  ); /* FF3.6-15 */
+  background: -webkit-radial-gradient(
+    center,
+    ellipse cover,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+/* Shine */
+.shiny:after {
+  content: '';
+  opacity: 0.5;
+  top: 0;
+  transform: translateX(100%);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+  animation: slide 2.5s infinite;
+
+  background: -moz-linear-gradient(
+    left,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(128, 186, 232, 0) 99%,
+    rgba(125, 185, 232, 0) 100%
+  ); /* FF3.6+ */
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    color-stop(0%, rgba(255, 255, 255, 0)),
+    color-stop(50%, rgba(255, 255, 255, 0.8)),
+    color-stop(99%, rgba(128, 186, 232, 0)),
+    color-stop(100%, rgba(125, 185, 232, 0))
+  ); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(
+    left,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(128, 186, 232, 0) 99%,
+    rgba(125, 185, 232, 0) 100%
+  ); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(
+    left,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(128, 186, 232, 0) 99%,
+    rgba(125, 185, 232, 0) 100%
+  ); /* Opera 11.10+ */
+  background: -ms-linear-gradient(
+    left,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(128, 186, 232, 0) 99%,
+    rgba(125, 185, 232, 0) 100%
+  ); /* IE10+ */
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(128, 186, 232, 0) 99%,
+    rgba(125, 185, 232, 0) 100%
+  ); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#007db9e8',GradientType=1 ); /* IE6-9 */
+}
+
+.docs-bg-overlay {
+  background: rgba(14, 14, 14, 1);
+  background: -moz-linear-gradient(
+    top,
+    rgba(14, 14, 14, 1) 0%,
+    rgba(14, 14, 14, 1) 17%,
+    rgba(14, 14, 14, 0) 100%
+  );
+  background: -webkit-gradient(
+    left top,
+    left bottom,
+    color-stop(0%, rgba(14, 14, 14, 1)),
+    color-stop(17%, rgba(14, 14, 14, 1)),
+    color-stop(100%, rgba(14, 14, 14, 0))
+  );
+  background: -webkit-linear-gradient(
+    top,
+    rgba(14, 14, 14, 1) 0%,
+    rgba(14, 14, 14, 1) 17%,
+    rgba(14, 14, 14, 0) 100%
+  );
+  background: -o-linear-gradient(
+    top,
+    rgba(14, 14, 14, 1) 0%,
+    rgba(14, 14, 14, 1) 17%,
+    rgba(14, 14, 14, 0) 100%
+  );
+  background: -ms-linear-gradient(
+    top,
+    rgba(14, 14, 14, 1) 0%,
+    rgba(14, 14, 14, 1) 17%,
+    rgba(14, 14, 14, 0) 100%
+  );
+  background: linear-gradient(
+    to bottom,
+    rgba(14, 14, 14, 1) 0%,
+    rgba(14, 14, 14, 1) 17%,
+    rgba(14, 14, 14, 0) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0e0e0e', endColorstr='#0e0e0e', GradientType=0 );
+}
+
+.docs-bg {
+  background-color: #0e0e0e;
+  background-image: linear-gradient(#b1b1b1 1.5px, transparent 1.5px),
+    linear-gradient(to right, #b1b1b1 1.5px, #0e0e0e 1.5px);
+  background-size: 30px 30px;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+#loader {
+  color: white !important;
+}
+
+.about-project .about-project-overlay {
+  transition: 0.1s;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.about-project:hover .about-project-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}

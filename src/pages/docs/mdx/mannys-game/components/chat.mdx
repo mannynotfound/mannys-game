@@ -1,0 +1,40 @@
+import Code from '../../../Code'
+
+# Chat
+
+Renders a "chat" in the style of World of Warcraft's chat window. Currently 
+used on the homepage and individual token pages.
+
+<h2 style={{ marginTop: 0}}>Usage</h2>
+
+<Code language="js">
+{`<Chat
+  account={{ 
+    address: "0xlol", 
+    ens: { name: "lol", avatar: "lol.png" } 
+  }} 
+  mannys={[{ id: 1, owner: "0xlol" }]}
+/>`}
+</Code>
+
+## Props
+
+### account
+
+<Code language="js">
+{`{
+  "address": string, // wallet address of account
+  "isConnecting": boolean // true if user is connecting wallet
+}`}
+</Code>
+
+### mannys
+
+<Code language="js">
+{`[
+  {
+    "id": integer, // token id of NFT
+    "owner": string // address of NFT owner
+  }
+]`}
+</Code>

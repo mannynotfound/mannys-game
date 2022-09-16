@@ -1,0 +1,141 @@
+import Code from '../../../Code'
+
+# accessories
+
+Configuration data for the accessories available to manny. 
+
+<h2 style={{ marginTop: 0 }}>Usage</h2>
+
+<Code language="js">
+{`import \{ allAccessories \} from 'fixtures/accessories';
+// ...
+const accessoryId = "monocle";
+const accessoryConfig = allAccessories.find((a) => a.id === accessoryId);`}
+</Code>
+
+## Return Value
+
+An array of objects representing accessories.
+
+<Code language="js">
+{`[
+  {
+    ...accessory
+  }
+]`}
+</Code>
+
+## Accessory Props
+  
+### animation
+
+<Code language="js">
+{`string // valid constants.LIBRARY animation associated with accessory`}
+</Code>
+
+### armature
+
+Object containing data for positioning the accessory.
+
+<Code language="js">
+{`{
+  bone: string, // name of bone in manny armature to attach to 
+  scale: {
+    x: float, // scale.x value
+    y: float, // scale.y value
+    z: float, // scale.x value
+  },
+  offset: {
+    position: {
+      x: float, // position.x offset
+      y: float, // position.y offset
+      z: float, // position.z offset
+    },
+    rotation: {
+      x: float, // rotation.x offset
+      y: float, // rotation.y offset
+      z: float, // rotation.z offset
+    }
+  }
+}`}
+</Code>
+
+### description
+
+<Code language="js">
+{`string // copy used on accessory tooltip`}
+</Code>
+
+### id
+
+<Code language="js">
+{`string // primary identification key of accessory`}
+</Code>
+
+### label
+
+<Code language="js">
+{`string // user friendly name of accessory`}
+</Code>
+
+### level
+
+<Code language="js">
+{`integer // accessory item level`}
+</Code>
+
+### mannyZ
+
+<Code language="js">
+{`float // offset added to manny's position.z`}
+</Code>
+
+### material
+
+<Code language="js">
+{`function // takes accessory Object3D as an argument and makes adjustments to its materials`}
+</Code>
+
+### rarity
+
+<Code language="js">
+{`string // accessory item rarity`}
+</Code>
+
+### requirement
+
+<Code language="js">
+{`string // requirements to unlock accessory if any`}
+</Code>
+
+### slot
+
+<Code language="js">
+{`string // character slot occupied by accessory`}
+</Code>
+
+### stats
+
+Object with arbitrary key/value pairs to render in the accessory tooltip.
+
+<Code language="js">
+{`{
+  [key]: value
+}`}
+</Code>
+  
+### textureUrl
+
+<Code language="js">
+{`string // optional url to load for accessory texture`}
+</Code>
+  
+### validator
+
+Used on "unlockable" accessories, the validator function takes whatever 
+arguments it needs to perform validation logic and return true/false if 
+accessory should be unlocked.
+
+<Code language="js">
+{`function // takes arbitrary arguments and returns true/false`}
+</Code>

@@ -1,0 +1,107 @@
+{
+  "1": {
+    "name": "nasjaq",
+    "address": "0xE7003d4f740D6bBc2Bb0f057D41Df36085d8CbA8",
+    "dateEarned": 1631844540,
+    "posX": -16
+  },
+  "2": {
+    "name": "empowermom",
+    "address": "0x8db73b54688A1c2cf50AED8b7eBD0c9dC643579f",
+    "dateEarned": 1631846038,
+    "size": 5,
+    "posX": -22.5,
+    "posY": 27
+  },
+  "3": {
+    "name": "mikedemarais",
+    "address": "0xE5501BC2B0Df6D0D7daAFC18D2ef127D9e612963",
+    "dateEarned": 1631845163,
+    "size": 5,
+    "posX": -22,
+    "posY": 27
+  },
+  "4": {
+    "name": "quasimatt",
+    "address": "0x64298A72F4E3e23387EFc409fc424a3f17356fC4",
+    "dateEarned": 1632858596,
+    "size": 7,
+    "posX": -22
+  },
+  "5": {
+    "name": "pugson",
+    "address": "0x96a77560146501eAEB5e6D5B7d8DD1eD23DEfa23",
+    "dateEarned": 1632941432,
+    "posX": -18
+  },
+  "6": {
+    "name": "nicabar",
+    "address": "0x435d821Ee5b346850545cB18443ca9808A9d47D0",
+    "dateEarned": 1636923865,
+    "posX": -18
+  },
+  "7": {
+    "name": "shahruz",
+    "address": "0xF73FE15cFB88ea3C7f301F16adE3c02564ACa407",
+    "dateEarned": 1641669319,
+    "posX": -19
+  },
+  "8": {
+    "name": "jacob",
+    "address": "0x17cd072cBd45031EFc21Da538c783E0ed3b25DCc",
+    "dateEarned": 1641673131,
+    "posX": -14
+  },
+  "9": {
+    "name": "immanual",
+    "address": "0x1ccD2496090C53687572EDc2b62c3b58B6799BBD",
+    "dateEarned": 1641908078,
+    "size": 7,
+    "posX": -20
+  },
+  "10": {
+    "name": "txdnt",
+    "address": "0xf27822E9AB6DA97481E6E1533a2314eDC44F41E4",
+    "dateEarned": 1646197468,
+    "posX": -13
+  },
+  "11": {
+    "name": "welp",
+    "address": "0x4888c0030b743c17C89A8AF875155cf75dCfd1E1",
+    "dateEarned": 1648333724,
+    "posX": -12
+  },
+  "12": {
+    "name": "spicedreams",
+    "address": "0xA5Cc7F3c81681429b8e4Fc074847083446CfDb99",
+    "dateEarned": 1649006604,
+    "posX": -20,
+    "size": 5
+  },
+  "13": {
+    "name": "thewalkingcity",
+    "address": "0x48A5b35225259D5D6f3DD3cDAE040d27B4bD324F",
+    "dateEarned": 1649201062,
+    "size": 5,
+    "posX": -22
+  },
+  "14": {
+    "name": "scotato",
+    "address": "0xC6c41119Af1e0840357245c66baAf0e21B694D4d",
+    "dateEarned": 1651184106,
+    "posX": -19
+  },
+  "15": {
+    "name": "snuts",
+    "address": "0x0ec364eFccB98eD3656C280a816631C1663eF0ba",
+    "dateEarned": 1654286640,
+    "posX": -14
+  },
+  "16": {
+    "name": "donosaur",
+    "address": "0xFAdc1D4FA467CF3c37d8A26aa35D95b612659C27",
+    "dateEarned": 1660236811,
+    "size": 7,
+    "posX": -20
+  }
+}

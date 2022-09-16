@@ -1,0 +1,21 @@
+import Code from '../../../Code'
+
+# useTokenOwner
+
+Hook for getting the owner address of a specified manny token.
+
+<h2 style={{ marginTop: 0 }}>Usage</h2>
+
+<Code language="js">
+{`const { mannyContract } = useWeb3();
+const tokenId = 1;
+const owner = useTokenOwner(mannyContract, tokenId);`}
+</Code>
+
+## Return Value
+
+<Code language="js">
+{`string // wallet address of token owner`}
+</Code>
+
+

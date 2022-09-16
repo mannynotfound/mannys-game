@@ -1,0 +1,28 @@
+import Code from '../../../Code'
+
+# useFloorPrice
+
+Hook for getting current OpenSea floor price of an NFT collection.
+
+<h2 style={{ marginTop: 0 }}>Usage</h2>
+
+Provide an array of arrays following the format of `[slug, multiplier]`. `slug` is 
+the string used at the end of the collection's OpenSea url. `multiplier` is a 
+convenience used when owning multiple of the same NFT.
+
+<Code language="js">
+{`const floorPrices = useFloorPrice([
+  ['cryptoadz-by-gremplin', 1],
+  ['turfnft', 3],
+  ['mannys-game', 1],
+]);`}
+</Code>
+
+## Return Value
+
+<Code language="js">
+{`{
+  [slug]: float, // value of floor price * multiplier in ETH
+}`}
+</Code>
+

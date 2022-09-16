@@ -1,0 +1,45 @@
+import Code from '../../../Code'
+
+# Header
+
+Global navigation used across the site. Hidden on the docs pages as they have 
+their own custom navigation.
+
+<h2 style={{ marginTop: 0}}>Usage</h2>
+
+<Code language="js">
+{`<Header
+  account={{ 
+    address: "0xlol", 
+    ens: { name: "lol", avatar: "lol.png" } 
+  }} 
+  disconnect={() => alert('lol')}
+  location={{ pathname: '/lol' }}
+/>`}
+</Code>
+
+## Props
+
+### account
+
+<Code language="js">
+{`{
+  "address": string, // wallet address of account
+  "ens": object, // { name: string, avatar: string }
+  "isConnecting": boolean // true if user is connecting wallet
+}`}
+</Code>
+
+### disconnect
+
+<Code language="js">
+{`function // returned from wagmi's useDisconnect `}
+</Code>
+
+### location
+
+<Code language="js">
+{`{
+  "pathname": string, // current app path, used to hide on some routes
+}`}
+</Code>

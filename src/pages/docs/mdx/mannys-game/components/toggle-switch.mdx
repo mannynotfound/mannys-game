@@ -1,0 +1,50 @@
+import Code from '../../../Code'
+
+# ToggleSwitch
+
+Visual component for handling toggling features on/off. Uses an HTML checkbox 
+under the hood.
+
+<h2 style={{ marginTop: 0}}>Usage</h2>
+
+<Code language="js">
+{`<ToggleSwitch
+  id="lolSwitch"
+  name="lol"
+  checked={checkedState}
+  onChange={() => setChecked(!checkedState)}
+  disabled={false}
+/>`}
+</Code>
+
+## Props
+
+### checked
+
+<Code language="js">
+{`boolean // if true, show component in checked state`}
+</Code>
+
+### disabled
+
+<Code language="js">
+{`boolean // if true, disable toggling`}
+</Code>
+
+### id
+
+<Code language="js">
+{`string // id of checkbox input`}
+</Code>
+
+### name
+
+<Code language="js">
+{`string // name of checkbox input`}
+</Code>
+
+### onChange
+
+<Code language="js">
+{`function // onChange callback`}
+</Code>

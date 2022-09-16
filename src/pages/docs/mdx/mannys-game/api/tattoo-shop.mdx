@@ -1,0 +1,77 @@
+import Code from '../../../Code'
+
+# /tattoo-shop
+
+## /upload
+
+Upload an image to use as a texture in the tattoo editor.
+
+<h3 style={{ marginTop: 0 }}>Usage</h3>
+
+Requires a `POST` request with a `body` that contains `FormData` with the fields 
+`token`, `file`, `sig` and `path`.
+
+<Code language="js">
+{`const formData = new FormData();
+formData.append('token', integer); // token to upload texture for
+formData.append('file', File); // File object from input
+formData.append('sig', string); // signed message of token owner
+formData.append('path', string); // name to use for file
+
+fetch('/api/tattoo-shop/upload', {
+  method: 'POST',
+  mode: 'cors',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: formData,
+})`}
+</Code>
+
+### Return Value
+
+An object representing the success/failure of the texture upload.
+
+<Code language="js">
+{`{
+  "message": string, // success or fail message
+  "textureUrl": string // url of newly uploaded texture
+}`}
+</Code>
+
+## /submit
+
+Submit a tattoo texture with tattoo position data for processing.
+
+<h3 style={{ marginTop: 0 }}>Usage</h3>
+
+Requires a `POST` request with a `body` that contains `FormData` with the fields 
+`token`, `sig`, `textureUrl`, `coordinates` and optional `code`.
+
+<Code language="js">
+{`const formData = new FormData();
+formData.append('token', integer); // token to upload texture for
+formData.append('sig', string); // signed message of token owner
+formData.append('textureUrl', string); // url of tattoo texture
+formData.append('coordinates', string); // encoded json of position data
+formData.append('code', string); // optional code for free tattoos
+
+fetch('/api/tattoo-shop/submit', {
+  method: 'POST',
+  mode: 'cors',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: formData,
+})`}
+</Code>
+
+### Return Value
+
+An object representing the success/failure of the tattoo submission.
+
+<Code language="js">
+{`{
+  "message": string // success or fail message
+}`}
+</Code>

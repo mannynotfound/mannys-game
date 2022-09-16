@@ -1,0 +1,81 @@
+import Code from '../../../Code'
+
+# achievements
+
+Data to render mannys.game achievements. 
+
+<h2 style={{ marginTop: 0 }}>Usage</h2>
+
+<Code language="js">
+{`import allAchievements from 'fixtures/achievements';
+// ...
+const achievementId = 3001;
+const achievement = allAchievements.find((ach) => ach.id === achievementId);`}
+</Code>
+
+## Return Value
+
+An array of objects representing achievements.
+
+<Code language="js">
+{`[
+  {
+    ...achievement
+  }
+]`}
+</Code>
+
+## Achievement Props
+    
+### category
+
+<Code language="js">
+{`string // category achievement belongs to`}
+</Code>
+
+### date_created
+
+<Code language="js">
+{`integer // unix timestamp of when acheivement was created`}
+</Code>
+
+### id
+
+<Code language="js">
+{`integer // primary identification key of achievement`}
+</Code>
+
+### image
+
+<Code language="js">
+{`image // URL to load for achievement thumbnail`}
+</Code>
+
+### points
+
+<Code language="js">
+{`integer // amount of points achievement is worth`}
+</Code>
+
+### requirements
+
+<Code language="js">
+{`[
+  {
+    "id": integer, // requirement id
+    "text": string // copy explaining the requirement
+  }
+]`}
+</Code>
+
+### title
+
+<Code language="js">
+{`string // user friendly name of achievement`}
+</Code>
+
+### type
+
+<Code language="js">
+{`string // achievement rarity type`}
+</Code>

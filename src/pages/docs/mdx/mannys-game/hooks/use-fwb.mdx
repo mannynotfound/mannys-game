@@ -1,0 +1,21 @@
+import Code from '../../../Code'
+
+# useFWB
+
+Hook for determining if provided address owns any FWB tokens.
+
+<h2 style={{ marginTop: 0 }}>Usage</h2>
+
+<Code language="js">
+{`const { provider } = useWeb3();
+const address = "0xF3A45Ee798fc560CE080d143D12312185f84aa72";
+const hasFWB = useFWB(provider, address);`}
+</Code>
+
+## Return Value
+
+<Code language="js">
+{`boolean // true if user has any FWB balance above 0`}
+</Code>
+
+

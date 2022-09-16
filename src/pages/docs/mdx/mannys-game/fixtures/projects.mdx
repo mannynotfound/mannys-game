@@ -1,0 +1,51 @@
+import Code from '../../../Code'
+
+# projects
+
+Data to render the projects list on the about page. 
+
+<h2 style={{ marginTop: 0 }}>Usage</h2>
+
+<Code language="js">
+{`import mannyProjects from 'fixtures/projects';
+// ...
+\{mannyProjects.map((project) => <ProjectCpt {...project} />)\}`}
+</Code>
+
+## Return Value
+
+An array of objects representing projects.
+
+<Code language="js">
+{`[
+  {
+    ...project
+  }
+]`}
+</Code>
+
+## Project Props
+
+### logo
+
+<Code language="js">
+{`string // name of logo file to load from /public/logos`}
+</Code>
+
+### logoSize
+
+<Code language="js">
+{`string // optional % to scale logo size to`}
+</Code>
+
+### name
+
+<Code language="js">
+{`string // user friendly name of project`}
+</Code>
+
+### url
+
+<Code language="js">
+{`string // project URL to link out to`}
+</Code>

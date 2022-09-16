@@ -1,0 +1,29 @@
+import Code from '../../../Code'
+
+# useWeb3
+
+Hook for initializing wagmi to get account info and the mannys.game contract.
+
+<h2 style={{ marginTop: 0 }}>Usage</h2>
+
+<Code language="js">
+{`const web3 = useWeb3();
+<App {...web3} />`}
+</Code>
+
+## Return Value
+
+<Code language="js">
+{`{
+  account: {
+    address: string, // address of connected wallet
+    ens: {
+      name: string, // ens name of connected wallet
+      avatar: string, // ens avatar URL of connected wallet
+    }
+  },
+  disconnect: function, // used to disconnect wallet from site
+  mannyContract: ethers.Contract, // used to query mannys.game contract
+  provider: ethers.Provider, // used to make ethereum queries/transactions
+}`}
+</Code>
