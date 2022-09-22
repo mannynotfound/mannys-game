@@ -41,6 +41,9 @@ const Body = () => {
         <Route path="/download">
           <Pages.Download {...web3} mannys={mannys} />
         </Route>
+        <Route path="/oncyber">
+          <Pages.Oncyber {...web3} mannys={mannys} />
+        </Route>
         <Route path="/docs">
           <Pages.Docs />
         </Route>

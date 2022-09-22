@@ -112,7 +112,7 @@ const DownloadToken = ({ account, mannys }) => {
       ? 'http://localhost:3001'
       : 'https://mannys-game-server.herokuapp.com';
 
-    fetch(`${fetchUrl}/api/download-token/${tokenId}`, {
+    fetch(`${fetchUrl}/api/download/token/${tokenId}`, {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -133,8 +133,6 @@ const DownloadToken = ({ account, mannys }) => {
         alert(error);
         setDownloading(false);
       });
-
-    console.log('REQUESTING ', tokenId);
   };
 
   return (

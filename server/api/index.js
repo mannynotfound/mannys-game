@@ -2,7 +2,7 @@ const leaderboard = require('./leaderboard');
 const achievements = require('./achievements');
 const fractions = require('./fractions');
 const nft = require('./nft');
-const downloadToken = require('./download-token');
+const download = require('./download');
 const tattooShop = require('./tattoo-shop');
 
 module.exports = {
@@ -10,6 +10,6 @@ module.exports = {
   achievements,
   fractions,
   nft,
-  downloadToken,
+  download,
   tattooShop,
 };

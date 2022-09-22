@@ -27,6 +27,7 @@ You may notice some pages that depend on server data wont load correctly, so to 
 ```bash
 npm start-server
 ```
+
 ## Contributing
 
 If you're interested in contributing, please read the [contributing docs](/.github/CONTRIBUTING.md) **before submitting a pull request**.
