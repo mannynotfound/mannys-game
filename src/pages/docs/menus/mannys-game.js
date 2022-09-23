@@ -12,8 +12,8 @@ const menuCfg = [
         to: 'achievements',
       },
       {
-        label: '/download-token',
-        to: 'download-token',
+        label: '/download',
+        to: 'download',
       },
       {
         label: '/fractions',

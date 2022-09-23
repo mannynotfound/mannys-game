@@ -31,7 +31,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use('/api/achievements', api.achievements);
   app.use('/api/fractions', api.fractions);
   app.use('/api/nft', api.nft);
-  app.use('/api/download-token', api.downloadToken);
+  app.use('/api/download', api.download);
   app.use('/api/tattoo-shop', api.tattooShop);
 
   app.listen(DEV_PORT, () => {

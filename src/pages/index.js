@@ -1,5 +1,6 @@
 export { default as About } from './about';
 export { default as Download } from './download';
+export { default as Oncyber } from './oncyber';
 export { default as Docs } from './docs';
 export { default as TattooShop } from './tattoo-shop';
 export { default as TattooView } from './tattoo-shop/View';
