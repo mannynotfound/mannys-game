@@ -8154,10 +8154,10 @@ makeerror@1.0.12:
   dependencies:
     tmpl "1.0.5"
 
-manny@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/manny/-/manny-3.2.0.tgz#3bde4b88ef570d986bae5b8106ddc0b95d890cfc"
-  integrity sha512-IOn4ORoM5AmLAbe4IG6zn4VnLtzzW/f2WJfITOwp/+X3XMbSW38VQMd/HSsFCVOX/XLoj7AxRurSh87aMe5Org==
+manny@3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/manny/-/manny-3.2.1.tgz#437d8c6f5bce9b73d5d428f4e4a22f36b7c146b8"
+  integrity sha512-UNdL4C4fZllfyCSLzSCxwm8JD4oc5mAWJsvtHR7DIOC36HVl28UKvKyVd07fe+x8qkWHZBVI6mkTlAqWIpleEQ==
 
 markdown-extensions@^1.0.0:
   version "1.1.1"
