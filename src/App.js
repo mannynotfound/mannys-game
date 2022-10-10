@@ -83,8 +83,8 @@ const Body = () => {
         <Route path="/plaque/:gamer">
           <Pages.Plaque />
         </Route>
-        <Route path="/:tokenId/3p">
-          <Pages.TokenThirdPerson {...web3} achievements={achievements} />
+        <Route path="/mannyverse/:tokenId">
+          <Pages.Mannyverse {...web3} achievements={achievements} />
         </Route>
         <Route path="/:tokenId">
           <Pages.Token {...web3} achievements={achievements} mannys={mannys} />

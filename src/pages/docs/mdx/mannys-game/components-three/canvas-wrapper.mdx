@@ -1,0 +1,27 @@
+import Code from '../../../Code'
+
+# Canvas Wrapper
+
+Adds a `@react-three/fiber` `<Canvas>` tag with optimal mannys.game settings + lighting.
+
+<h2 style={{ marginTop: 0}}>Usage</h2>
+
+<Code language="js">
+{`<CanvasWrapper>
+  {sceneChildren}
+</CanvasWrapper>`}
+</Code>
+
+## Props
+  
+### canvasProps
+
+<Code language="js">
+{`object // if provided will be spread onto the Canvas element`}
+</Code>
+
+### children
+
+<Code language="js">
+{`any // rendered inside the Canvas`}
+</Code>

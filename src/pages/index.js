@@ -13,5 +13,5 @@ export { default as Asset } from './assets/Asset';
 export { default as Plaque } from './plaque';
 export { default as Splash } from './splash';
 export { default as Token } from './token';
-export { default as TokenThirdPerson } from './token/ThirdPerson';
+export { default as Mannyverse } from './mannyverse';
 export { default as Viewer } from './viewer';

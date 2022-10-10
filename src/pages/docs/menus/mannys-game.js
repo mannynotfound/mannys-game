@@ -72,6 +72,10 @@ const menuCfg = [
     subPath: 'components-three',
     subMenu: [
       {
+        label: 'CanvasWrapper',
+        to: 'canvas-wrapper',
+      },
+      {
         label: 'Controls',
         to: 'controls',
       },

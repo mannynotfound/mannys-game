@@ -1,5 +1,5 @@
-# local manny module for debug
-src/manny
+# local modules for debug
+src/vendor
 
 .env
 node_modules

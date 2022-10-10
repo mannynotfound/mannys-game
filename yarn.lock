@@ -8154,10 +8154,10 @@ makeerror@1.0.12:
   dependencies:
     tmpl "1.0.5"
 
-manny@3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/manny/-/manny-3.2.1.tgz#437d8c6f5bce9b73d5d428f4e4a22f36b7c146b8"
-  integrity sha512-UNdL4C4fZllfyCSLzSCxwm8JD4oc5mAWJsvtHR7DIOC36HVl28UKvKyVd07fe+x8qkWHZBVI6mkTlAqWIpleEQ==
+manny@^3.2.3:
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/manny/-/manny-3.2.3.tgz#640c2e1616a7f859d080972603f35add6ad58f86"
+  integrity sha512-6EvYZcxQEOwDIF6/YEGRR+viIvlwU5vRJaWc2oqyui6z4/B7ojRAb6Dxwx6Mrcy6yMtZGXRwdZxIECXAbZNYmA==
 
 markdown-extensions@^1.0.0:
   version "1.1.1"
@@ -10444,10 +10444,10 @@ react-three-fiber@0.0.0-deprecated:
   resolved "https://registry.yarnpkg.com/react-three-fiber/-/react-three-fiber-0.0.0-deprecated.tgz#c737242487d824cf9520307308b7e4c4071a278f"
   integrity sha512-EblIqTAsIpkYeM8bZtC4lcpTE0A2zCEGipFB52RgcQq/q+0oryrk7Sxt+sqhIjUu6xMNEVywV8dr74lz5yWO6A==
 
-react-three-third-person@^0.4.4:
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/react-three-third-person/-/react-three-third-person-0.4.4.tgz#697b19ccea2d4a60e2a092f6f92402410b2fc966"
-  integrity sha512-0spR4C2xwMCZF0zI3n/FCmnU2EGfPln69g64HQhZgEy9N3Hks9UJH3/VDZ3njbpaYhir5xVidPsPtGYeo+DV3A==
+react-three-third-person@^0.4.6:
+  version "0.4.6"
+  resolved "https://registry.yarnpkg.com/react-three-third-person/-/react-three-third-person-0.4.6.tgz#7d44de3c9f039f70431bf9e65dead15e41f718c4"
+  integrity sha512-RHVUuz3pLwcs/xBuFcVNFoQl4DVEMVEQcS6A5Un4uSst2W8Ju7Zff9jruNoE5aZHwCYanPMLKE8UViM4eZe2Kw==
   dependencies:
     default-passive-events "^2.0.0"
 
