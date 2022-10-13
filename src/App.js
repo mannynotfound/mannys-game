@@ -1,23 +1,14 @@
 import './styles/fonts.css';
-import './styles/rainbowkit.css';
 import './styles/index.css';
 import './styles/stars.css';
-import { Buffer } from 'buffer';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import {
-  RainbowKitProvider,
-  getDefaultWallets,
-  darkTheme,
-} from '@rainbow-me/rainbowkit';
-import { chain, createClient, configureChains, WagmiConfig } from 'wagmi';
-import { infuraProvider } from 'wagmi/providers/infura';
+import { ConnectKitProvider, getDefaultClient } from 'connectkit';
+import { chain, createClient, WagmiConfig } from 'wagmi';
 
 import { Header } from 'components';
 import * as Pages from 'pages';
 import { useMannys, useLeaderboard, useAchievements, useWeb3 } from 'hooks';
 import { INFURA_ID } from 'constants';
-
-if (!window.Buffer) window.Buffer = Buffer;
 
 const Body = () => {
   const leaderboard = useLeaderboard();
@@ -94,27 +85,52 @@ const Body = () => {
   );
 };
 
+const primaryColor = '#70bf44';
+const secondaryColor = '#f0c925';
+
 const App = () => {
-  const { chains, provider, webSocketProvider } = configureChains(
-    [chain.mainnet],
-    [infuraProvider({ infuraId: INFURA_ID })]
+  const client = createClient(
+    getDefaultClient({
+      appName: 'mannys.game',
+      infuraId: INFURA_ID,
+      chains: [chain.mainnet],
+    })
   );
-  const { connectors } = getDefaultWallets({
-    appName: 'mannys.game',
-    chains,
-  });
-  const client = createClient({
-    autoConnect: true,
-    connectors,
-    provider,
-    webSocketProvider,
-  });
 
   return (
     <WagmiConfig client={client}>
-      <RainbowKitProvider chains={chains} theme={darkTheme()}>
+      <ConnectKitProvider
+        theme="midnight"
+        mode="dark"
+        customTheme={{
+          '--ck-font-family': '"PP Mono"',
+          '--ck-accent-color': secondaryColor,
+          '--ck-accent-text-color': '#000',
+          '--ck-focus-color': secondaryColor,
+          '--ck-spinner-color': secondaryColor,
+          '--ck-body-action-color': secondaryColor,
+          '--ck-body-background': `#0e0e0e`,
+          '--ck-modal-box-shadow': `0 0 0 2px ${primaryColor}`,
+          '--ck-border-radius': '0px',
+
+          '--ck-primary-button-background': '#0e0e0e',
+          '--ck-primary-button-border-radius': '0px',
+          '--ck-primary-button-box-shadow': `0 0 0 2px ${primaryColor}`,
+          '--ck-primary-button-hover-color': '#0e0e0e',
+          '--ck-primary-button-hover-background': primaryColor,
+
+          '--ck-secondary-button-background': '#0e0e0e',
+          '--ck-secondary-button-border-radius': '0px',
+          '--ck-secondary-button-box-shadow': `0 0 0 2px ${secondaryColor}`,
+          '--ck-secondary-button-hover-color': '#0e0e0e',
+
+          '--ck-tooltip-background': '#0e0e0e',
+          '--ck-tooltip-border-radius': '0px',
+          '--ck-tooltip-shadow': `0 0 0 2px ${secondaryColor}`,
+        }}
+      >
         <Body />
-      </RainbowKitProvider>
+      </ConnectKitProvider>
     </WagmiConfig>
   );
 };
