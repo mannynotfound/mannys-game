@@ -126,7 +126,7 @@ const App = () => {
 
           '--ck-tooltip-background': '#0e0e0e',
           '--ck-tooltip-border-radius': '0px',
-          '--ck-tooltip-shadow': `0 0 0 2px ${secondaryColor}`,
+          '--ck-tooltip-shadow': `0 0 0 2px ${primaryColor}`,
         }}
       >
         <Body />
