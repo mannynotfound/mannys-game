@@ -25,7 +25,7 @@
     "b64-to-blob": "^1.2.19",
     "connectkit": "^0.0.2",
     "cors": "2.8.5",
-    "ethers": "^5.0.31",
+    "ethers": "^5.6.5",
     "express": "4.17.1",
     "file-saver": "^2.0.5",
     "manny": "^3.2.3",
@@ -44,7 +44,7 @@
     "tailwindcss": "2.2.16",
     "three": "0.137.4",
     "three-stdlib": "2.8.3",
-    "wagmi": "^0.5.9"
+    "wagmi": "^0.6.0"
   },
   "devDependencies": {
     "eslint-config-airbnb": "18.2.0",
