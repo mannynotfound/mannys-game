@@ -1,7 +1,7 @@
 import { Suspense, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import * as THREE from 'three';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { ConnectKitButton } from 'connectkit';
 import { useSignMessage } from 'wagmi';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -48,13 +48,13 @@ const WalletConnect = () => (
   <div className="flex items-center relative z-50 pb-10">
     <p className="text-xl" style={{ maxWidth: 680 }}>
       Connect your wallet see if you have any mannys...
-      <ConnectButton.Custom>
-        {({ openConnectModal }) => (
-          <Button className="ml-4" onClick={openConnectModal} large>
+      <ConnectKitButton.Custom>
+        {({ show }) => (
+          <Button className="ml-4" onClick={show} large>
             <span className="text-white">connect</span>
           </Button>
         )}
-      </ConnectButton.Custom>
+      </ConnectKitButton.Custom>
     </p>
   </div>
 );

@@ -1,4 +1,4 @@
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { ConnectKitButton } from 'connectkit';
 
 const Address = ({
   account,
@@ -15,13 +15,13 @@ const Address = ({
 
   if (!isConnecting && !address) {
     return (
-      <ConnectButton.Custom>
-        {({ openConnectModal }) => (
-          <button onClick={openConnectModal} type="button">
+      <ConnectKitButton.Custom>
+        {({ show }) => (
+          <button onClick={show} type="button">
             Connect
           </button>
         )}
-      </ConnectButton.Custom>
+      </ConnectKitButton.Custom>
     );
   }
 

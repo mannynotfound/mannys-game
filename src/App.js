@@ -1,23 +1,15 @@
 import './styles/fonts.css';
-import './styles/rainbowkit.css';
 import './styles/index.css';
 import './styles/stars.css';
-import { Buffer } from 'buffer';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import {
-  RainbowKitProvider,
-  getDefaultWallets,
-  darkTheme,
-} from '@rainbow-me/rainbowkit';
-import { chain, createClient, configureChains, WagmiConfig } from 'wagmi';
-import { infuraProvider } from 'wagmi/providers/infura';
+import { ConnectKitProvider, getDefaultClient } from 'connectkit';
+import { chain, createClient, WagmiConfig } from 'wagmi';
+import connectKitTheme from 'connectKitTheme';
 
 import { Header } from 'components';
 import * as Pages from 'pages';
 import { useMannys, useLeaderboard, useAchievements, useWeb3 } from 'hooks';
 import { INFURA_ID } from 'constants';
-
-if (!window.Buffer) window.Buffer = Buffer;
 
 const Body = () => {
   const leaderboard = useLeaderboard();
@@ -95,26 +87,23 @@ const Body = () => {
 };
 
 const App = () => {
-  const { chains, provider, webSocketProvider } = configureChains(
-    [chain.mainnet],
-    [infuraProvider({ infuraId: INFURA_ID })]
+  const client = createClient(
+    getDefaultClient({
+      appName: 'mannys.game',
+      infuraId: INFURA_ID,
+      chains: [chain.mainnet],
+    })
   );
-  const { connectors } = getDefaultWallets({
-    appName: 'mannys.game',
-    chains,
-  });
-  const client = createClient({
-    autoConnect: true,
-    connectors,
-    provider,
-    webSocketProvider,
-  });
 
   return (
     <WagmiConfig client={client}>
-      <RainbowKitProvider chains={chains} theme={darkTheme()}>
+      <ConnectKitProvider
+        theme="midnight"
+        mode="dark"
+        customTheme={connectKitTheme}
+      >
         <Body />
-      </RainbowKitProvider>
+      </ConnectKitProvider>
     </WagmiConfig>
   );
 };

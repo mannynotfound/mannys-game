@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { ConnectKitButton } from 'connectkit';
 import { useSignMessage } from 'wagmi';
 import b64ToBlob from 'b64-to-blob';
 import fileSaver from 'file-saver';
@@ -25,13 +25,13 @@ const WalletConnect = () => (
   <>
     <p className="mt-4">Connect your wallet see if you have any mannys:</p>
     <p className="mt-4 text-center">
-      <ConnectButton.Custom>
-        {({ openConnectModal }) => (
-          <Button onClick={openConnectModal} large>
+      <ConnectKitButton.Custom>
+        {({ show }) => (
+          <Button onClick={show} large>
             <span className="text-white">connect</span>
           </Button>
         )}
-      </ConnectButton.Custom>
+      </ConnectKitButton.Custom>
     </p>
   </>
 );

@@ -4,7 +4,7 @@ import { ethers } from 'ethers';
 import { Canvas } from '@react-three/fiber';
 import { useFBX } from '@react-three/drei';
 import { useSignMessage, useSigner } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { ConnectKitButton } from 'connectkit';
 
 import { Page, Button } from 'components';
 import { Controls, ForwardControls, Lighting, Manny } from 'components/three';
@@ -504,13 +504,13 @@ const WalletConnect = () => (
         Please allow up to a week for tattoo metadata to update.
       </p>
       <p className="text-lg mt-4 text-center">
-        <ConnectButton.Custom>
-          {({ openConnectModal }) => (
-            <Button onClick={openConnectModal} large>
+        <ConnectKitButton.Custom>
+          {({ show }) => (
+            <Button onClick={show} large>
               <span className="text-white">connect</span>
             </Button>
           )}
-        </ConnectButton.Custom>
+        </ConnectKitButton.Custom>
       </p>
     </div>
   </Page>
