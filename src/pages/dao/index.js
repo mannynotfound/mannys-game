@@ -68,7 +68,7 @@ const AnimateCamera = ({ logoRef, groupRef, animatedIn, onRest }) => {
     if (logoRef?.position) {
       camera.lookAt(logoRef?.position);
       logoRef.lookAt(camera.position);
-      logoRef.rotateX(THREE.Math.degToRad(90));
+      logoRef.rotateX(THREE.MathUtils.degToRad(90));
     }
     if (animatedIn && groupRef?.current) {
       groupRef.current.rotation.y -= -0.001;

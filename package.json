@@ -42,8 +42,8 @@
     "react-three-third-person": "^0.4.6",
     "react-twitter-embed": "^3.0.3",
     "tailwindcss": "2.2.16",
-    "three": "0.137.4",
-    "three-stdlib": "2.8.3",
+    "three": "0.143.0",
+    "three-stdlib": "2.12.1",
     "wagmi": "^0.6.0"
   },
   "devDependencies": {

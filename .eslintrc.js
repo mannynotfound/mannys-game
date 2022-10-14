@@ -48,6 +48,7 @@ module.exports = {
     'react/button-has-type': 'off',
     'react/no-unescaped-entities': 'off',
     'react/react-in-jsx-scope': 'off',
+    'react/no-unknown-property': 'off',
     'object-curly-newline': 'off',
     'prefer-destructuring': 'off',
     'dot-notation': 'off',
