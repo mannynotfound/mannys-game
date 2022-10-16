@@ -690,6 +690,21 @@
     "points": 100
   },
   {
+    "id": 20028,
+    "title": "Repo Manny",
+    "category": "gaming",
+    "type": "legendary",
+    "date_created": 1644081464,
+    "requirements": [
+      {
+        "id": 0,
+        "text": "Reposess a manny lended out on withbacked.xyz"
+      }
+    ],
+    "image": "https://mannys-game.s3.us-east-1.amazonaws.com/achievements-images/20028.png",
+    "points": 100
+  },
+  {
     "id": 30000,
     "title": "Discord Fatigue",
     "category": "social",
@@ -746,6 +761,21 @@
       }
     ],
     "image": "https://mannys-game.s3.us-east-1.amazonaws.com/achievements-images/30003.png",
+    "points": 100
+  },
+  {
+    "id": 30004,
+    "title": "Open Sourcooooooor",
+    "category": "social",
+    "type": "legendary",
+    "date_created": 1657241174,
+    "requirements": [
+      {
+        "id": 0,
+        "text": "Contributed to a mannys.game repository"
+      }
+    ],
+    "image": "https://mannys-game.s3.us-east-1.amazonaws.com/achievements-images/30004.png",
     "points": 100
   },
   {
