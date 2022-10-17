@@ -24,6 +24,10 @@ const menuCfg = [
         to: 'leaderboard',
       },
       {
+        label: '/mannyverse',
+        to: 'mannyverse',
+      },
+      {
         label: '/nft',
         to: 'nft',
       },

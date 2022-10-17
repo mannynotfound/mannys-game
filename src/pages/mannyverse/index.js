@@ -1,8 +1,9 @@
 import { Suspense } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Physics, Debug } from '@react-three/cannon';
+import { Physics } from '@react-three/cannon';
 
 import { CanvasWrapper } from 'components/three';
+import { useBestTweets } from 'hooks';
 import { parseToken } from 'utils';
 import MannyThirdPerson from './MannyThirdPerson';
 import LoadingScreen from './LoadingScreen';
@@ -14,22 +15,30 @@ const Mannyverse = (props) => {
   // stuff that needs to be loaded before showing scene
   const registerKeys = ['manny', 'animations', 'gallery'];
   const { loading, registers } = useLoaded(registerKeys);
+  const {
+    data: bestTweets,
+    load: loadBestTweets,
+    loading: loadingBestTweets,
+  } = useBestTweets();
 
   return (
     <>
       <LoadingScreen loading={loading} />
       <CanvasWrapper>
         <Physics gravity={[0, -35, 0]}>
-          <Debug color="lime">
-            <Suspense fallback={null}>
-              <MannyThirdPerson
-                textureUrl={textureUrl}
-                onLoadManny={registers.manny}
-                onLoadAnimations={registers.animations}
-              />
-              <GamerGallery onLoad={registers.gallery} />
-            </Suspense>
-          </Debug>
+          <Suspense fallback={null}>
+            <MannyThirdPerson
+              textureUrl={textureUrl}
+              onLoadManny={registers.manny}
+              onLoadAnimations={registers.animations}
+            />
+            <GamerGallery
+              onLoad={registers.gallery}
+              bestTweets={bestTweets}
+              loadBestTweets={loadBestTweets}
+              loadingBestTweets={loadingBestTweets}
+            />
+          </Suspense>
         </Physics>
       </CanvasWrapper>
     </>

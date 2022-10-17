@@ -1,22 +1,10 @@
-import { useEffect, useState } from 'react';
 import { Fade } from 'react-reveal';
+import useRandomGif from './useRandomGif';
+import useLoadingDots from './useLoadingDots';
 
 const LoadingScreen = ({ loading }) => {
-  const [dotAmount, setDotAmount] = useState(0);
-  const [randomGif, setRandomGif] = useState();
-
-  useEffect(() => {
-    const dotInterval = setInterval(() => {
-      setDotAmount((da) => (da + 1 > 3 ? 0 : da + 1));
-    }, 100);
-
-    const randomGifIdx = Math.floor(Math.random() * (10 - 1 + 1) + 1);
-    setRandomGif(`/gifs/${randomGifIdx}.gif`);
-
-    return () => {
-      clearInterval(dotInterval);
-    };
-  }, []);
+  const randomGif = useRandomGif();
+  const dots = useLoadingDots();
 
   const loadingClasses = [
     'fixed inset-0 z-20',
@@ -38,11 +26,7 @@ const LoadingScreen = ({ loading }) => {
           )}
           <div className="text-5xl">
             loading
-            {['dot1', 'dot2', 'dot3'].map((d, i) => (
-              <span key={d} className={dotAmount > i ? '' : 'opacity-0'}>
-                .
-              </span>
-            ))}
+            {dots}
           </div>
         </div>
       </Fade>

@@ -33,6 +33,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use('/api/nft', api.nft);
   app.use('/api/download', api.download);
   app.use('/api/tattoo-shop', api.tattooShop);
+  app.use('/api/mannyverse', api.mannyverse);
 
   app.listen(DEV_PORT, () => {
     console.log(`Server listening on ${DEV_PORT}`);

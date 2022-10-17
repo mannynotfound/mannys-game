@@ -1,0 +1,30 @@
+import Code from '../../../Code'
+
+# /mannyverse
+
+## /best-tweets
+
+Gets the latest best 150 tweets from manny owners sorted by score.
+
+<h3 style={{ marginTop: 0 }}>Usage</h3>
+
+<Code language="js">
+{`fetch('/api/mannyverse/best-tweets'`}
+</Code>
+
+### Return Value
+
+An array of objects representing the tweets.
+
+<Code language="js">
+{`[
+  {
+    "user_id_str": string, // twitter user id 
+    "screen_name": string, // twitter screen name
+    "id_str": string, // tweet id
+    "text": string, // contents of tweet
+    "created_at": integer, // unix time it was tweeted
+    "score": integer, // score based on total engagement
+  },
+]`}
+</Code>

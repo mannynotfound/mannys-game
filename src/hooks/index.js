@@ -10,3 +10,4 @@ export { default as useAccessories } from './useAccessories';
 export { default as useAchievements } from './useAchievements';
 export { default as useLeaderboard } from './useLeaderboard';
 export { default as useWeb3 } from './useWeb3';
+export { default as useBestTweets } from './useBestTweets';
