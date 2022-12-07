@@ -51,6 +51,9 @@ const Body = () => {
         <Route path="/tattoo-shop">
           <Pages.TattooShop {...web3} mannys={mannys} />
         </Route>
+        <Route path="/tattoo-view/:tokenId/:address">
+          <Pages.TattooView />
+        </Route>
         <Route path="/tattoo-view/:tokenId">
           <Pages.TattooView />
         </Route>

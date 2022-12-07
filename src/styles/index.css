@@ -6,6 +6,20 @@
   box-sizing: border-box;
 }
 
+.party-btn {
+	color: white;
+  border: 2px solid white;
+	font-weight: bold;
+	background: linear-gradient(270deg, #5f2c82, #ee38bf, #ff5858, #49a09d, #1b5ece, #5f2c82, #ee38bf, #ff5858);
+	background-size: 400% 400%;
+	animation: rainbow 5s ease infinite;
+}
+
+@keyframes rainbow {
+	0%   { background-position: 0% center; }
+	100% { background-position: 100% center; }
+}
+
 .toggle-switch {
   position: relative;
   width: 40px;

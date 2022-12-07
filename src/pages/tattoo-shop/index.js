@@ -4,6 +4,7 @@ import { useSignMessage, useSigner } from 'wagmi';
 import IntroScene from 'pages/tattoo-shop/IntroScene';
 import TattooAdd from 'pages/tattoo-shop/TattooAdd';
 import TattooRemove from 'pages/tattoo-shop/TattooRemove';
+import TattooParty from 'pages/tattoo-shop/TattooParty';
 import { Page, Button } from 'components';
 
 const TattooShop = (props) => {
@@ -24,6 +25,16 @@ const TattooShop = (props) => {
   if (jobType === 'remove') {
     return (
       <TattooRemove
+        {...props}
+        signMessage={signMessageAsync}
+        signer={signer}
+        setJobType={setJobType}
+      />
+    );
+  }
+  if (jobType === 'party') {
+    return (
+      <TattooParty
         {...props}
         signMessage={signMessageAsync}
         signer={signer}
@@ -75,6 +86,15 @@ const TattooShop = (props) => {
           </Button>
           <Button color="white" large onClick={() => setJobType('remove')}>
             Remove Tattoos
+          </Button>
+        </div>
+        <div className="z-40 flex justify-center text-2xl mt-4 relative">
+          <Button
+            className="party-btn"
+            large
+            onClick={() => setJobType('party')}
+          >
+            PARTY TAT
           </Button>
         </div>
         <p className="mt-4 text-center mx-auto text-xs z-40 relative text-green">

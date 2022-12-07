@@ -6,6 +6,7 @@ const StepControls = ({
   setOwnerSignature,
   tattooPosition,
   onTattooUpload,
+  onTattooSubmit,
   jobType,
   setJobType,
   signMessage,
@@ -51,11 +52,13 @@ const StepControls = ({
   }
 
   if (currentStep === 1) {
-    prevBtn = (
-      <button className={prevClasses} onClick={() => setCurrentStep(0)}>
-        ← BACK
-      </button>
-    );
+    if (jobType === 'party') {
+      prevBtn = (
+        <button className={prevClasses} onClick={() => setJobType(null)}>
+          ← BACK
+        </button>
+      );
+    }
     if (jobType === 'add' && uploadFile) {
       nextBtn = (
         <button
@@ -63,6 +66,23 @@ const StepControls = ({
           onClick={async () => {
             const signature = await signMessage({
               message: 'Claiming Manny Tattoo',
+            }).catch(console.error);
+            if (signature) {
+              setOwnerSignature(signature);
+              onTattooUpload(signature);
+            }
+          }}
+        >
+          Upload {uploadFile.name} →
+        </button>
+      );
+    } else if (jobType === 'party' && uploadFile) {
+      nextBtn = (
+        <button
+          className={nextClasses}
+          onClick={async () => {
+            const signature = await signMessage({
+              message: 'Uploading Party Tat',
             }).catch(console.error);
             if (signature) {
               setOwnerSignature(signature);
@@ -86,6 +106,13 @@ const StepControls = ({
       nextBtn = (
         <button className={nextClasses} onClick={() => setCurrentStep(3)}>
           SUBMIT #{chosenManny} →
+        </button>
+      );
+    }
+    if (jobType === 'party' && tattooPosition) {
+      nextBtn = (
+        <button className={nextClasses} onClick={() => onTattooSubmit()}>
+          SUBMIT PARTY TAT →
         </button>
       );
     }

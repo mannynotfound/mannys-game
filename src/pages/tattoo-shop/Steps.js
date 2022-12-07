@@ -5,6 +5,19 @@ import TattooEditor from 'pages/tattoo-shop/TattooEditor';
 
 const S3_URL = 'https://mannys-game.s3.us-east-1.amazonaws.com/images';
 
+const getTitle = (jobType) => {
+  switch (jobType) {
+    case 'add':
+      return 'Add Tattoo';
+    case 'remove':
+      return 'Remove Tattoo';
+    case 'party':
+      return 'Add Party Tat';
+    default:
+      return '';
+  }
+};
+
 export const StepOne = ({
   mannys,
   chosenManny,
@@ -14,7 +27,7 @@ export const StepOne = ({
 }) => (
   <div className="TattooShop-step">
     <h2 className="text-green text-xl text-center mb-0">
-      <b>{jobType === 'add' ? 'Add Tattoo' : 'Remove Tattoos'}</b>
+      <b>{getTitle(jobType)}</b>
     </h2>
     <h3 className="text-green text-center mb-0">
       Step {label}: Choose a Manny
@@ -53,7 +66,7 @@ export const StepOne = ({
 export const StepTwo = ({ onFileChange, label, jobType }) => (
   <div className="TattooShop-step text-center">
     <h2 className="text-green text-xl">
-      <b>{jobType === 'add' ? 'Add Tattoo' : 'Remove Tattoos'}</b>
+      <b>{getTitle(jobType)}</b>
     </h2>
     <h3 className="text-green mb-4">Step {label}: Upload A Tattoo</h3>
     <p className="text-white mb-4">Upload a .png or .jpg under 1MB:</p>
@@ -84,7 +97,7 @@ export const StepThree = ({
 }) => (
   <div className="TattooShop-step text-white">
     <h2 className="text-green text-xl text-center mb-0">
-      <b>{jobType === 'add' ? 'Add Tattoo' : 'Remove Tattoos'}</b>
+      <b>{getTitle(jobType)}</b>
     </h2>
     <h3 className="text-green text-center mb-0">
       Step {label}: Place Your Tattoo
@@ -171,7 +184,7 @@ export const StepFour = ({
   return (
     <div className="TattooShop-step text-white text-center">
       <h2 className="text-green text-xl text-center">
-        <b>{jobType === 'add' ? 'Add Tattoo' : 'Remove Tattoos'}</b>
+        <b>{getTitle(jobType)}</b>
       </h2>
       <h3 className="text-green text-center">Step {label}: Pay for Order</h3>
       <div className="inline-block mt-4 w-full" style={{ maxWidth: 600 }}>

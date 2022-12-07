@@ -51,6 +51,7 @@ const TattooView = ({ match }) => {
   const [tattooData, setTattooData] = useState(null);
   const [fetchingTattoos, setFetchingTattoos] = useState(false);
   const tokenId = match?.params?.tokenId;
+  const address = match?.params?.address;
 
   const fetchTattoos = async () => {
     setFetchingTattoos(true);
@@ -58,7 +59,11 @@ const TattooView = ({ match }) => {
     const fetchUrl = window.location.host.includes('localhost')
       ? 'http://localhost:3001'
       : 'https://mannys-game-server.herokuapp.com';
-    fetch(`${fetchUrl}/api/tattoo-shop/view/${tokenId}`, { mode: 'cors' })
+    let baseFetchUrl = `${fetchUrl}/api/tattoo-shop/view/${tokenId}`;
+    if (address) {
+      baseFetchUrl += `/${address}`;
+    }
+    fetch(baseFetchUrl, { mode: 'cors' })
       .then((resp) => resp.json())
       .then((json) => {
         setTattooData(json.data);

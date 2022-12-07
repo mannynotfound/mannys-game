@@ -1,18 +1,17 @@
 import { Page } from 'components';
 
-const NoMannys = () => (
+const NoParty = () => (
   <Page className="flex justify-center items-center">
     <div className="w-full h-auto overflow-y-auto p-8">
       <p className="text-xl mt-4 text-white text-center">
-        Looks like you dont have any mannys, <br />
-        try getting some on the{' '}
+        Looks like you haven't joined the party, <br />
         <a
-          href="https://opensea.io/collection/mannys-game"
+          href="https://discord.gg/46FyE2ppmj"
           target="_blank"
           className="text-green"
           rel="noopener noreferrer"
         >
-          secondary market
+          join the discord to learn more.
         </a>
         .
       </p>
@@ -20,4 +19,4 @@ const NoMannys = () => (
   </Page>
 );
 
-export default NoMannys;
+export default NoParty;
