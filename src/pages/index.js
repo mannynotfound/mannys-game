@@ -4,6 +4,7 @@ export { default as Oncyber } from './oncyber';
 export { default as Docs } from './docs';
 export { default as TattooShop } from './tattoo-shop';
 export { default as TattooView } from './tattoo-shop/View';
+export { default as TattooViewParty } from './tattoo-shop/ViewParty';
 export { default as Leaderboard } from './leaderboard';
 export { default as Achievements } from './achievements';
 export { default as Achievement } from './achievements/Achievement';

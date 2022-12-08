@@ -1,11 +1,33 @@
-import { Suspense, useRef } from 'react';
+import { Suspense, useRef, useState, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import * as THREE from 'three';
 import { ForwardControls, Lighting } from 'components/three';
 import MannyTattoo from './MannyTattoo';
 
-const TattooEditor = ({ tokenId, textureUrl, setTattooPosition }) => {
+const TattooEditor = ({
+  tokenId,
+  textureUrl,
+  setTattooPosition,
+  showExisting,
+}) => {
   const controlsRef = useRef();
+  const [tattooData, setTattooData] = useState(null);
+
+  useEffect(() => {
+    if (showExisting) {
+      const fetchUrl = window.location.host.includes('localhost')
+        ? 'http://localhost:3001'
+        : 'https://mannys-game-server.herokuapp.com';
+
+      fetch(`${fetchUrl}/api/tattoo-shop/view/${tokenId}`, { mode: 'cors' })
+        .then((resp) => resp.json())
+        .then((json) => {
+          setTattooData(json.data);
+        })
+        .catch(console.error);
+    }
+  }, [showExisting]);
+
   return (
     <div className="absolute inset-0 overflow-hidden z-10">
       <Canvas
@@ -29,6 +51,7 @@ const TattooEditor = ({ tokenId, textureUrl, setTattooPosition }) => {
             decalTextureUrl={textureUrl}
             controlsRef={controlsRef}
             setTattooPosition={setTattooPosition}
+            existing={tattooData}
           />
         </Suspense>
         <ForwardControls

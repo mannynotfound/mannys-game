@@ -20,6 +20,52 @@
 	100% { background-position: 100% center; }
 }
 
+.live-icon {
+  display: inline-block;
+  position: relative;
+  top: calc(50% - 5px);
+  background-color: red;
+  width: 10px;
+  height: 10px;
+  margin-left: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.live-icon:before {
+  content: "";
+  display: block;
+  position: absolute;
+  background-color: rgba(255, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  -webkit-animation: live 2s ease-in-out infinite;
+          animation: live 2s ease-in-out infinite;
+  z-index: -1;
+}
+
+@-webkit-keyframes live {
+  0% {
+    transform: scale(1, 1);
+  }
+  100% {
+    transform: scale(3.5, 3.5);
+    background-color: rgba(255, 0, 0, 0);
+  }
+}
+
+@keyframes live {
+  0% {
+    transform: scale(1, 1);
+  }
+  100% {
+    transform: scale(3.5, 3.5);
+    background-color: rgba(255, 0, 0, 0);
+  }
+}
+
 .toggle-switch {
   position: relative;
   width: 40px;

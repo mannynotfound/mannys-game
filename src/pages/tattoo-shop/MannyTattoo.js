@@ -17,6 +17,7 @@ const MannyTattoo = ({
   position = [0, 0, 0],
   rotation = [0, 0, 0],
   controlsRef,
+  existing,
 }) => {
   const { scene, gl, camera } = useThree();
   const domElement = gl.domElement;
@@ -88,7 +89,6 @@ const MannyTattoo = ({
 
   // create decal material which acts as our tattoo
   const decalMaterial = new THREE.MeshPhongMaterial({
-    specular: 0x444444,
     map: decalTexture,
     normalScale: new THREE.Vector2(1, 1),
     transparent: true,
@@ -299,6 +299,45 @@ const MannyTattoo = ({
     scene.add(m);
     tattooSet.current = true;
   }, [coordinates, mesh]);
+
+  useEffect(() => {
+    if (!existing?.length || !mesh) return;
+
+    const loader = new THREE.TextureLoader();
+    existing.forEach((existingTat) => {
+      loader.load(
+        existingTat.tattoo_url,
+        (texture) => {
+          const material = decalMaterial.clone();
+          material.map = texture;
+          const existingCords = JSON.parse(existingTat.coordinates);
+          const {
+            position: ePos,
+            orientation: eOrient,
+            size: eSize,
+          } = existingCords;
+          const posVec = new THREE.Vector3(ePos.x, ePos.y, ePos.z);
+          const orEuler = new THREE.Euler(
+            eOrient.x,
+            eOrient.y,
+            eOrient.z,
+            'XYZ'
+          );
+          const sizeVec = new THREE.Vector3(eSize.x, eSize.y, eSize.z);
+          const m = new THREE.Mesh(
+            new DecalGeometry(mesh, posVec, orEuler, sizeVec),
+            material
+          );
+
+          scene.add(m);
+        },
+        undefined,
+        (err) => {
+          console.error('Error loading existing tattoo', err);
+        }
+      );
+    });
+  }, [existing, mesh]);
 
   return (
     <>

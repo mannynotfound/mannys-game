@@ -5,7 +5,7 @@ const CONTRACT = '0x4523Fb71EC20f63928541c48cFC236219BD7700D';
 const { abi } = require('contracts/PARTYabi');
 
 export default function useHasParty(provider, address) {
-  const [balance, setBalance] = useState();
+  const [contributedEnough, setContributedEnough] = useState(false);
 
   const contract = useContract({
     addressOrName: CONTRACT,
@@ -14,13 +14,17 @@ export default function useHasParty(provider, address) {
   });
 
   useEffect(() => {
-    const getBalance = async () => {
-      const contractBalance = await contract.balanceOf(address);
-      setBalance(contractBalance > 0);
+    const getContributions = async () => {
+      const contribution = await contract.getContributorInfo(address);
+      if (contribution?.length) {
+        const contributionAmount = contribution[0];
+        // contributed at least .04 eth
+        setContributedEnough(contributionAmount >= 40000000000000000);
+      }
     };
 
-    getBalance();
-  }, [contract]);
+    getContributions();
+  }, [contract, address]);
 
-  return balance;
+  return contributedEnough;
 }

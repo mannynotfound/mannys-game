@@ -94,6 +94,7 @@ export const StepThree = ({
   setTattooPosition,
   label,
   jobType,
+  showExisting,
 }) => (
   <div className="TattooShop-step text-white">
     <h2 className="text-green text-xl text-center mb-0">
@@ -126,6 +127,7 @@ export const StepThree = ({
     <div className="mb-4 mt-0">
       <div className="relative mx-auto" style={{ height: 900, width: 600 }}>
         <TattooEditor
+          showExisting={showExisting}
           tokenId={chosenManny}
           textureUrl={uploadResponse.textureUrl}
           setTattooPosition={setTattooPosition}

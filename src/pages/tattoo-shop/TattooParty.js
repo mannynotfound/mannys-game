@@ -205,7 +205,7 @@ const TattooParty = ({
                   setSubmitResponse(null);
                   setTattooPosition(null);
                   setUploadFile(null);
-                  setChosenManny(null);
+                  setChosenManny(84);
                   setCurrentStep(1);
                 }}
               >
@@ -224,6 +224,7 @@ const TattooParty = ({
               {...stepProps}
               uploadResponse={uploadResponse}
               setTattooPosition={setTattooPosition}
+              showExisting
               label="2 of 3"
               jobType="party"
             />
