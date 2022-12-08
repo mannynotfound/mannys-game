@@ -65,21 +65,24 @@ const MannyTattooView = ({ tokenId, position, existing }) => {
           material.map = texture;
           const existingCords = JSON.parse(existingTat.coordinates) || {};
           if (
-            !existingCords.position ||
-            !existingCords.orientation ||
-            !existingCords.size
+            !existingCords?.position ||
+            !existingCords?.orientation ||
+            !existingCords?.size
           ) {
-            console.log('error rendering ', existingTat);
+            console.log('missing coordinates for ', existingTat);
             return;
           }
 
-          // console.log('rendering ', existingTat);
           const {
             position: ePos,
             orientation: eOrient,
             size: eSize,
           } = existingCords;
-          const posVec = new THREE.Vector3(ePos.x, ePos.y, ePos.z);
+          const posVec = new THREE.Vector3(
+            ePos?.x || 0,
+            ePos?.y || 0,
+            ePos?.z || 0
+          );
           const orEuler = new THREE.Euler(
             eOrient.x,
             eOrient.y,

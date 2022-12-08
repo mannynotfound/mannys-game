@@ -98,6 +98,18 @@ const TattooParty = ({
   };
 
   const onTattooSubmit = async (voucherCode) => {
+    if (!tattooPosition?.position) {
+      alert('Error capturing tattoo position, please try again.');
+      return;
+    }
+    if (!tattooPosition?.orientation) {
+      alert('Error capturing tattoo orientation, please try again.');
+      return;
+    }
+    if (!tattooPosition?.size) {
+      alert('Error capturing tattoo size, please try again.');
+      return;
+    }
     setIsUploadingTattoo(true);
     const data = new FormData();
     data.append('token', 84);
