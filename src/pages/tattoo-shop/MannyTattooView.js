@@ -63,7 +63,17 @@ const MannyTattooView = ({ tokenId, position, existing }) => {
         (texture) => {
           const material = decalMaterial.clone();
           material.map = texture;
-          const existingCords = JSON.parse(existingTat.coordinates);
+          const existingCords = JSON.parse(existingTat.coordinates) || {};
+          if (
+            !existingCords.position ||
+            !existingCords.orientation ||
+            !existingCords.size
+          ) {
+            console.log('error rendering ', existingTat);
+            return;
+          }
+
+          // console.log('rendering ', existingTat);
           const {
             position: ePos,
             orientation: eOrient,
