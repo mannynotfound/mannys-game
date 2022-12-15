@@ -29,8 +29,6 @@ const TattooViewer = ({ tokenId, existing }) => (
         />
       </Suspense>
       <Controls
-        autoRotate
-        autoRotateSpeed={1}
         target={[0, 45, 0]}
         minDistance={100}
         maxDistance={1000}
@@ -65,6 +63,13 @@ const TattooViewParty = () => {
       fetchTattoos();
     }
   }, []);
+
+  if (tattooData?.length) {
+    console.log(tattooData.length);
+    tattooData.forEach((td) => {
+      console.log(td.tattoo_url);
+    });
+  }
 
   return (
     <div className="three-container fixed inset-0">
