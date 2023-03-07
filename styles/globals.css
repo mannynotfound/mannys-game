@@ -1,0 +1,14 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  html {
+    @apply text-white;
+    @apply bg-gray-dark;
+  }
+  #__next {
+    @apply h-full;
+    @apply w-full;
+  }
+}

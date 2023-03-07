@@ -1,0 +1,48 @@
+.docs-bg-overlay {
+  background: rgba(14, 14, 14, 1);
+  background: -moz-linear-gradient(
+    top,
+    rgba(14, 14, 14, 1) 0%,
+    rgba(14, 14, 14, 1) 17%,
+    rgba(14, 14, 14, 0) 100%
+  );
+  background: -webkit-gradient(
+    left top,
+    left bottom,
+    color-stop(0%, rgba(14, 14, 14, 1)),
+    color-stop(17%, rgba(14, 14, 14, 1)),
+    color-stop(100%, rgba(14, 14, 14, 0))
+  );
+  background: -webkit-linear-gradient(
+    top,
+    rgba(14, 14, 14, 1) 0%,
+    rgba(14, 14, 14, 1) 17%,
+    rgba(14, 14, 14, 0) 100%
+  );
+  background: -o-linear-gradient(
+    top,
+    rgba(14, 14, 14, 1) 0%,
+    rgba(14, 14, 14, 1) 17%,
+    rgba(14, 14, 14, 0) 100%
+  );
+  background: -ms-linear-gradient(
+    top,
+    rgba(14, 14, 14, 1) 0%,
+    rgba(14, 14, 14, 1) 17%,
+    rgba(14, 14, 14, 0) 100%
+  );
+  background: linear-gradient(
+    to bottom,
+    rgba(14, 14, 14, 1) 0%,
+    rgba(14, 14, 14, 1) 17%,
+    rgba(14, 14, 14, 0) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0e0e0e', endColorstr='#0e0e0e', GradientType=0 );
+}
+
+.docs-bg {
+  background-color: #0e0e0e;
+  background-image: linear-gradient(#b1b1b1 1.5px, transparent 1.5px),
+    linear-gradient(to right, #b1b1b1 1.5px, #0e0e0e 1.5px);
+  background-size: 30px 30px;
+}

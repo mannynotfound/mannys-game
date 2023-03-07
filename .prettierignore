@@ -1,4 +1,4 @@
 node_modules
 build
-src/pages/docs/mdx
+views/docs/mdx
 .github

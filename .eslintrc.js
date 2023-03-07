@@ -2,8 +2,13 @@ module.exports = {
   env: {
     browser: true,
   },
-  extends: ['airbnb'],
   plugins: ['prettier'],
+  extends: [
+    'plugin:@typescript-eslint/recommended',
+    'prettier',
+    'next',
+    'plugin:prettier/recommended',
+  ],
   rules: {
     'prettier/prettier': [
       'error',
@@ -23,6 +28,12 @@ module.exports = {
         jsx: 'never',
         ts: 'never',
         tsx: 'never',
+      },
+    ],
+    '@typescript-eslint/no-namespace': [
+      'error',
+      {
+        allowDeclarations: true,
       },
     ],
     'import/prefer-default-export': 'off',
@@ -49,6 +60,7 @@ module.exports = {
     'react/no-unescaped-entities': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/no-unknown-property': 'off',
+    'react/require-default-props': 'off',
     'object-curly-newline': 'off',
     'prefer-destructuring': 'off',
     'dot-notation': 'off',
@@ -72,7 +84,7 @@ module.exports = {
   settings: {
     'import/resolver': {
       node: {
-        paths: ['src'],
+        paths: ['./'],
       },
     },
   },

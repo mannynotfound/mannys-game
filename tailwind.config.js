@@ -1,22 +1,29 @@
+/** @type {import('tailwindcss').Config} */
 const yellow = '#F0C925';
 const grayLight = '#424242';
 const grayCode = 'rgb(30, 30, 30)';
 const border = `1px solid ${grayLight}`;
 
 module.exports = {
-  purge: [],
-  darkMode: false, // or 'media' or 'class'
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './views/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+  ],
   theme: {
     extend: {
+      spacing: {
+        'nav-height': '80px',
+      },
       typography: () => ({
         DEFAULT: {
           css: {
-            color: 'white',
+            '--tw-prose-body': 'white',
+            '--tw-prose-headings': 'white',
+            '--tw-prose-code': 'white',
             a: { color: yellow },
-            strong: { color: 'white' },
             table: { border, borderRight: '1px solid transparent' },
             th: {
-              color: 'white',
               borderRight: border,
               borderBottom: border,
               fontWeight: 'bold',
@@ -26,20 +33,14 @@ module.exports = {
             'tbody td:first-child': { paddingLeft: '0.5714286em' },
             'tbody tr': { borderBottom: border },
             td: { borderRight: border },
-            h1: { color: 'white', marginBottom: '0.4em' },
+            h1: { marginBottom: '0.4em' },
             h2: {
-              color: 'white',
               borderBottom: `1px solid ${grayCode}`,
               marginBottom: '0.6em',
               marginTop: '1.5em',
             },
-            h3: { color: 'white' },
-            h4: { color: 'white' },
-            h5: { color: 'white' },
-            h6: { color: 'white' },
             code: {
               backgroundColor: grayCode,
-              color: 'white',
             },
             'code::before': {
               content: '""',
@@ -47,12 +48,12 @@ module.exports = {
             'code::after': {
               content: '""',
             },
-            pre: { color: 'white' },
           },
         },
       }),
     },
     colors: {
+      current: 'currentColor',
       green: '#70bf44',
       yellow,
       white: '#fff',
@@ -80,9 +81,6 @@ module.exports = {
       xl: '1280px',
       '2xl': '1800px',
     },
-  },
-  variants: {
-    extend: {},
   },
   plugins: [require('@tailwindcss/typography')],
 };

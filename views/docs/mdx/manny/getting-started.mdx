@@ -1,0 +1,99 @@
+import Code from '../../Code';
+import BasicScene from '../../BasicScene';
+import Link from 'next/link';
+
+# Getting Started
+
+`manny` is a free, open-source 3D model for use in media, video games,
+and cross-platform virtual or augmented reality. manny was created from
+a high-resolution photogrammetry capture of software
+artist <a href="https://twitter.com/mannynotfound" target="_blank">@mannynotfound</a>
+in 2018. Ever since, manny has been using the model for everything
+from <a href="https://giphy.com/mannynotfound" target="_blank">making memes</a>
+to <a href="https://twitter.com/mannynotfound/status/1438670320987160577" target="_blank">launching NFT projects</a>.
+
+The docs on this page are for
+the <a href="https://www.npmjs.com/package/manny" target="_blank">javascript module</a> version of manny.
+
+## Installation
+
+Install manny and its react-three-fiber peer dependency.
+
+<Code language="bash">{'npm install manny @react-three/fiber'}</Code>
+## Quick Start
+
+### 1. Create a react-three-fiber canvas
+
+In order for manny to load, he will need to be wrapped in a `<Canvas>` from
+react-three-fiber with some custom configuration. We use the `flat` prop
+on the canvas to disable tone mapping which makes manny look more flattering.
+Also, we'll add some lights so we can see our manny.
+
+<Code language="js">
+{`import React from "react";
+import { Canvas } from "@react-three/fiber";
+
+const App = () => (
+
+{' '}
+<Canvas flat camera={{ fov: 45, position: [25, 100, 300] }}>
+  <hemisphereLight groundColor={0x444444} />
+  <directionalLight castShadow intensity={0.25} position={[0, 200, 100]} />
+</Canvas>
+);
+
+export default App;`}
+</Code>
+_note: Canvas is responsive to fit the parent node, so you can control how 
+big it is by changing the parents width and height._
+
+<a href="https://docs.pmnd.rs/react-three-fiber/api/canvas" target="_blank">
+  Read more about canvas options
+</a>
+
+### 2. Add your manny
+
+Next, create a `<group>` to add the manny model to. Additionally, you'll
+want to wrap the manny components in a `<React.Suspense>` so it doesn't hold up your
+app while it loads.
+
+<Code language="js">
+{`import React, { Suspense } from "react";
+import manny from "manny";
+import { Canvas } from "@react-three/fiber";
+
+const Manny = () => (
+
+{' '}
+<group position={[0, -90, 0]}>
+  <primitive object={manny()} dispose={null} />
+</group>
+);
+
+const App = () => (
+
+{' '}
+<Canvas flat camera={{ fov: 45, position: [25, 100, 200] }}>
+  <Suspense fallback={null}>
+    <Manny />
+  </Suspense>
+  <hemisphereLight groundColor={0x444444} />
+  <directionalLight castShadow intensity={0.25} position={[0, 200, 100]} />
+</Canvas>
+);
+
+export default App;`}
+</Code>
+<br />
+<Link href="/docs/hooks/use-manny">Read more about manny configuration</Link>
+
+### 3. You're good to go!
+
+<BasicScene />
+
+That should everything needed to render a manny model on the page in a
+static pose - check out <Link href="/docs/using-animation">using animation</Link> and
+
+<Link href="/docs/adding-controls">adding controls</Link> to bring manny to life!{' '}
+
+To see how the manny module is used on mannys.game, take a look at <a href="https://github.com/mannynotfound/mannys-game/tree/main/src/components/three" target="_blank">three components</a>.
