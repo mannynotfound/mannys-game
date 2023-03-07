@@ -1,6 +1,6 @@
 # mannys-game
 
-Front end code + minimal express server for [mannys.game](https://mannys.game).
+Front end code for [mannys.game](https://mannys.game).
 
 ## Documentation
 
