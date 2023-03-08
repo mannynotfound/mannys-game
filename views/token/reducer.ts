@@ -16,7 +16,7 @@ export const initialState: TokenState = {
     paused: false,
     bgColor: '#0e0e0e',
   },
-  useTextureHD: false,
+  textureHD: false,
 };
 
 export default (
@@ -56,16 +56,15 @@ export default (
         paused: payload.zoomedIn ? true : nextTokenState.camera.paused,
       };
       nextTokenState.mood = payload.zoomedIn ? 'idle' : nextTokenState.mood;
-      // load HD texture after any zoom
-      if (!nextTokenState.useTextureHD) {
-        nextTokenState.useTextureHD = true;
-      }
       break;
     case 'SET_PAUSED':
       nextTokenState.camera = {
         ...nextTokenState.camera,
         paused: payload.paused,
       };
+      break;
+    case 'SET_TEXTURE_HD':
+      nextTokenState.textureHD = payload.textureHD;
       break;
     case 'SET_BG_COLOR':
       nextTokenState.camera = {

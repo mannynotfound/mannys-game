@@ -39,6 +39,7 @@ function Token(props: { tokenId: number } & AppProps) {
     accessories,
     questMode,
     mood,
+    textureHD,
   } = tokenState;
 
   return (
@@ -50,6 +51,7 @@ function Token(props: { tokenId: number } & AppProps) {
         mood={mood}
         bgColor={bgColor}
         paused={paused}
+        textureHD={textureHD}
         zoomedIn={zoomedIn}
         questMode={questMode}
       />
@@ -78,6 +80,7 @@ function Token(props: { tokenId: number } & AppProps) {
           bgColor={bgColor}
           zoomedIn={zoomedIn}
           paused={paused}
+          textureHD={textureHD}
           tokenId={tokenId}
           dispatch={dispatch}
         />

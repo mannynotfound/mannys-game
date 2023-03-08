@@ -3,6 +3,7 @@ import type { TokenStateDispatch } from '@/views/token/types';
 import OptionBackground from '@/views/token/Tools/Camera/OptionBackground';
 import OptionMood from '@/views/token/Tools/Camera/OptionMood';
 import OptionPaused from '@/views/token/Tools/Camera/OptionPaused';
+import OptionTextureHD from '@/views/token/Tools/Camera/OptionTextureHD';
 import OptionZoomed from '@/views/token/Tools/Camera/OptionZoomed';
 import OptionSave from '@/views/token/Tools/Camera/OptionSave';
 import OptionEditNFT from '@/views/token/Tools/Camera/OptionEditNFT';
@@ -14,6 +15,7 @@ type Props = {
   bgColor: string;
   zoomedIn: boolean;
   paused: boolean;
+  textureHD: boolean;
   dispatch: TokenStateDispatch;
 };
 
@@ -24,6 +26,7 @@ export default function Camera({
   bgColor,
   zoomedIn,
   paused,
+  textureHD,
   dispatch,
 }: Props) {
   return (
@@ -59,6 +62,11 @@ export default function Camera({
           dispatch={dispatch}
         />
         <OptionPaused tokenId={tokenId} paused={paused} dispatch={dispatch} />
+        <OptionTextureHD
+          tokenId={tokenId}
+          textureHD={textureHD}
+          dispatch={dispatch}
+        />
         <OptionSave tokenId={tokenId} />
         <OptionEditNFT tokenId={tokenId} dispatch={dispatch} />
       </div>

@@ -7,7 +7,6 @@ import { MANNY_TEXTURE_DEFAULT, MANNY_FBX, LIBRARY } from '@/utils/constants';
 
 type Props = {
   textureUrl?: string;
-  useTextureHD?: boolean;
   accessories?: {
     [slot: string]: string[];
   };

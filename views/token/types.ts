@@ -15,7 +15,7 @@ export type TokenState = {
     [slot: string]: string[];
   };
   camera: CameraState;
-  useTextureHD: boolean;
+  textureHD: boolean;
   mood: string;
 };
 

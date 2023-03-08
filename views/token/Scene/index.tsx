@@ -13,8 +13,16 @@ type Props = {
   mood: string;
   bgColor: string;
   paused: boolean;
+  textureHD: boolean;
   zoomedIn: boolean;
   questMode: string | undefined;
+};
+
+const getTextureURL = (textureUrl: string, textureHD: boolean) => {
+  if (textureUrl.includes('textures-small') && textureHD) {
+    return textureUrl.replace('textures-small', 'textures-hd');
+  }
+  return textureUrl;
 };
 
 export default function Scene({
@@ -23,6 +31,7 @@ export default function Scene({
   mood,
   bgColor,
   paused,
+  textureHD,
   zoomedIn,
   questMode,
 }: Props) {
@@ -64,7 +73,7 @@ export default function Scene({
             position={[0, -85, 0]}
             paused={paused}
             animation={mood}
-            textureUrl={textureUrl}
+            textureUrl={getTextureURL(textureUrl, textureHD)}
             accessories={accessories}
           />
         </Suspense>
