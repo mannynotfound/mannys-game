@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, Dispatch, SyntheticEvent } from 'react';
 import ReactCrop, { centerCrop, makeAspectCrop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import type { Crop } from 'react-image-crop/dist/types';
+import { TokenId } from '@/utils/types';
 
 const getCanvasImage = (useTransparent: boolean) => {
   const canvas = document.querySelector('canvas');
@@ -65,7 +66,7 @@ type CanvasImagesState = {
 };
 
 type Props = {
-  tokenId: number;
+  tokenId: TokenId;
   setCompletedCrop: Dispatch<Crop>;
   canvasImages: CanvasImagesState | undefined;
   setCanvasImages: Dispatch<CanvasImagesState>;

@@ -2,11 +2,11 @@ import { useEnsName } from 'wagmi';
 import { useRouter } from 'next/router';
 import type { Contract } from 'ethers';
 import useTokenOwner from '@/hooks/useTokenOwner';
-import { Account, EthAddress } from '@/utils/types';
+import type { Account, EthAddress, TokenId } from '@/utils/types';
 
 type OwnerProps = {
   account: Account;
-  tokenId: number;
+  tokenId: TokenId;
   tokenOwner: EthAddress;
 };
 
@@ -42,7 +42,7 @@ const Owner = ({ account, tokenId, tokenOwner }: OwnerProps) => {
 type Props = {
   account: Account;
   mannyContract: Contract;
-  tokenId: number;
+  tokenId: TokenId;
 };
 
 export default function Info({ account, mannyContract, tokenId }: Props) {

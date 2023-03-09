@@ -1,17 +1,14 @@
 import ToggleSwitch from '@/components/ToggleSwitch';
-import type { TokenStateDispatch } from '@/views/token/types';
+import type { TokenId } from '@/utils/types';
+import { useTokenDispatch } from '@/views/token/hooks';
 
 type Props = {
-  tokenId: number;
+  tokenId: TokenId;
   textureHD: boolean;
-  dispatch: TokenStateDispatch;
 };
 
-export default function OptionToggleHD({
-  tokenId,
-  textureHD,
-  dispatch,
-}: Props) {
+export default function OptionToggleHD({ tokenId, textureHD }: Props) {
+  const dispatch = useTokenDispatch();
   return (
     <div className="flex w-full justify-between">
       <div className="flex items-center">
@@ -26,9 +23,7 @@ export default function OptionToggleHD({
             dispatch({
               type: 'SET_TEXTURE_HD',
               tokenId,
-              payload: {
-                textureHD: !textureHD,
-              },
+              payload: !textureHD,
             });
           }}
           disabled={false}

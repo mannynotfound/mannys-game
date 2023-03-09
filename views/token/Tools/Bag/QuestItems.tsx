@@ -1,14 +1,14 @@
-import type { TokenStateDispatch, SetTooltipArgs } from '@/views/token/types';
+import type { TokenId } from '@/utils/types';
 import { allQuests } from '@/fixtures/quests';
 import QuestItem from '@/views/token/Tools/Bag/QuestItem';
+import type { SetTooltipArgs } from '@/views/token/Tools/Bag/Tooltip';
 
 type Props = {
-  tokenId: number;
-  dispatch: TokenStateDispatch;
+  tokenId: TokenId;
   setTooltip: (args: SetTooltipArgs) => void;
 };
 
-export default function Quests({ tokenId, dispatch, setTooltip }: Props) {
+export default function Quests({ tokenId, setTooltip }: Props) {
   return (
     <div key="quest-items">
       <div className="text-green text-lg capitalize mb-1">quest items</div>
@@ -18,7 +18,6 @@ export default function Quests({ tokenId, dispatch, setTooltip }: Props) {
             key={quest.id}
             quest={quest}
             tokenId={tokenId}
-            dispatch={dispatch}
             setTooltip={setTooltip}
             imageUrl={`/accessories/${quest.id}.png`}
           />

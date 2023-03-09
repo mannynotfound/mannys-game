@@ -1,6 +1,25 @@
 import MouseTooltip from 'react-sticky-mouse-tooltip';
 import { twMerge } from 'tailwind-merge';
-import { BagTooltip } from '@/views/token/types';
+
+export type BagTooltip = {
+  distanceFromEdge: number;
+  bgColor: string;
+  label: string;
+  description: string;
+  level?: number;
+  stats?: Record<string, number>;
+  slot?: string;
+  requirement?: string;
+};
+
+export type SetTooltipArgs =
+  | {
+      bgColor: string;
+      distanceFromEdge: number;
+      label: string;
+      description: string;
+    }
+  | undefined;
 
 type Props = {
   tooltip: BagTooltip | undefined;

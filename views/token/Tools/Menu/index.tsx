@@ -1,20 +1,16 @@
 import { twMerge } from 'tailwind-merge';
-import type { TokenStateDispatch } from '@/views/token/types';
 import { Backpack, Camera } from '@/components/Svg';
+import type { TokenId } from '@/utils/types';
+import { useTokenDispatch } from '@/views/token/hooks';
 
 type Props = {
-  tokenId: number;
+  tokenId: TokenId;
   bagOpen: boolean;
   cameraOpen: boolean;
-  dispatch: TokenStateDispatch;
 };
 
-export default function Menu({
-  tokenId,
-  bagOpen,
-  cameraOpen,
-  dispatch,
-}: Props) {
+export default function Menu({ tokenId, bagOpen, cameraOpen }: Props) {
+  const dispatch = useTokenDispatch();
   const baseClasses = twMerge(
     'min-w-[50px] min-h-[50px]',
     'inline-block p-1 rounded-md relative border',
@@ -34,7 +30,11 @@ export default function Menu({
       <div
         className={cameraClasses}
         onClick={() =>
-          dispatch({ type: 'SET_CAMERA_OPEN', tokenId, payload: !cameraOpen })
+          dispatch({
+            type: 'TOGGLE_CAMERA_OPEN',
+            tokenId,
+            payload: !cameraOpen,
+          })
         }
       >
         <div className="flex items-center absolute inset-0">
@@ -44,7 +44,7 @@ export default function Menu({
       <div
         className={bagClasses}
         onClick={() =>
-          dispatch({ type: 'SET_BAG_OPEN', tokenId, payload: !bagOpen })
+          dispatch({ type: 'TOGGLE_BAG_OPEN', tokenId, payload: !bagOpen })
         }
       >
         <Backpack height={40} width={20} className="mx-auto" />

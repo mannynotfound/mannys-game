@@ -1,15 +1,16 @@
 import { useState, useRef, useEffect } from 'react';
 import { twMerge } from 'tailwind-merge';
 import createFrogger from '@/views/token/Quests/Frogger';
-import type { TokenStateDispatch, SetTooltipArgs } from '@/views/token/types';
+import { useTokenDispatch } from '@/views/token/hooks';
+import type { SetTooltipArgs } from '@/views/token/Tools/Bag/Tooltip';
 import type { Quest } from '@/fixtures/quests';
+import { TokenId } from '@/utils/types';
 
 type Props = {
   quest: Quest;
   imageUrl: string;
-  tokenId: number;
+  tokenId: TokenId;
   setTooltip: (args: SetTooltipArgs) => void;
-  dispatch: TokenStateDispatch;
 };
 
 export default function QuestItem({
@@ -17,9 +18,9 @@ export default function QuestItem({
   imageUrl,
   tokenId,
   setTooltip,
-  dispatch,
 }: Props) {
   const itemRef = useRef<HTMLDivElement>(null);
+  const dispatch = useTokenDispatch();
 
   const [distanceFromEdge, setDistanceFromEdge] = useState(0);
   useEffect(() => {
@@ -48,9 +49,7 @@ export default function QuestItem({
         dispatch({
           type: 'SET_QUEST_MODE',
           tokenId,
-          payload: {
-            quest,
-          },
+          payload: quest.id,
         });
 
         if (quest.id === 'toadz') {
@@ -63,16 +62,12 @@ export default function QuestItem({
                 dispatch({
                   type: 'SET_QUEST_MODE',
                   tokenId,
-                  payload: {
-                    quest: {},
-                  },
+                  payload: undefined,
                 });
                 dispatch({
                   type: 'SET_MOOD',
                   tokenId,
-                  payload: {
-                    mood: isWin ? 'cheering' : 'agony',
-                  },
+                  payload: isWin ? 'cheering' : 'agony',
                 });
               }, 2500);
             };

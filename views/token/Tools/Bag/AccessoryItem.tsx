@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { twMerge } from 'tailwind-merge';
 import type { Accessory } from '@/fixtures/accessories';
-import type { SetTooltipArgs } from '@/views/token/types';
+import type { SetTooltipArgs } from '@/views/token/Tools/Bag/Tooltip';
 
 type Props = {
   accessory: Accessory;

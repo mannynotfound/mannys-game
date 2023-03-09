@@ -1,12 +1,13 @@
 import Button from '@/components/Button';
-import type { TokenStateDispatch } from '@/views/token/types';
+import type { TokenId } from '@/utils/types';
+import { useTokenDispatch } from '@/views/token/hooks';
 
 type Props = {
-  dispatch: TokenStateDispatch;
-  tokenId: number;
+  tokenId: TokenId;
 };
 
-export default function OptionEditNFT({ dispatch, tokenId }: Props) {
+export default function OptionEditNFT({ tokenId }: Props) {
+  const dispatch = useTokenDispatch();
   return (
     <div className="flex w-full">
       <Button

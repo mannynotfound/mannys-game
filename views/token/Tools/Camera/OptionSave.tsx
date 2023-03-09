@@ -1,7 +1,8 @@
 import Button from '@/components/Button';
+import type { TokenId } from '@/utils/types';
 
 type Props = {
-  tokenId: number;
+  tokenId: TokenId;
 };
 
 export default function OptionSave({ tokenId }: Props) {

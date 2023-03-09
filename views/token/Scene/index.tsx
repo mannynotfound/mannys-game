@@ -3,12 +3,13 @@ import { Canvas } from '@react-three/fiber';
 import { NoToneMapping, sRGBEncoding, Vector3 } from 'three';
 import { Manny, Controls, Lighting, CameraZoom } from '@/components/three';
 import AsciiRenderer from '@/views/token/Quests/AsciiRenderer';
+import type { TokenId } from '@/utils/types';
 
 type Props = {
   accessories?: {
     [slot: string]: string[];
   };
-  tokenId: number;
+  tokenId: TokenId;
   textureUrl: string;
   mood: string;
   bgColor: string;

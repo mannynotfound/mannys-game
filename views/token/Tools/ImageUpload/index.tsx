@@ -3,10 +3,11 @@ import { useSignMessage } from 'wagmi';
 import type { Crop } from 'react-image-crop/dist/types';
 import PreviewImage from '@/views/token/Tools/ImageUpload/PreviewImage';
 import Button from '@/components/Button';
+import type { TokenId } from '@/utils/types';
 import ToggleSwitch from '@/components/ToggleSwitch';
 import { createCroppedImage } from '@/views/token/Tools/ImageUpload/utils';
 import { API_URL } from '@/utils/constants';
-import { TokenStateDispatch } from '@/views/token/types';
+import { useTokenDispatch } from '@/views/token/hooks';
 
 type CanvasImagesState = {
   [key: string]: string;
@@ -18,11 +19,11 @@ type SubmitState = {
 };
 
 type Props = {
-  tokenId: number;
-  dispatch: TokenStateDispatch;
+  tokenId: TokenId;
 };
 
-const ImageUpload = ({ tokenId, dispatch }: Props) => {
+const ImageUpload = ({ tokenId }: Props) => {
+  const dispatch = useTokenDispatch();
   const [canvasImages, setCanvasImages] = useState<CanvasImagesState>();
   const [useTransparent, setUseTransaprent] = useState(false);
   const [completedCrop, setCompletedCrop] = useState<Crop>({

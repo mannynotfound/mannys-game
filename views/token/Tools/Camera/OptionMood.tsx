@@ -1,22 +1,17 @@
 import { useProvider } from 'wagmi';
 import useLoot from '@/hooks/useLoot';
 import { getTokenProps } from '@/utils';
-import { Account } from '@/utils/types';
-import type { TokenStateDispatch } from '@/views/token/types';
+import type { Account, TokenId } from '@/utils/types';
+import { useTokenDispatch } from '@/views/token/hooks';
 
 type Props = {
   account: Account;
-  tokenId: number;
+  tokenId: TokenId;
   mood: string;
-  dispatch: TokenStateDispatch;
 };
 
-export default function OptionMood({
-  account,
-  tokenId,
-  mood,
-  dispatch,
-}: Props) {
+export default function OptionMood({ account, tokenId, mood }: Props) {
+  const dispatch = useTokenDispatch();
   const animationName = getTokenProps(tokenId)?.animationName;
   const provider = useProvider();
   const { hasLoot, hasMLoot } = useLoot(provider, account?.address);
@@ -34,9 +29,7 @@ export default function OptionMood({
             dispatch({
               type: 'SET_MOOD',
               tokenId,
-              payload: {
-                mood: e.target.value,
-              },
+              payload: e.target.value,
             });
           }}
         >

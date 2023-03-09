@@ -4,21 +4,18 @@ import { Accessory, allAccessories } from '@/fixtures/accessories';
 import useLoot from '@/hooks/useLoot';
 import useFWB from '@/hooks/useFWB';
 import useNounish from '@/hooks/useNounish';
-import type { Account, AchievementEarnedObject } from '@/utils/types';
+import type { Account, AchievementEarnedObject, TokenId } from '@/utils/types';
 import { fetcher, groupBy } from '@/utils';
 import { API_URL } from '@/utils/constants';
-import type {
-  TokenState,
-  TokenStateDispatch,
-  SetTooltipArgs,
-} from '@/views/token/types';
+import { useTokenDispatch } from '@/views/token/hooks';
+import { TokenState } from '@/views/token/reducer';
+import type { SetTooltipArgs } from '@/views/token/Tools/Bag/Tooltip';
 import Item from '@/views/token/Tools/Bag/AccessoryItem';
 
 type Props = {
-  tokenId: number;
+  tokenId: TokenId;
   account: Account;
   accessories: TokenState['accessories'];
-  dispatch: TokenStateDispatch;
   setTooltip: (args: SetTooltipArgs) => void;
 };
 
@@ -28,9 +25,9 @@ export default function AccessoryItems({
   tokenId,
   account,
   accessories,
-  dispatch,
   setTooltip,
 }: Props) {
+  const dispatch = useTokenDispatch();
   const provider = useProvider();
   const address = account?.address;
 

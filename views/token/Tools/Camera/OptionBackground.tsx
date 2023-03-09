@@ -1,16 +1,13 @@
-import type { TokenStateDispatch } from '@/views/token/types';
+import type { TokenId } from '@/utils/types';
+import { useTokenDispatch } from '@/views/token/hooks';
 
 type Props = {
-  tokenId: number;
+  tokenId: TokenId;
   bgColor: string;
-  dispatch: TokenStateDispatch;
 };
 
-export default function OptionBackground({
-  tokenId,
-  bgColor,
-  dispatch,
-}: Props) {
+export default function OptionBackground({ tokenId, bgColor }: Props) {
+  const dispatch = useTokenDispatch();
   return (
     <div className="flex w-full justify-between">
       <div className="flex items-center">
@@ -24,9 +21,7 @@ export default function OptionBackground({
             dispatch({
               type: 'SET_BG_COLOR',
               tokenId,
-              payload: {
-                bgColor: e.target.value,
-              },
+              payload: e.target.value,
             });
           }}
         />

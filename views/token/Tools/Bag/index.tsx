@@ -1,27 +1,19 @@
 import { useState } from 'react';
-import type { Account } from '@/utils/types';
-import type {
-  TokenState,
-  TokenStateDispatch,
-  BagTooltip,
-} from '@/views/token/types';
+import type { Account, TokenId } from '@/utils/types';
+import { useTokenDispatch } from '@/views/token/hooks';
+import type { TokenState } from '@/views/token/reducer';
 import AccessoryItems from '@/views/token/Tools/Bag/AccessoryItems';
 import QuestItems from '@/views/token/Tools/Bag/QuestItems';
-import Tooltip from '@/views/token/Tools/Bag/Tooltip';
+import Tooltip, { BagTooltip } from '@/views/token/Tools/Bag/Tooltip';
 
 type Props = {
-  tokenId: number;
+  tokenId: TokenId;
   account: Account;
   accessories: TokenState['accessories'];
-  dispatch: TokenStateDispatch;
 };
 
-export default function Bag({
-  tokenId,
-  account,
-  accessories,
-  dispatch,
-}: Props) {
+export default function Bag({ tokenId, account, accessories }: Props) {
+  const dispatch = useTokenDispatch();
   const [tooltip, setTooltip] = useState<BagTooltip>();
 
   return (
@@ -30,7 +22,7 @@ export default function Bag({
         <div
           className="absolute top-0 right-0 text-yellow cursor-pointer"
           onClick={() =>
-            dispatch({ type: 'SET_BAG_OPEN', tokenId, payload: false })
+            dispatch({ type: 'TOGGLE_BAG_OPEN', tokenId, payload: false })
           }
         >
           <div className="p-4 text-2xl font-bold">x</div>
@@ -42,14 +34,9 @@ export default function Bag({
           tokenId={tokenId}
           account={account}
           accessories={accessories}
-          dispatch={dispatch}
           setTooltip={setTooltip}
         />
-        <QuestItems
-          tokenId={tokenId}
-          dispatch={dispatch}
-          setTooltip={setTooltip}
-        />
+        <QuestItems tokenId={tokenId} setTooltip={setTooltip} />
       </div>
       <Tooltip tooltip={tooltip} />
     </div>

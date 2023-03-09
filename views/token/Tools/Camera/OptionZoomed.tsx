@@ -1,13 +1,14 @@
 import ToggleSwitch from '@/components/ToggleSwitch';
-import type { TokenStateDispatch } from '@/views/token/types';
+import type { TokenId } from '@/utils/types';
+import { useTokenDispatch } from '@/views/token/hooks';
 
 type Props = {
-  tokenId: number;
+  tokenId: TokenId;
   zoomedIn: boolean;
-  dispatch: TokenStateDispatch;
 };
 
-export default function OptionZoomed({ tokenId, zoomedIn, dispatch }: Props) {
+export default function OptionZoomed({ tokenId, zoomedIn }: Props) {
+  const dispatch = useTokenDispatch();
   return (
     <div className="flex w-full justify-between">
       <div className="flex items-center">
@@ -22,9 +23,7 @@ export default function OptionZoomed({ tokenId, zoomedIn, dispatch }: Props) {
             dispatch({
               type: 'SET_ZOOM',
               tokenId,
-              payload: {
-                zoomedIn: !zoomedIn,
-              },
+              payload: !zoomedIn,
             });
           }}
           disabled={false}

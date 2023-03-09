@@ -1,6 +1,5 @@
 import type { Contract } from 'ethers';
-import type { Account, Token } from '@/utils/types';
-import type { TokenStateDispatch } from '@/views/token/types';
+import type { Account, Token, TokenId } from '@/utils/types';
 import Info from '@/views/token/Footer/Info';
 import ToolsMenu from '@/views/token/Tools/Menu';
 import Chat from '@/components/Chat';
@@ -11,8 +10,7 @@ type Props = {
   mannyContract: Contract;
   bagOpen: boolean;
   cameraOpen: boolean;
-  dispatch: TokenStateDispatch;
-  tokenId: number;
+  tokenId: TokenId;
   zoomedIn: boolean;
 };
 
@@ -22,7 +20,6 @@ export default function Footer({
   mannyContract,
   bagOpen,
   cameraOpen,
-  dispatch,
   tokenId,
   zoomedIn,
 }: Props) {
@@ -47,7 +44,6 @@ export default function Footer({
           tokenId={tokenId}
           cameraOpen={cameraOpen}
           bagOpen={bagOpen}
-          dispatch={dispatch}
         />
       </div>
     </div>
