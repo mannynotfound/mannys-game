@@ -1,6 +1,7 @@
 import ToggleSwitch from '@/components/ToggleSwitch';
 import type { TokenId } from '@/utils/types';
-import { useTokenDispatch } from '@/views/token/hooks';
+import { useAppDispatch } from '@/views/token/hooks';
+import { setTextureHD } from '@/views/token/reducer';
 
 type Props = {
   tokenId: TokenId;
@@ -8,7 +9,7 @@ type Props = {
 };
 
 export default function OptionToggleHD({ tokenId, textureHD }: Props) {
-  const dispatch = useTokenDispatch();
+  const dispatch = useAppDispatch();
   return (
     <div className="flex w-full justify-between">
       <div className="flex items-center">
@@ -20,11 +21,12 @@ export default function OptionToggleHD({ tokenId, textureHD }: Props) {
           name="textureHD"
           checked={textureHD}
           onChange={() => {
-            dispatch({
-              type: 'SET_TEXTURE_HD',
-              tokenId,
-              payload: !textureHD,
-            });
+            dispatch(
+              setTextureHD({
+                tokenId,
+                value: !textureHD,
+              })
+            );
           }}
           disabled={false}
         />

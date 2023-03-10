@@ -2,7 +2,8 @@ import { useProvider } from 'wagmi';
 import useLoot from '@/hooks/useLoot';
 import { getTokenProps } from '@/utils';
 import type { Account, TokenId } from '@/utils/types';
-import { useTokenDispatch } from '@/views/token/hooks';
+import { useAppDispatch } from '@/views/token/hooks';
+import { setMood } from '@/views/token/reducer';
 
 type Props = {
   account: Account;
@@ -11,7 +12,7 @@ type Props = {
 };
 
 export default function OptionMood({ account, tokenId, mood }: Props) {
-  const dispatch = useTokenDispatch();
+  const dispatch = useAppDispatch();
   const animationName = getTokenProps(tokenId)?.animationName;
   const provider = useProvider();
   const { hasLoot, hasMLoot } = useLoot(provider, account?.address);
@@ -26,11 +27,12 @@ export default function OptionMood({ account, tokenId, mood }: Props) {
           className="text-black p-1 text-right font-mono max-w-[170px]"
           value={mood}
           onChange={(e) => {
-            dispatch({
-              type: 'SET_MOOD',
-              tokenId,
-              payload: e.target.value,
-            });
+            dispatch(
+              setMood({
+                tokenId,
+                value: e.target.value,
+              })
+            );
           }}
         >
           <option>idle</option>

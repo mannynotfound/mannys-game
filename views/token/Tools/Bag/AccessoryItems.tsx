@@ -7,8 +7,8 @@ import useNounish from '@/hooks/useNounish';
 import type { Account, AchievementEarnedObject, TokenId } from '@/utils/types';
 import { fetcher, groupBy } from '@/utils';
 import { API_URL } from '@/utils/constants';
-import { useTokenDispatch } from '@/views/token/hooks';
-import { TokenState } from '@/views/token/reducer';
+import { useAppDispatch } from '@/views/token/hooks';
+import { TokenState, toggleAccessory } from '@/views/token/reducer';
 import type { SetTooltipArgs } from '@/views/token/Tools/Bag/Tooltip';
 import Item from '@/views/token/Tools/Bag/AccessoryItem';
 
@@ -27,7 +27,7 @@ export default function AccessoryItems({
   accessories,
   setTooltip,
 }: Props) {
-  const dispatch = useTokenDispatch();
+  const dispatch = useAppDispatch();
   const provider = useProvider();
   const address = account?.address;
 
@@ -75,11 +75,15 @@ export default function AccessoryItems({
                     isEnabled={getItemEnabled(acc)}
                     isActive={isActive}
                     onClick={() => {
-                      dispatch({
-                        type: 'TOGGLE_ACCESSORY',
-                        tokenId,
-                        payload: acc,
-                      });
+                      dispatch(
+                        toggleAccessory({
+                          tokenId,
+                          value: {
+                            id: acc.id,
+                            slot: acc.slot,
+                          },
+                        })
+                      );
                     }}
                     setTooltip={setTooltip}
                     key={acc.id}

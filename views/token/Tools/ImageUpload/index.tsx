@@ -7,7 +7,8 @@ import type { TokenId } from '@/utils/types';
 import ToggleSwitch from '@/components/ToggleSwitch';
 import { createCroppedImage } from '@/views/token/Tools/ImageUpload/utils';
 import { API_URL } from '@/utils/constants';
-import { useTokenDispatch } from '@/views/token/hooks';
+import { useAppDispatch } from '@/views/token/hooks';
+import { closeImageUpload } from '../../reducer';
 
 type CanvasImagesState = {
   [key: string]: string;
@@ -23,7 +24,7 @@ type Props = {
 };
 
 const ImageUpload = ({ tokenId }: Props) => {
-  const dispatch = useTokenDispatch();
+  const dispatch = useAppDispatch();
   const [canvasImages, setCanvasImages] = useState<CanvasImagesState>();
   const [useTransparent, setUseTransaprent] = useState(false);
   const [completedCrop, setCompletedCrop] = useState<Crop>({
@@ -101,10 +102,11 @@ const ImageUpload = ({ tokenId }: Props) => {
           <p>{submitResponse.message}</p>
           <Button
             onClick={() =>
-              dispatch({
-                type: 'CLOSE_IMAGE_UPLOAD',
-                tokenId,
-              })
+              dispatch(
+                closeImageUpload({
+                  tokenId,
+                })
+              )
             }
             color="yellow"
             className="w-auto text-center"
@@ -152,7 +154,7 @@ const ImageUpload = ({ tokenId }: Props) => {
       </div>
       <div
         className="absolute inset-0 z-0"
-        onClick={() => dispatch({ type: 'CLOSE_IMAGE_UPLOAD', tokenId })}
+        onClick={() => dispatch(closeImageUpload({ tokenId }))}
       />
     </div>
   );

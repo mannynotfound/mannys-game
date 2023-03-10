@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { twMerge } from 'tailwind-merge';
 import createFrogger from '@/views/token/Quests/Frogger';
-import { useTokenDispatch } from '@/views/token/hooks';
+import { useAppDispatch } from '@/views/token/hooks';
+import { setQuestMode, setMood } from '@/views/token/reducer';
 import type { SetTooltipArgs } from '@/views/token/Tools/Bag/Tooltip';
 import type { Quest } from '@/fixtures/quests';
 import { TokenId } from '@/utils/types';
@@ -20,7 +21,7 @@ export default function QuestItem({
   setTooltip,
 }: Props) {
   const itemRef = useRef<HTMLDivElement>(null);
-  const dispatch = useTokenDispatch();
+  const dispatch = useAppDispatch();
 
   const [distanceFromEdge, setDistanceFromEdge] = useState(0);
   useEffect(() => {
@@ -46,11 +47,12 @@ export default function QuestItem({
         });
       }}
       onClick={() => {
-        dispatch({
-          type: 'SET_QUEST_MODE',
-          tokenId,
-          payload: quest.id,
-        });
+        dispatch(
+          setQuestMode({
+            tokenId,
+            value: quest.id,
+          })
+        );
 
         if (quest.id === 'toadz') {
           setTimeout(() => {
@@ -59,16 +61,18 @@ export default function QuestItem({
 
             const endGame = (isWin: boolean) => {
               setTimeout(() => {
-                dispatch({
-                  type: 'SET_QUEST_MODE',
-                  tokenId,
-                  payload: undefined,
-                });
-                dispatch({
-                  type: 'SET_MOOD',
-                  tokenId,
-                  payload: isWin ? 'cheering' : 'agony',
-                });
+                dispatch(
+                  setQuestMode({
+                    tokenId,
+                    value: undefined,
+                  })
+                );
+                dispatch(
+                  setMood({
+                    tokenId,
+                    value: isWin ? 'cheering' : 'agony',
+                  })
+                );
               }, 2500);
             };
 

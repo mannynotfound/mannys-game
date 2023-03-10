@@ -24,7 +24,7 @@ export default function Footer({
   zoomedIn,
 }: Props) {
   return (
-    <div className="fixed bottom-0 p-8 w-full flex h-[200px]">
+    <div className="fixed left-0 bottom-0 p-8 w-full flex h-[200px]">
       <div className="flex-1 pr-8 select-none">
         {!zoomedIn && <Chat account={account} mannys={mannys} />}
       </div>

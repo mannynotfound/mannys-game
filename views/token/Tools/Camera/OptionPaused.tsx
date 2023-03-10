@@ -1,6 +1,7 @@
 import ToggleSwitch from '@/components/ToggleSwitch';
 import type { TokenId } from '@/utils/types';
-import { useTokenDispatch } from '@/views/token/hooks';
+import { useAppDispatch } from '@/views/token/hooks';
+import { setPaused } from '@/views/token/reducer';
 
 type Props = {
   tokenId: TokenId;
@@ -8,7 +9,7 @@ type Props = {
 };
 
 export default function OptionPaused({ tokenId, paused }: Props) {
-  const dispatch = useTokenDispatch();
+  const dispatch = useAppDispatch();
   return (
     <div className="flex w-full justify-between">
       <div className="flex items-center">
@@ -20,11 +21,12 @@ export default function OptionPaused({ tokenId, paused }: Props) {
           name="paused"
           checked={paused}
           onChange={() => {
-            dispatch({
-              type: 'SET_PAUSED',
-              tokenId,
-              payload: !paused,
-            });
+            dispatch(
+              setPaused({
+                tokenId,
+                value: !paused,
+              })
+            );
           }}
           disabled={false}
         />

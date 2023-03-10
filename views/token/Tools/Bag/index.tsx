@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { Account, TokenId } from '@/utils/types';
-import { useTokenDispatch } from '@/views/token/hooks';
-import type { TokenState } from '@/views/token/reducer';
+import { useAppDispatch } from '@/views/token/hooks';
+import { TokenState, toggleBagOpen } from '@/views/token/reducer';
 import AccessoryItems from '@/views/token/Tools/Bag/AccessoryItems';
 import QuestItems from '@/views/token/Tools/Bag/QuestItems';
 import Tooltip, { BagTooltip } from '@/views/token/Tools/Bag/Tooltip';
@@ -13,7 +13,7 @@ type Props = {
 };
 
 export default function Bag({ tokenId, account, accessories }: Props) {
-  const dispatch = useTokenDispatch();
+  const dispatch = useAppDispatch();
   const [tooltip, setTooltip] = useState<BagTooltip>();
 
   return (
@@ -22,7 +22,12 @@ export default function Bag({ tokenId, account, accessories }: Props) {
         <div
           className="absolute top-0 right-0 text-yellow cursor-pointer"
           onClick={() =>
-            dispatch({ type: 'TOGGLE_BAG_OPEN', tokenId, payload: false })
+            dispatch(
+              toggleBagOpen({
+                tokenId,
+                value: false,
+              })
+            )
           }
         >
           <div className="p-4 text-2xl font-bold">x</div>

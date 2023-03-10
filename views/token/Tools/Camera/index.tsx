@@ -1,5 +1,6 @@
 import type { Account, TokenId } from '@/utils/types';
-import { useTokenDispatch } from '@/views/token/hooks';
+import { useAppDispatch } from '@/views/token/hooks';
+import { toggleCameraOpen } from '@/views/token/reducer';
 import OptionBackground from '@/views/token/Tools/Camera/OptionBackground';
 import OptionMood from '@/views/token/Tools/Camera/OptionMood';
 import OptionPaused from '@/views/token/Tools/Camera/OptionPaused';
@@ -27,14 +28,19 @@ export default function Camera({
   paused,
   textureHD,
 }: Props) {
-  const dispatch = useTokenDispatch();
+  const dispatch = useAppDispatch();
   return (
     <div className="absolute right-0 px-8 text-green select-none bottom-[200px] max-w-[320px] w-full">
       <div className="border p-4 border-green rounded-md relative z-10 flex flex-col gap-y-2">
         <div
           className="absolute top-0 right-0 text-yellow cursor-pointer z-0"
           onClick={() =>
-            dispatch({ type: 'TOGGLE_CAMERA_OPEN', tokenId, payload: false })
+            dispatch(
+              toggleCameraOpen({
+                tokenId,
+                value: false,
+              })
+            )
           }
         >
           <div className="p-4 pb-0 text-2xl">

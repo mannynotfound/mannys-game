@@ -1,5 +1,6 @@
 import type { TokenId } from '@/utils/types';
-import { useTokenDispatch } from '@/views/token/hooks';
+import { useAppDispatch } from '@/views/token/hooks';
+import { setBgColor } from '@/views/token/reducer';
 
 type Props = {
   tokenId: TokenId;
@@ -7,7 +8,7 @@ type Props = {
 };
 
 export default function OptionBackground({ tokenId, bgColor }: Props) {
-  const dispatch = useTokenDispatch();
+  const dispatch = useAppDispatch();
   return (
     <div className="flex w-full justify-between">
       <div className="flex items-center">
@@ -18,11 +19,12 @@ export default function OptionBackground({ tokenId, bgColor }: Props) {
           type="color"
           value={bgColor}
           onChange={(e) => {
-            dispatch({
-              type: 'SET_BG_COLOR',
-              tokenId,
-              payload: e.target.value,
-            });
+            dispatch(
+              setBgColor({
+                tokenId,
+                value: e.target.value,
+              })
+            );
           }}
         />
       </div>
