@@ -3,7 +3,6 @@ import { useAppSelector } from '@/views/token/hooks';
 import { initialState } from '@/views/token/reducer';
 import store, { persistor } from '@/views/token/store';
 import { PersistGate } from 'redux-persist/integration/react';
-import { useRouter } from 'next/router';
 import { getTokenProps } from '@/utils';
 import { AppProps, TokenId } from '@/utils/types';
 import Scene from '@/views/token/Scene';
@@ -23,7 +22,7 @@ function Token(props: Props) {
   const tokenMatch = getTokenProps(tokenId);
   const textureUrl = tokenMatch?.textureUrl ?? MANNY_TEXTURE_DEFAULT;
   const state = useAppSelector((state) => state.tokens);
-  const tokenState = state[tokenId.toString()] ?? initialState;
+  const tokenState = state[tokenId] ?? initialState;
 
   const {
     camera: { zoomedIn, paused, bgColor },
@@ -82,19 +81,15 @@ function Token(props: Props) {
   );
 }
 
-export default function TokenCheck(props: AppProps) {
-  const router = useRouter();
-  const tokenStr = router.query.tokenId?.toString() ?? '0';
-  const tokenMatch = getTokenProps(parseInt(tokenStr, 10));
-  const tokenId = tokenMatch?.tokenId;
-  if (tokenId === undefined) {
+export default function TokenCheck(props: AppProps & { tokenId: TokenId }) {
+  if (props.tokenId === undefined) {
     return null;
   }
 
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <Token tokenId={tokenId} {...props} />
+        <Token {...props} />
       </PersistGate>
     </Provider>
   );
