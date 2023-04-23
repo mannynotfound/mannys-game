@@ -1,14 +1,14 @@
 import { useCallback, Dispatch, SetStateAction } from 'react';
 import DatGui, { DatNumber } from 'react-dat-gui';
-import { DatData } from '@/hooks/useAccessories';
+import type { Offset } from '@/fixtures/accessories';
 
 type Props = {
-  datData: DatData;
-  setDatData: Dispatch<SetStateAction<DatData>>;
+  datData: Offset;
+  setDatData: Dispatch<SetStateAction<Offset>>;
 };
 
 export function AccessoryGUI({ datData, setDatData }: Props) {
-  const handleUpdate = useCallback((newData: DatData) => {
+  const handleUpdate = useCallback((newData: Offset) => {
     setDatData((prev) => ({
       ...prev,
       rotation: {
