@@ -3,6 +3,7 @@ import { Vector3, Euler, Group } from 'three';
 // @ts-expect-error: add types to manny module
 import manny from 'manny';
 import useAccessories from '@/hooks/useAccessories';
+import type { Offset } from '@/fixtures/accessories';
 import { MANNY_TEXTURE_DEFAULT, MANNY_FBX, LIBRARY } from '@/utils/constants';
 
 type Props = {
@@ -16,6 +17,7 @@ type Props = {
   scale?: number;
   position?: number[];
   rotation?: number[];
+  datData?: Offset;
 };
 
 function Manny({
@@ -27,6 +29,7 @@ function Manny({
   scale = 1,
   position = [0, 0, 0],
   rotation = [0, 0, 0],
+  datData,
 }: Props) {
   const [loaded, setLoaded] = useState(false);
 
@@ -45,7 +48,7 @@ function Manny({
     animationOptions,
   });
 
-  useAccessories(mannyObj, accessories);
+  useAccessories(mannyObj, accessories, datData);
 
   useEffect(() => {
     if (!loaded) {

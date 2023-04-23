@@ -73,3 +73,10 @@ export const groupBy = <T>(
     (acc[predicate(value, index, array)] ||= []).push(value);
     return acc;
   }, {} as { [key: string]: T[] });
+
+export const getTextureURL = (textureUrl: string, textureHD: boolean) => {
+  if (textureUrl.includes('textures-small') && textureHD) {
+    return textureUrl.replace('textures-small', 'textures-hd');
+  }
+  return textureUrl;
+};

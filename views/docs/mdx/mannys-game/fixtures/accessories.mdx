@@ -27,19 +27,12 @@ An array of objects representing accessories.
 
 ## Accessory Props
   
-### animation
-
-<Code language="js">
-{`string // valid constants.LIBRARY animation associated with accessory`}
-</Code>
-
-### armature
+### offset
 
 Object containing data for positioning the accessory.
 
 <Code language="js">
 {`{
-  bone: string, // name of bone in manny armature to attach to 
   scale: {
     x: float, // scale.x value
     y: float, // scale.y value
@@ -47,14 +40,14 @@ Object containing data for positioning the accessory.
   },
   offset: {
     position: {
-      x: float, // position.x offset
-      y: float, // position.y offset
-      z: float, // position.z offset
+      x: float, // position.x 
+      y: float, // position.y 
+      z: float, // position.z 
     },
     rotation: {
-      x: float, // rotation.x offset
-      y: float, // rotation.y offset
-      z: float, // rotation.z offset
+      x: float, // rotation.x 
+      y: float, // rotation.y 
+      z: float, // rotation.z 
     }
   }
 }`}
@@ -82,18 +75,6 @@ Object containing data for positioning the accessory.
 
 <Code language="js">
 {`integer // accessory item level`}
-</Code>
-
-### mannyZ
-
-<Code language="js">
-{`float // offset added to manny's position.z`}
-</Code>
-
-### material
-
-<Code language="js">
-{`function // takes accessory Object3D as an argument and makes adjustments to its materials`}
 </Code>
 
 ### rarity

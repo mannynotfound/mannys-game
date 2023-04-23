@@ -26,6 +26,7 @@ type Props = {
 };
 
 export default function Tooltip({ tooltip }: Props) {
+  const { bgColor } = tooltip ?? {};
   const closeToEdge =
     tooltip?.distanceFromEdge !== undefined && tooltip?.distanceFromEdge < 269;
 
@@ -37,6 +38,13 @@ export default function Tooltip({ tooltip }: Props) {
 
   const visible = tooltip !== undefined;
 
+  const textClass =
+    bgColor === 'bg-magenta'
+      ? 'text-magenta'
+      : bgColor === 'bg-cyan'
+      ? 'text-cyan'
+      : 'text-green';
+
   return (
     <MouseTooltip
       visible={visible}
@@ -45,7 +53,7 @@ export default function Tooltip({ tooltip }: Props) {
     >
       {visible && (
         <div className={tooltipClasses}>
-          <h3 className={`text-${tooltip.bgColor}`}>{tooltip.label}</h3>
+          <h3 className={`${textClass}`}>{tooltip.label}</h3>
           {tooltip.level && (
             <p className="text-yellow">Item Level {tooltip.level}</p>
           )}

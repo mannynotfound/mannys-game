@@ -34,10 +34,10 @@ export default function AccessoryItem({
   // default to green bg. rare = cyan, legendary = magenta
   const bgColor =
     accessory.rarity === 'rare'
-      ? 'cyan'
+      ? 'bg-cyan'
       : accessory.rarity === 'legendary'
-      ? 'magenta'
-      : 'green';
+      ? 'bg-magenta'
+      : 'bg-green';
 
   const tooltip = {
     ...accessory,
@@ -68,7 +68,7 @@ export default function AccessoryItem({
       onClick={onClickHandler}
     >
       <div className="absolute inset-0 opacity-50 highlight" />
-      <div className={`absolute inset-0 opacity-50 bg-${bgColor}`} />
+      <div className={`absolute inset-0 opacity-50 ${bgColor}`} />
       <div
         className="absolute inset-0"
         style={{

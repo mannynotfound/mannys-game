@@ -7,14 +7,13 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import { useFBX } from '@react-three/drei';
 import { MODELS_HOST } from '@/utils/constants';
-import { allAccessories } from '@/fixtures/accessories';
-import type { Bone, Slot } from '@/fixtures/accessories';
+import { allAccessories, slots, slot2BoneMap } from '@/fixtures/accessories';
+import type { Slot, Offset } from '@/fixtures/accessories';
 
 // cache for loaded models
 const accessoryModels: {
   [accessoryId: string]: {
-    object: Object3D;
-    bone: Bone;
+    model: Object3D;
     slot: Slot;
   };
 } = {};
@@ -23,7 +22,8 @@ export default function useAccessories(
   mannyObj: Object3D,
   accessories?: {
     [slot: string]: string[];
-  }
+  },
+  datData?: Offset
 ) {
   const selectedAccessories = Object.values(accessories ?? {}).reduce(
     (a, b) => a.concat(b),
@@ -33,40 +33,58 @@ export default function useAccessories(
   // load any selected accessories
   const models = useMemo(() => {
     selectedAccessories.forEach((accId) => {
-      // already loaded
-      if (accessoryModels[accId]) return;
-
       const accCfg = allAccessories.find((a) => a.id === accId);
       if (accCfg === undefined) return;
 
-      const model =
-        accCfg.format === 'glb'
-          ? useLoader(GLTFLoader, `${MODELS_HOST}/${accId}.glb`, (loader) => {
-              const dracoLoader = new DRACOLoader();
-              dracoLoader.setDecoderPath('/draco/gltf/');
-              (loader as GLTFLoader).setDRACOLoader(dracoLoader);
-            }).scene
-          : useFBX(`${MODELS_HOST}/${accId}.fbx`);
+      const { offset = {}, fileName, slot } = accCfg;
+      const { scale = {}, position = {}, rotation = {} } = offset;
 
-      let _clone = model.clone();
-      const { scale = {}, offset } = accCfg.armature;
-      const position = offset?.position ?? {};
-      const rotation = offset?.rotation ?? {};
-      _clone.position.set(position.x ?? 0, position.y ?? 0, position.z ?? 0);
-      _clone.rotation.set(rotation.x ?? 0, rotation.y ?? 0, rotation.z ?? 0);
-      // TODO: normalize scale so this is not necessary
-      if (accCfg.format === 'glb') {
-        _clone.children[0].scale.set(1, 1, 1);
+      // TODO: remove fbx loader
+      let model;
+      if (accessoryModels[accId]) {
+        model = accessoryModels[accId].model;
+      } else {
+        model = fileName.endsWith('fbx')
+          ? useFBX(`${MODELS_HOST}/${fileName}`)
+          : useLoader(
+              GLTFLoader,
+              fileName
+                ? `https://mannys-game.s3.amazonaws.com/accessories/${fileName}`
+                : `${MODELS_HOST}/${accId}.glb`,
+              (loader) => {
+                const dracoLoader = new DRACOLoader();
+                dracoLoader.setDecoderPath('/draco/gltf/');
+                (loader as GLTFLoader).setDRACOLoader(dracoLoader);
+              }
+            ).scene;
       }
 
-      _clone.scale.set(scale.x ?? 1, scale.y ?? 1, scale.z ?? 1);
+      model.position.set(
+        datData?.position?.x ?? position.x ?? 0,
+        datData?.position?.y ?? position.y ?? 0,
+        datData?.position?.z ?? position.z ?? 0
+      );
+      model.rotation.set(
+        datData?.rotation?.x ?? rotation.x ?? 0,
+        datData?.rotation?.y ?? rotation.y ?? 0,
+        datData?.rotation?.z ?? rotation.z ?? 0
+      );
 
+      // TODO: remove logic, default to 100
+      const defaultScale = accCfg.fileName.endsWith('gltf') ? 100 : 1;
+      model.scale.set(
+        scale.x ?? defaultScale,
+        scale.y ?? defaultScale,
+        scale.z ?? defaultScale
+      );
+
+      // TODO: remove
       if (accCfg.textureUrl) {
         const texture = useLoader(
           TextureLoader,
           `${MODELS_HOST}/${accCfg.textureUrl}`
         );
-        _clone.traverse((child) => {
+        model.traverse((child) => {
           const childMesh = child as Mesh;
           if (childMesh.isMesh) {
             childMesh.material = new MeshPhongMaterial({ map: texture });
@@ -74,34 +92,18 @@ export default function useAccessories(
         });
       }
 
-      if (accCfg.material) {
-        _clone = accCfg.material(_clone);
-      }
-
       accessoryModels[accId] = {
-        object: _clone,
-        bone: accCfg.armature.bone,
-        slot: accCfg.slot,
+        model,
+        slot,
       };
     });
 
     return accessoryModels;
-  }, [selectedAccessories]);
+  }, [selectedAccessories, datData]);
 
   // add remove / accessories to bones as they're changed
   useEffect(() => {
     const childrenToRemove: Object3D[] = [];
-
-    const slots = [
-      'Head',
-      'Eyes',
-      'Back',
-      'Right Hand',
-      'Left Hand',
-      'Ears',
-      'Nose',
-      'Mouth',
-    ];
     slots.forEach((slot) => {
       mannyObj.traverse((child) => {
         if (child.name.includes(`accessory-${slot}`)) {
@@ -115,11 +117,12 @@ export default function useAccessories(
     });
 
     selectedAccessories.forEach((acc) => {
-      const { object, bone, slot } = models[acc];
-      if (!object) {
+      const { model, slot } = models[acc] ?? {};
+      const bone = slot2BoneMap[slot];
+      if (!model) {
         return;
       }
-      object.name = `accessory-${slot}`;
+      model.name = `accessory-${slot}`;
 
       const mannyArm = mannyObj.children.find((c) => c.type === 'Group'); // armature will always be the group
       const name = (n: string) => (c: Object3D) => c.name === n;
@@ -153,7 +156,7 @@ export default function useAccessories(
         boneToAdd = spine;
       }
 
-      boneToAdd?.add(object);
+      boneToAdd?.add(model);
     });
   }, [mannyObj, selectedAccessories, models]);
 

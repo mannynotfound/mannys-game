@@ -1,8 +1,13 @@
-import { Suspense } from 'react';
+import { useRouter } from 'next/router';
+import { Suspense, useState, useMemo } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { NoToneMapping, sRGBEncoding, Vector3 } from 'three';
+import { Environment } from '@react-three/drei';
+import type { Offset } from '@/fixtures/accessories';
+import { AccessoryGUI } from '../Debug';
 import { Manny, Controls, Lighting, CameraZoom } from '@/components/three';
 import AsciiRenderer from '@/views/token/Quests/AsciiRenderer';
+import { getTextureURL } from '@/utils';
 import type { TokenId } from '@/utils/types';
 
 type Props = {
@@ -19,12 +24,10 @@ type Props = {
   questMode: string | undefined;
 };
 
-const getTextureURL = (textureUrl: string, textureHD: boolean) => {
-  if (textureUrl.includes('textures-small') && textureHD) {
-    return textureUrl.replace('textures-small', 'textures-hd');
-  }
-  return textureUrl;
-};
+const zoomedInCameraPosition = [5, 72, 52];
+const ogCameraPosition = [25, 100, 300];
+const ogTarget = [0, 0, 0];
+const zoomedInTarget = [0, 70, 0];
 
 export default function Scene({
   accessories,
@@ -36,14 +39,20 @@ export default function Scene({
   zoomedIn,
   questMode,
 }: Props) {
-  const zoomedInCameraPosition = [5, 72, 52];
-  const ogCameraPosition = [25, 100, 300];
-  const cameraPosition = zoomedIn
-    ? new Vector3(...zoomedInCameraPosition)
-    : new Vector3(...ogCameraPosition);
-  const ogTarget = [0, 0, 0];
-  const zoomedInTarget = [0, 70, 0];
-  const controlsTarget = zoomedIn ? zoomedInTarget : ogTarget;
+  const router = useRouter();
+  const { debug } = router.query;
+  const [datData, setDatData] = useState<Offset>({});
+  const cameraPosition = useMemo(
+    () =>
+      zoomedIn
+        ? new Vector3(...zoomedInCameraPosition)
+        : new Vector3(...ogCameraPosition),
+    [zoomedIn]
+  );
+  const controlsTarget = useMemo(
+    () => (zoomedIn ? zoomedInTarget : ogTarget),
+    [zoomedIn]
+  );
 
   return (
     <div
@@ -76,6 +85,7 @@ export default function Scene({
             animation={mood}
             textureUrl={getTextureURL(textureUrl, textureHD)}
             accessories={accessories}
+            datData={datData}
           />
         </Suspense>
         <Controls target={controlsTarget} />
@@ -86,7 +96,11 @@ export default function Scene({
         />
         <Lighting />
         {questMode === 'corruption' && <AsciiRenderer invert />}
+        <Environment preset="warehouse" />
       </Canvas>
+      {debug !== undefined && (
+        <AccessoryGUI setDatData={setDatData} datData={datData} />
+      )}
     </div>
   );
 }

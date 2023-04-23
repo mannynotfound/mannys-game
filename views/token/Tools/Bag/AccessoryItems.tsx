@@ -47,10 +47,6 @@ export default function AccessoryItems({
       return true;
     }
 
-    if (accessory.mystery) {
-      return false;
-    }
-
     return accessory.validator({
       achievements: achievements ?? [],
       hasFWB,

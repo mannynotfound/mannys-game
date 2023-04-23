@@ -1,31 +1,4 @@
-import { Color, sRGBEncoding } from 'three';
-import type {
-  MeshPhongMaterial,
-  MeshStandardMaterial,
-  Group,
-  Mesh,
-} from 'three';
 import { calculateAchievementPoints } from '@/utils';
-
-const resetMaterialColor = (material: MeshPhongMaterial) => {
-  material.color = new Color('white');
-  material.shininess = 0;
-  material.specular = new Color('black');
-  return material;
-};
-
-const resetMaterials = (meshNames: string[]) => (obj: Group) => {
-  obj.traverse((child) => {
-    if (meshNames.includes(child?.name)) {
-      const childMaterial = (child as Mesh).material as MeshPhongMaterial;
-      (child as Mesh).material = resetMaterialColor(childMaterial);
-      if (childMaterial.map !== null) {
-        childMaterial.map.encoding = sRGBEncoding;
-      }
-    }
-  });
-  return obj;
-};
 
 // slot is where accessory appears visually on model, 1 accessory per slot allowed
 export type Slot =
@@ -37,204 +10,170 @@ export type Slot =
   | 'Left Hand'
   | 'Eyes'
   | 'Back';
+
+export const slots: Slot[] = [
+  'Head',
+  'Eyes',
+  'Back',
+  'Right Hand',
+  'Left Hand',
+  'Ears',
+  'Nose',
+  'Mouth',
+];
+
 // bone is where accessory is placed in model skeleton, multiple per bone allowed
 export type Bone = 'Head' | 'LeftHand' | 'RightHand' | 'Back';
+// map which bone should be used for a given slot
+export const slot2BoneMap: Record<Slot, Bone> = {
+  Head: 'Head',
+  Mouth: 'Head',
+  Ears: 'Head',
+  Nose: 'Head',
+  Eyes: 'Head',
+  'Right Hand': 'RightHand',
+  'Left Hand': 'LeftHand',
+  Back: 'Back',
+};
 // category is how accessories are grouped in the UI
 type Category = 'hats' | 'eyes' | 'face' | 'weapons';
 
+export type Offset = {
+  scale?: {
+    x?: number;
+    y?: number;
+    z?: number;
+  };
+  position?: {
+    x?: number;
+    y?: number;
+    z?: number;
+  };
+  rotation?: {
+    x?: number;
+    y?: number;
+    z?: number;
+  };
+};
+
 export type Accessory = {
   id: string;
+  description: string;
   category: Category;
-  textureUrl?: string;
+  fileName: string; // temp can standardize on id once all are gltf
+  textureUrl?: string; // temp should be removed once all are gltf
   level: number;
   label: string;
-  description: string;
   slot: Slot;
   stats: Record<string, number>;
-  armature: {
-    bone: Bone;
-    scale?: {
-      x?: number;
-      y?: number;
-      z?: number;
-    };
-    offset?: {
-      position?: {
-        x?: number;
-        y?: number;
-        z?: number;
-      };
-      rotation?: {
-        x?: number;
-        y?: number;
-        z?: number;
-      };
-    };
-  };
-  animation?: string;
-  mannyZ?: number;
-  format?: string;
-  mystery?: boolean;
-  rarity?: string;
+  offset?: Offset;
+  rarity?: 'rare' | 'legendary';
   requirement?: string;
-  material?: (obj: Group) => Group;
   validator?: (args: any) => boolean;
 };
 
 const partyHat: Accessory = {
-  id: 'phat',
-  category: 'hats',
-  textureUrl: 'phat.jpg',
-  level: 40,
-  label: 'Partyhat',
+  id: 'hats_head_phat',
   description:
     'One of the rarest and most valuable items from Runescape, partyhats were obtained by opening crackers during the 2001 Christmas event.',
+  textureUrl: 'phat.jpg',
+  fileName: 'phat.fbx',
+  level: 40,
+  label: 'Partyhat',
+  category: 'hats',
   slot: 'Head',
   stats: {
     vibes: 10,
     wealth: 50,
   },
-  armature: {
-    bone: 'Head',
-    offset: {
-      position: {
-        x: 1.08,
-        y: 14,
-        z: -2.64,
-      },
-      rotation: {
-        x: -0.3,
-      },
+  offset: {
+    position: {
+      x: 1.08,
+      y: 14,
+      z: -2.64,
+    },
+    rotation: {
+      x: -0.3,
     },
   },
-  material: resetMaterials(['Party_Hat']),
 };
 
 const propellerHat: Accessory = {
-  id: 'propellerhat',
-  category: 'hats',
-  textureUrl: 'propellerhat.jpg',
-  level: 22,
-  label: 'Propeller Hat',
+  id: 'hats_head_propeller',
   description:
     'Originally created in 1947 by Ray Faraday, the propeller beanie became an icon for science fiction fans and beyond around the world.',
-  slot: 'Head',
+  fileName: 'hats_head_cap_propellor.gltf',
+  label: 'Propeller Hat',
+  level: 22,
   stats: {
     beanie: 20,
   },
-  armature: {
-    bone: 'Head',
-    offset: {
-      position: {
-        x: 0.71,
-        y: 10.74,
-        z: -0.47,
-      },
-      rotation: {
-        x: -0.09,
-      },
-    },
-  },
-  material: resetMaterials(['Propeller', 'Hat']),
-};
-
-const tiara: Accessory = {
-  id: 'tiara',
   category: 'hats',
-  label: 'Tiara',
-  description: 'A jeweled, ornamental crown traditionally worn by prom queens.',
   slot: 'Head',
-  level: 14,
-  stats: {
-    cuteness: 30,
-  },
-  armature: {
-    bone: 'Head',
-    offset: {
-      position: {
-        x: 0.88,
-        y: 13.14,
-        z: 6.02,
-      },
+  offset: {
+    position: {
+      y: -0.4,
+    },
+    rotation: {
+      x: -0.05,
     },
   },
-  material: resetMaterials(['PrincessTiara']),
 };
 
-const flowerCrown: Accessory = {
-  id: 'flowercrown',
+const roseCrown: Accessory = {
+  id: 'hats_head_roses_crown',
+  description: 'A headdress made of the blitmap rose.',
+  label: 'Rose Crown',
+  fileName: 'hats_head_roses_crown.gltf',
   category: 'hats',
-  label: 'Flower Crown',
-  description:
-    'A headdress made of leaves and flowers, perfect for your next Coachella look.',
   slot: 'Head',
   level: 14,
   stats: {
     basic: 20,
     cuteness: 10,
   },
-  armature: {
-    bone: 'Head',
-    offset: {
-      position: {
-        x: 0.52,
-        y: 13.14,
-        z: 6.02,
-      },
-      rotation: {
-        x: -0.18,
-      },
+  offset: {
+    position: {
+      z: 0.5,
     },
-  },
-  material: (obj) => {
-    obj.traverse((child) => {
-      const childMaterial = (child as Mesh).material as MeshPhongMaterial;
-      if (childMaterial?.name === 'FloralCrown') {
-        childMaterial.color = new Color('white');
-        childMaterial.shininess = 0;
-      }
-    });
-    return obj;
+    rotation: {
+      x: -0.1,
+    },
   },
 };
 
 const leatherHat: Accessory = {
-  id: 'leatherhat',
-  category: 'hats',
-  label: 'Cowboy Hat',
+  id: 'hats_head_leather_hat',
   description:
     'A high-crowned, wide brimmed hat adorned with the teeth of market bears.',
+  fileName: 'hats_head_leather_hat.gltf',
+  label: 'Cowboy Hat',
+  category: 'hats',
   slot: 'Head',
   level: 34,
   stats: {
     'badass mf': 50,
     'hell ya brother': 1,
   },
-  armature: {
-    bone: 'Head',
-    offset: {
-      position: {
-        x: 1.09,
-        y: 13.59,
-        z: -3.51,
-      },
-      rotation: {
-        x: -0.28,
-      },
+  offset: {
+    position: {
+      z: 1,
+    },
+    rotation: {
+      x: -0.1,
     },
   },
-  material: resetMaterials(['LeatherHat']),
 };
 
 const fwbHat: Accessory = {
-  id: 'fwbhat',
+  id: 'hats_head_fwb_cap',
+  description:
+    'A hat commemorating Friends With Benefits, where Manny gained a lot of his early NFT knowledge.',
+  fileName: 'hats_head_fwb_cap.gltf',
   category: 'hats',
-  textureUrl: 'fwbhat.jpg',
   slot: 'Head',
   label: 'FWB Hat',
   level: 75,
-  description:
-    'A hat commemorating Friends With Benefits, where Manny gained a lot of his early NFT knowledge.',
   stats: {
     friendship: 50,
     benefits: 50,
@@ -242,167 +181,113 @@ const fwbHat: Accessory = {
   requirement: 'Requires owning any FWB PRO tokens.',
   validator: ({ hasFWB }) => hasFWB,
   rarity: 'rare',
-  armature: {
-    bone: 'Head',
-    offset: {
-      position: {
-        x: 1,
-        y: 15.19,
-        z: -1.17,
-      },
-      rotation: {
-        x: -0.13,
-      },
+  offset: {
+    position: {
+      z: 0.75,
+    },
+    rotation: {
+      x: -0.1,
     },
   },
-  material: resetMaterials(['Cylinder']),
 };
 
 const stupidHat: Accessory = {
-  id: 'stupidhat',
-  category: 'hats',
-  textureUrl: 'stupidhat.jpg',
-  label: 'Stupid Hat',
-  slot: 'Head',
-  level: 100,
+  id: 'hats_head_stupid_hat',
   description:
     "Omg did you see Manny's stupid fucking hat? It's a fedora with flaps on the back...",
+  fileName: 'stupidhat.fbx',
+  textureUrl: 'stupidhat.jpg',
+  label: 'Stupid Hat',
+  category: 'hats',
+  slot: 'Head',
+  level: 100,
   rarity: 'legendary',
   stats: {
     sad: 100,
     sosad: 100,
     sosososad: 100,
   },
-  armature: {
-    bone: 'Head',
-    offset: {
-      position: {
-        x: 0.9,
-        y: -0.5,
-        z: -7,
-      },
-      rotation: {
-        x: -0.28,
-      },
+  offset: {
+    position: {
+      x: 0.9,
+      y: -0.5,
+      z: -7,
+    },
+    rotation: {
+      x: -0.28,
     },
   },
-  material: resetMaterials(['pPlane1']),
 };
 
-const juul: Accessory = {
-  id: 'juul',
-  category: 'face',
-  format: 'glb',
-  label: 'Juul',
-  slot: 'Mouth',
+const vape: Accessory = {
+  id: 'face_mouth_vape',
   description:
-    'A vape that is so well designed Manny had to quit them forever to avoid vaping non-stop.',
+    'A device so well designed Manny had to quit them forever to avoid vaping non-stop.',
+  fileName: 'face_mouth_vape.gltf',
+  label: 'Vape',
+  category: 'face',
+  slot: 'Mouth',
   level: 11,
   stats: {
     addicted: 50,
     nicotine: 20,
-    'time lost looking for Juul': -20,
+    'time lost looking for vape': -20,
   },
-  armature: {
-    bone: 'Head',
-    scale: {
-      x: 80,
-      y: 80,
-      z: 80,
-    },
-    offset: {
-      position: {
-        x: 1.33,
-        y: 1.28,
-        z: 18,
-      },
-      rotation: {
-        x: Math.PI / 2,
-        y: Math.PI,
-        z: Math.PI,
-      },
+  offset: {
+    position: {
+      x: 0.25,
+      y: 1.5,
     },
   },
 };
 
 const cig: Accessory = {
-  id: 'cigarette',
-  category: 'face',
-  textureUrl: 'cigarette.png',
+  id: 'face_mouth_cigarette',
+  description: 'An analogue vape popular among boomers.',
+  fileName: 'face_mouth_cigarette.gltf',
   label: 'Cigarette',
+  category: 'face',
   slot: 'Mouth',
-  description: 'An analogue Juul popular among boomers.',
   level: 10,
   stats: {
     death: 50,
     health: -50,
   },
-  armature: {
-    bone: 'Head',
-    offset: {
-      position: {
-        x: 1.33,
-        y: 1.28,
-        z: 13,
-      },
-      rotation: {
-        z: Math.PI,
-      },
+  offset: {
+    position: {
+      y: 1.5,
     },
   },
-  material: resetMaterials(['Cylinder']),
 };
 
 const pipe: Accessory = {
-  id: 'pipe',
-  category: 'face',
-  format: 'glb',
-  label: 'Pipe',
-  slot: 'Mouth',
+  id: 'face_mouth_pipe',
   description: "Ceci n'est pas une pipe.",
+  fileName: 'face_mouth_pipe.gltf',
+  label: 'Pipe',
+  category: 'face',
+  slot: 'Mouth',
   level: 20,
   stats: {
     surrealism: 20,
     class: 20,
   },
-  armature: {
-    bone: 'Head',
-    scale: {
-      x: 1.2,
-      y: 1.2,
-      z: 1.2,
+  offset: {
+    position: {
+      y: 1.5,
     },
-    offset: {
-      position: {
-        x: 2,
-        y: -2.8,
-        z: 14,
-      },
-      rotation: {
-        y: Math.PI / 2,
-      },
-    },
-  },
-  material: (obj) => {
-    obj.traverse((child) => {
-      const childMaterial = (child as Mesh).material as MeshStandardMaterial;
-      if (childMaterial?.name === 'Material.003') {
-        childMaterial.metalness = 0.5;
-      }
-    });
-    return obj;
   },
 };
 
 const joint: Accessory = {
-  id: 'joint',
-  category: 'face',
-  format: 'glb',
+  id: 'face_mouth_joint',
+  description: 'A nicely rolled cone complete with a paper filter.',
+  fileName: 'face_mouth_joint.gltf',
   label: 'Joint',
+  category: 'face',
   slot: 'Mouth',
   rarity: 'legendary',
   level: 100,
-  description: 'A nicely rolled cone complete with a paper filter.',
   requirement: 'Requires 420+ achievement points.',
   validator: ({ achievements }) => {
     const points = calculateAchievementPoints(achievements);
@@ -412,60 +297,44 @@ const joint: Accessory = {
     based: 20,
     high: 100,
   },
-  armature: {
-    bone: 'Head',
-    scale: {
-      x: 70,
-      y: 70,
-      z: 70,
-    },
-    offset: {
-      position: {
-        x: 1.33,
-        y: 1.1,
-        z: 10.5,
-      },
+  offset: {
+    position: {
+      y: 1.5,
     },
   },
 };
 
 const facemask: Accessory = {
-  id: 'facemask',
-  category: 'face',
-  textureUrl: 'facemask.jpg',
-  label: 'Face Mask',
-  slot: 'Mouth',
-  level: 10,
+  id: 'face_mouth_mask_n40',
   description:
     'A surgical face mask that can prevent the spread of droplets and particles.',
+  fileName: 'face_mouth_mask_n40.gltf',
+  label: 'Face Mask',
+  category: 'face',
+  level: 10,
   stats: {
     comfort: -10,
     superspreading: -10,
   },
-  armature: {
-    bone: 'Head',
-    offset: {
-      position: {
-        x: -0.07,
-        y: 2.96,
-        z: 5.44,
-      },
-      rotation: {
-        x: -0.08,
-      },
+  slot: 'Mouth',
+  offset: {
+    position: {
+      z: 0.5,
+    },
+    rotation: {
+      x: -0.1,
     },
   },
 };
 
 const earrings: Accessory = {
-  id: 'earrings',
-  category: 'face',
-  textureUrl: 'gold.png',
+  id: 'face_ears_ring_ear',
+  description: 'Golden hoop earrings to instantly turn into a hot guy.',
+  fileName: 'face_ears_ring_ear.gltf',
   label: 'Earrings',
-  slot: 'Ears',
+  category: 'face',
   level: 72,
   rarity: 'rare',
-  description: 'Golden hoop earrings to instantly turn into a hot guy.',
   requirement: 'Requires 202+ achievement points.',
   validator: ({ achievements }) => {
     const points = calculateAchievementPoints(achievements);
@@ -475,150 +344,114 @@ const earrings: Accessory = {
     swag: 32,
     hottie: 47,
   },
-  armature: {
-    bone: 'Head',
-    offset: {
-      position: {
-        x: 1,
-        y: 1.4,
-        z: -0.8,
-      },
+  slot: 'Ears',
+  offset: {
+    position: {
+      y: 0.5,
     },
   },
 };
 
 const nosering: Accessory = {
-  id: 'nosering',
-  category: 'face',
-  textureUrl: 'gold.png',
+  id: 'face_nose_ring_nose',
+  description: 'A septum ring to channel your inner bull.',
+  fileName: 'face_nose_ring_nose.gltf',
   label: 'Nose Ring',
   level: 24,
-  slot: 'Nose',
-  description: 'A septum ring to channel your inner bull.',
+  category: 'face',
   stats: {
     bull: 31,
     punk: 18,
   },
-  armature: {
-    bone: 'Head',
-    offset: {
-      position: {
-        x: 1.35,
-        y: 3.5,
-        z: 11.5,
-      },
+  slot: 'Nose',
+  offset: {
+    position: {
+      y: 1.3,
+      z: 0.3,
     },
   },
-  material: resetMaterials(['Piercing_16']),
 };
 
 const lipring: Accessory = {
-  id: 'lipring',
-  category: 'face',
-  textureUrl: 'chrome.jpg',
-  label: 'Lip Ring',
-  slot: 'Mouth',
+  id: 'face_mouth_ring_lip',
   description: 'A silver lip ring shoplifted from Hot Topic.',
+  fileName: 'face_mouth_ring_lip.gltf',
+  label: 'Lip Ring',
+  category: 'face',
+  slot: 'Mouth',
   level: 24,
   stats: {
     emo: 33,
     conformity: -15,
   },
-  armature: {
-    bone: 'Head',
-    offset: {
-      position: {
-        x: 1.35,
-        y: 0.5,
-        z: 11,
-      },
+  offset: {
+    position: {
+      y: 1.15,
+      z: 1,
     },
   },
-  material: resetMaterials(['Piercing_01']),
 };
 
 const book: Accessory = {
-  id: 'book',
-  category: 'weapons',
-  textureUrl: 'book.png',
-  label: 'Book',
-  mannyZ: -75,
-  animation: 'spellcast',
-  level: 50,
+  id: 'weapons_left_hand_book',
   description: 'An analogue website popular among boomers',
+  fileName: 'weapons_left_hand_book.gltf',
+  label: 'Book',
+  level: 50,
   requirement: 'Requires owning mLoot or Loot NFT.',
   validator: ({ hasMLoot, hasLoot }) => hasMLoot || hasLoot,
   stats: {
     intellect: 55,
     dexterity: 55,
   },
+  category: 'weapons',
   slot: 'Left Hand',
-  armature: {
-    bone: 'LeftHand',
-    scale: {
-      x: 0.75,
-      y: 0.75,
-      z: 0.75,
+  offset: {
+    rotation: {
+      z: -1.5,
+      x: 0.5,
     },
-    offset: {
-      position: {
-        x: -2,
-        y: 12,
-        z: 5.27,
-      },
-      rotation: {
-        x: 0.28,
-        y: 0.09,
-        z: 1.35,
-      },
+    position: {
+      y: 14,
+      z: 6,
+      x: -4,
     },
   },
-  material: resetMaterials(['Cube001']),
 };
 
-const chronicle: Accessory = {
-  id: 'chronicle',
-  category: 'weapons',
-  textureUrl: 'chronicle.png',
-  label: 'Chronicle',
-  mannyZ: -75,
-  animation: 'inwardslash',
+const sword: Accessory = {
+  id: 'weapons_right_hand_sword',
+  description: 'A bladed weapon stolen from Toan of Dark Cloud.',
+  fileName: 'weapons_right_hand_sword.gltf',
+  label: 'Sword',
   rarity: 'rare',
   level: 60,
-  description: 'A bladed weapon stolen from Toan of Dark Cloud.',
   requirement: 'Requires owning mLoot or Loot NFT.',
   validator: ({ hasMLoot, hasLoot }) => hasMLoot || hasLoot,
   stats: {
     badass: 66,
     attack: 66,
   },
+  category: 'weapons',
   slot: 'Right Hand',
-  armature: {
-    bone: 'RightHand',
-    offset: {
-      position: {
-        x: 5.8,
-        y: 7.42,
-        z: 2.3,
-      },
-      rotation: {
-        x: 0.4,
-        y: -0.03,
-        z: -1.58,
-      },
+  offset: {
+    rotation: {
+      z: -1,
+    },
+    position: {
+      x: 3,
+      y: 7,
+      z: 2.5,
     },
   },
-  material: resetMaterials(['Sword_low']),
 };
 
 const wand: Accessory = {
-  id: 'wand',
-  category: 'weapons',
-  textureUrl: 'wand.png',
-  label: 'Wand',
-  mannyZ: -100,
-  level: 50,
+  id: 'weapons_right_hand_wand',
   description: 'A thin rod used to conjure supernatural headassery.',
+  fileName: 'weapons_right_hand_wand.gltf',
+  label: 'Wand',
+  level: 50,
   requirement: 'Requires owning mLoot or Loot NFT.',
   validator: ({ hasMLoot, hasLoot }: { hasLoot: boolean; hasMLoot: boolean }) =>
     hasMLoot || hasLoot,
@@ -626,394 +459,268 @@ const wand: Accessory = {
     fanfic: 55,
     magic: 55,
   },
+  category: 'weapons',
   slot: 'Right Hand',
-  armature: {
-    bone: 'RightHand',
-    offset: {
-      position: {
-        x: 11.78,
-        y: 8.76,
-        z: 3.04,
-      },
-      rotation: {
-        x: 0.4,
-        y: 0,
-        z: -1.3,
-      },
+  offset: {
+    rotation: {
+      z: -1,
+    },
+    position: {
+      x: 3,
+      y: 7,
+      z: 2.5,
     },
   },
-  material: resetMaterials(['Voldemort_Wand']),
 };
 
-const falchion: Accessory = {
-  id: 'falchion',
-  category: 'weapons',
-  textureUrl: 'falchion.png',
-  label: 'Falchion',
-  rarity: 'rare',
-  mannyZ: -35,
-  animation: 'horizontalswing',
-  level: 60,
+const scimitar: Accessory = {
+  id: 'weapons_right_hand_scimitar',
   description: 'A curvy boi sword popularized by Euros in the 13th century.',
+  fileName: 'weapons_right_hand_scimitar.gltf',
+  label: 'Scimitar',
+  rarity: 'rare',
+  level: 60,
   requirement: 'Requires owning mLoot or Loot NFT.',
   validator: ({ hasMLoot, hasLoot }) => hasMLoot || hasLoot,
   stats: {
     badass: 66,
     attack: 66,
   },
+  category: 'weapons',
   slot: 'Right Hand',
-  armature: {
-    bone: 'RightHand',
-    offset: {
-      position: {
-        x: 12.67,
-        y: 7.27,
-        z: 2.82,
-      },
-      rotation: {
-        x: 0.4,
-        y: -0.03,
-        z: -1.58,
-      },
+  offset: {
+    rotation: {
+      z: -1,
+    },
+    position: {
+      x: 2,
+      y: 5.5,
+      z: 2.5,
     },
   },
-  material: resetMaterials(['OrcSlayer']),
 };
 
 const katana: Accessory = {
-  id: 'katana',
-  category: 'weapons',
-  textureUrl: 'katana.png',
+  id: 'weapons_right_hand_katana',
+  description: 'Japanese sword used by anime characters.',
+  fileName: 'weapons_right_hand_katana.gltf',
   label: 'Katana',
-  animation: 'swordrun',
   rarity: 'rare',
   level: 70,
-  description: 'Japanese sword used by anime characters.',
   requirement: 'Requires owning mLoot or Loot NFT.',
   validator: ({ hasMLoot, hasLoot }) => hasMLoot || hasLoot,
   stats: {
     badass: 77,
     attack: 77,
   },
-  slot: 'Right Hand',
-  armature: {
-    bone: 'RightHand',
-    offset: {
-      position: {
-        x: 3.73,
-        y: 6.32,
-        z: 2.52,
-      },
-      rotation: {
-        x: -1.4,
-        y: -0.43,
-        z: -1.4,
-      },
-    },
-  },
-  material: resetMaterials(['Mesh_ZBrush_defualt_group']),
-};
-
-const club: Accessory = {
-  id: 'club',
   category: 'weapons',
-  label: 'Club',
-  mannyZ: -35,
-  animation: 'downwardswing',
-  level: 60,
-  description: 'The only club Manny recognizes.',
-  requirement: 'Requires owning mLoot or Loot NFT.',
-  validator: ({ hasMLoot, hasLoot }) => hasMLoot || hasLoot,
-  stats: {
-    strength: 66,
-    attack: 66,
-  },
   slot: 'Right Hand',
-  armature: {
-    bone: 'RightHand',
-    offset: {
-      position: {
-        x: 8.41,
-        y: 8.38,
-        z: 3.92,
-      },
-      rotation: {
-        x: -1.03,
-        y: -0.03,
-        z: -1.58,
-      },
+  offset: {
+    rotation: {
+      x: -1.6,
+      y: 0.5,
+      z: -1,
+    },
+    position: {
+      x: -4,
+      y: 10,
+      z: 8,
     },
   },
-  material: resetMaterials(['Sphere']),
 };
 
 const quarterstaff: Accessory = {
-  id: 'quarterstaff',
-  category: 'weapons',
+  id: 'weapons_back_staff',
+  description: 'A long stave for conjuring supernatural headassery.',
+  fileName: 'weapons_back_staff.gltf',
   label: 'Quarterstaff',
-  mannyZ: -35,
-  animation: 'spellcast2h',
   rarity: 'legendary',
   level: 90,
-  description: 'A long stave for conjuring supernatural headassery.',
-  requirement: 'Requires owning Loot NFT.',
-  validator: ({ hasLoot }) => hasLoot,
+  requirement: 'Requires owning mLoot or Loot NFT.',
+  validator: ({ hasLoot, hasMLoot }) => hasLoot || hasMLoot,
   stats: {
     magic: 99,
     headassery: 99,
   },
+  category: 'weapons',
   slot: 'Back',
-  armature: {
-    bone: 'Back',
-    offset: {
-      position: {
-        x: 19.69,
-        y: -30.5,
-        z: -7.3,
-      },
-      rotation: {
-        x: -0.58,
-        y: -2.58,
-        z: -0.76,
-      },
+  offset: {
+    rotation: {
+      x: 1.1,
+      y: 3.14,
+      z: 1.6,
+    },
+    position: {
+      x: 75,
+      y: -10,
+      z: 10,
     },
   },
-  material: resetMaterials(['Staff']),
 };
 
 const warhammer: Accessory = {
-  id: 'warhammer',
-  category: 'weapons',
-  textureUrl: 'warhammer.png',
+  id: 'weapons_right_hand_hammer',
+  description: 'A weapon for the finest Manny foot soldiers.',
+  fileName: 'weapons_right_hand_hammer.gltf',
   label: 'Warhammer',
-  mannyZ: -20,
-  animation: 'battlecry',
   rarity: 'legendary',
   level: 90,
+  category: 'weapons',
   slot: 'Right Hand',
-  description: 'A weapon for the finest Manny foot soldiers.',
-  requirement: 'Requires owning Loot NFT.',
-  validator: ({ hasLoot }) => hasLoot,
+  requirement: 'Requires owning mLoot or Loot NFT.',
+  validator: ({ hasLoot, hasMLoot }) => hasLoot || hasMLoot,
   stats: {
     strength: 99,
     attack: 99,
   },
-  armature: {
-    bone: 'RightHand',
-    offset: {
-      position: {
-        x: 11.21,
-        y: 9.46,
-        z: 3.12,
-      },
-      rotation: {
-        x: -2.46,
-        y: -0.21,
-        z: -1.76,
-      },
+  offset: {
+    rotation: {
+      x: -2.7,
+      y: -0.3,
+      z: -2,
+    },
+    position: {
+      x: 2,
+      y: 5.5,
+      z: 2.5,
     },
   },
-  material: resetMaterials(['PrpNHammer']),
 };
 
 const cloutGoggle: Accessory = {
-  id: 'cloutgoggles',
-  category: 'eyes',
-  format: 'glb',
+  id: 'eyes_eyes_glasses_cool_1',
+  description: 'Eskeddittt',
+  fileName: 'eyes_eyes_glasses_cool_1.gltf',
   label: 'Clout Goggles',
   level: 26,
+  category: 'eyes',
   slot: 'Eyes',
-  description: 'Eskeddittt',
   stats: {
     swag: 20,
     clout: 1,
   },
-  armature: {
-    bone: 'Head',
-    scale: {
-      x: 2.83,
-      y: 2.35,
-      z: 2.55,
+  offset: {
+    position: {
+      z: 0.75,
     },
-    offset: {
-      position: {
-        x: 1.22,
-        y: 7.95,
-        z: 2.36,
-      },
-      rotation: {
-        x: 0.01,
-        z: 0.01,
-      },
+    rotation: {
+      x: -0.08,
     },
   },
 };
 
 const fashionGlasses: Accessory = {
-  id: 'fashionglasses',
-  category: 'eyes',
-  format: 'glb',
+  id: 'eyes_eyes_glasses_cool_2',
+  description: 'A fashionable pair of red glasses.',
+  fileName: 'eyes_eyes_glasses_cool_2.gltf',
   label: 'Fashion Glasses',
   level: 26,
+  category: 'eyes',
   slot: 'Eyes',
-  description: 'A fashionable pair of red glasses.',
   stats: {
     fashion: 20,
     mystique: 10,
   },
-  armature: {
-    bone: 'Head',
-    scale: {
-      x: 2.82,
-      y: 2.65,
-      z: 2.75,
+  offset: {
+    position: {
+      y: 0.3,
+      z: 0.5,
     },
-    offset: {
-      position: {
-        x: -2.7,
-        y: 9.2,
-        z: 9.36,
-      },
-      rotation: {
-        x: -0.01,
-        y: 0.015,
-        z: 0.01,
-      },
+    rotation: {
+      x: -0.07,
     },
   },
 };
 
 const rondoGlasses: Accessory = {
-  id: 'rondoglasses',
-  category: 'eyes',
-  format: 'glb',
+  id: 'eyes_eyes_glasses_funny',
+  description: 'Evil pepe emoji.',
+  fileName: 'eyes_eyes_glasses_funny.gltf',
   label: 'Rondo Glasses',
   level: 26,
+  category: 'eyes',
   slot: 'Eyes',
-  description: 'Evil pepe emoji.',
   stats: {
     evil: 50,
     mystery: 10,
   },
-  armature: {
-    bone: 'Head',
-    scale: {
-      x: 100,
-      y: 100,
-      z: 100,
+  offset: {
+    position: {
+      y: 0.3,
+      z: 0.6,
     },
-    offset: {
-      position: {
-        x: 1.2,
-        y: 6.6,
-        z: 4.1,
-      },
-      rotation: {
-        x: -0.01,
-      },
+    rotation: {
+      x: -0.1,
     },
   },
 };
 
-const monkaGlasses: Accessory = {
-  id: 'monkaglasses',
-  category: 'eyes',
-  label: 'MonkaS Glasses',
+const hackerGlasses: Accessory = {
+  id: 'eyes_eyes_glasses_hacker',
+  description: 'Booting into the mainframe...',
+  fileName: 'eyes_eyes_glasses_hacker.gltf',
+  label: 'Hacker Glasses',
   level: 33,
+  category: 'eyes',
   slot: 'Eyes',
-  description: ':monkaS:',
   stats: {
-    monka: 20,
-    S: 20,
+    cyber: 20,
+    punk: 20,
   },
-  armature: {
-    bone: 'Head',
-    offset: {
-      position: {
-        x: 1.2,
-        y: 7.5,
-        z: 7.75,
-      },
-      rotation: {
-        x: -0.09,
-        y: 0.01,
-      },
+  offset: {
+    position: {
+      y: 0.3,
+      z: 0.6,
+    },
+    rotation: {
+      x: -0.1,
     },
   },
-  material: resetMaterials(['NoveltyGlasses3']),
 };
 
 const holoLens: Accessory = {
-  id: 'hololens',
-  category: 'eyes',
-  format: 'glb',
+  id: 'eyes_eyes_holovisor',
+  description: 'Unlock mixed reality experiences with this 5lb headset.',
+  fileName: 'eyes_eyes_holovisor.gltf',
   label: 'Hololens',
   level: 42,
+  category: 'eyes',
   slot: 'Eyes',
-  description: 'Unlock mixed reality experiences with this 5lb headset.',
   rarity: 'rare',
   stats: {
     XR: 50,
     comfort: -20,
   },
-  armature: {
-    bone: 'Head',
-    scale: {
-      x: 0.25,
-      y: 0.35,
-      z: 0.35,
-    },
-    offset: {
-      position: {
-        x: 1.2,
-        y: 6.9,
-        z: 0.4,
-      },
-      rotation: {
-        x: -0.05,
-        z: -Math.PI,
-      },
-    },
-  },
 };
 
 const monocle: Accessory = {
-  id: 'monocle',
-  category: 'eyes',
-  format: 'glb',
+  id: 'eyes_eyes_monocle',
+  description: 'Hmm.....',
+  fileName: 'eyes_eyes_monocle.gltf',
   label: 'Monocle',
   level: 42,
+  category: 'eyes',
   slot: 'Eyes',
-  description: 'Hmm.....',
   stats: {
     thinking: 48,
     posh: 10,
   },
   rarity: 'rare',
-  armature: {
-    bone: 'Head',
-    scale: {
-      x: 95,
-      y: 95,
-      z: 95,
-    },
-    offset: {
-      position: {
-        x: -2.5,
-        y: 1.53,
-        z: 9.45,
-      },
+  offset: {
+    position: {
+      y: 1,
     },
   },
 };
 
 const nounish: Accessory = {
-  id: 'nounish',
-  category: 'eyes',
-  label: 'Nounish Glasses',
-  level: 100,
-  slot: 'Eyes',
+  id: 'eyes_eyes_nounish',
   description: '!vibe',
+  label: 'Nounish Glasses',
+  fileName: 'nounish.fbx',
+  level: 100,
+  category: 'eyes',
+  slot: 'Eyes',
   stats: {
     vibes: 100,
     clout: 100,
@@ -1021,42 +728,37 @@ const nounish: Accessory = {
   rarity: 'legendary',
   requirement: 'Requires owning a Nouns/Lil Nouns/CrypToadz NFT.',
   validator: ({ hasNouns }) => hasNouns,
-  armature: {
-    bone: 'Head',
-    offset: {
-      position: {
-        x: 0.7,
-        y: 7.25,
-        z: 9.75,
-      },
+  offset: {
+    position: {
+      x: 0.7,
+      y: 7.25,
+      z: 9.75,
     },
   },
 };
 
 const overTheTops: Accessory = {
-  id: 'overthetop',
-  category: 'eyes',
+  id: 'eyes_eyes_overthetop',
+  description: 'The hardest sunglasses design of all time.',
+  fileName: 'overthetop.fbx',
   textureUrl: 'overthetop.jpg',
   label: 'Over The Tops',
   rarity: 'legendary',
   level: 101,
+  category: 'eyes',
   slot: 'Eyes',
-  description: 'The hardest sunglasses design of all time.',
   stats: {
     based: 100,
     hardness: 100,
   },
-  armature: {
-    bone: 'Head',
-    offset: {
-      position: {
-        x: 1.09,
-        y: 11.1,
-        z: 4.76,
-      },
-      rotation: {
-        x: -0.09,
-      },
+  offset: {
+    position: {
+      x: 1.09,
+      y: 11.1,
+      z: 4.76,
+    },
+    rotation: {
+      x: -0.09,
     },
   },
 };
@@ -1064,21 +766,20 @@ const overTheTops: Accessory = {
 export const allAccessories = [
   propellerHat,
   leatherHat,
-  flowerCrown,
-  tiara,
+  roseCrown,
   partyHat,
   fwbHat,
   stupidHat,
   cloutGoggle,
   fashionGlasses,
   rondoGlasses,
-  monkaGlasses,
+  hackerGlasses,
   monocle,
   holoLens,
   nounish,
   overTheTops,
   facemask,
-  juul,
+  vape,
   cig,
   pipe,
   nosering,
@@ -1087,9 +788,8 @@ export const allAccessories = [
   joint,
   book,
   wand,
-  club,
-  chronicle,
-  falchion,
+  sword,
+  scimitar,
   katana,
   quarterstaff,
   warhammer,
