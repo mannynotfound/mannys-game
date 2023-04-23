@@ -1,16 +1,16 @@
 import useSWR from 'swr';
 import { useProvider } from 'wagmi';
 import { Accessory, allAccessories } from '@/fixtures/accessories';
-import useLoot from '@/hooks/useLoot';
 import useFWB from '@/hooks/useFWB';
+import useLoot from '@/hooks/useLoot';
 import useNounish from '@/hooks/useNounish';
-import type { Account, AchievementEarnedObject, TokenId } from '@/utils/types';
+import { useAppDispatch } from '@/views/token/hooks';
 import { fetcher, groupBy } from '@/utils';
 import { API_URL } from '@/utils/constants';
-import { useAppDispatch } from '@/views/token/hooks';
-import { TokenState, toggleAccessory } from '@/views/token/reducer';
-import type { SetTooltipArgs } from '@/views/token/Tools/Bag/Tooltip';
+import type { Account, AchievementEarnedObject, TokenId } from '@/utils/types';
 import Item from '@/views/token/Tools/Bag/AccessoryItem';
+import type { SetTooltipArgs } from '@/views/token/Tools/Bag/Tooltip';
+import { TokenState, toggleAccessory } from '@/views/token/reducer';
 
 type Props = {
   tokenId: TokenId;

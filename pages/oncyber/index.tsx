@@ -1,6 +1,6 @@
 import Page from '@/components/Page';
-import Oncyber from '@/views/oncyber';
 import { AppProps } from '@/utils/types';
+import Oncyber from '@/views/oncyber';
 
 export default function OnCyberPage(props: AppProps) {
   return (

@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { twMerge } from 'tailwind-merge';
-import Link from 'next/link';
-import Pulse from 'react-reveal/Pulse';
 import Fade from 'react-reveal/Fade';
+import Pulse from 'react-reveal/Pulse';
+import Link from 'next/link';
+import { twMerge } from 'tailwind-merge';
 import { GitHub } from '@/components/Svg';
 import Menu, { MenuConfig } from '@/views/docs/menus';
 

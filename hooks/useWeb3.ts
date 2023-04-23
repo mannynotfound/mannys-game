@@ -1,11 +1,11 @@
 import {
   useAccount,
-  useEnsName,
-  useEnsAvatar,
   useContract,
+  useEnsAvatar,
+  useEnsName,
   useProvider,
 } from 'wagmi';
-import { MANNY_CONTRACT, MANNY_ABI } from 'utils/constants';
+import { MANNY_ABI, MANNY_CONTRACT } from 'utils/constants';
 
 export default function useWeb3() {
   const accountData = useAccount();

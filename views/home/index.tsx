@@ -1,13 +1,12 @@
-import { Suspense, Fragment } from 'react';
+import { Fragment, Suspense } from 'react';
+import { Canvas } from '@react-three/fiber';
 import useSWR from 'swr';
 import { NoToneMapping, sRGBEncoding } from 'three/src/constants';
-import { Canvas } from '@react-three/fiber';
-
-import { API_URL } from '@/utils/constants';
-import { Gamer, AppProps } from '@/utils/types';
-import { findRarestManny, getTokenProps, fetcher } from '@/utils';
-import { Manny, Controls, Lighting, Text3D } from '@/components/three';
 import Chat from '@/components/Chat';
+import { Controls, Lighting, Manny, Text3D } from '@/components/three';
+import { fetcher, findRarestManny, getTokenProps } from '@/utils';
+import { API_URL } from '@/utils/constants';
+import { AppProps, Gamer } from '@/utils/types';
 
 type SceneProps = {
   topThree:

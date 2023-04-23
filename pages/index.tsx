@@ -1,6 +1,6 @@
 import Page from '@/components/Page';
-import Home from '@/views/home';
 import { AppProps } from '@/utils/types';
+import Home from '@/views/home';
 
 export default function HomePage(appProps: AppProps) {
   return (

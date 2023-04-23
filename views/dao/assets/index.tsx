@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { useBalance } from 'wagmi';
-import { MANNY_DAO } from '@/utils/constants';
+import { LinkOut } from '@/components/Svg';
 import useExchangePrice from '@/hooks/useExchangePrice';
 import useFloorPrice from '@/hooks/useFloorPrice';
-import { LinkOut } from '@/components/Svg';
+import { MANNY_DAO } from '@/utils/constants';
 
 export default function Assets() {
   const { data } = useBalance({ address: MANNY_DAO });
@@ -136,6 +136,7 @@ export default function Assets() {
           <div className="flex-1 mb-6 md:mb-0 md:pr-5">
             <Link href="/dao/assets/mario-pikachu">
               <div className="mb-6">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   alt="exodia slab"
                   src="/assets/mariopikachuslabsquare.png"
@@ -161,6 +162,7 @@ export default function Assets() {
           <div className="flex-1 mb-6 md:mb-0 md:pr-5">
             <Link href="/dao/assets/cryptoadz-5958">
               <div className="mb-6">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   alt="cryptoadz 5958"
                   src="/assets/toad.png"
@@ -186,6 +188,7 @@ export default function Assets() {
           <div className="flex-1 md:pl-5">
             <Link href="/dao/assets/forbidden-one">
               <div className="mb-6">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   alt="exodia slab"
                   src="/assets/exodiaslabsquare.png"

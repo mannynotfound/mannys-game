@@ -1,7 +1,7 @@
-import { useEffect, forwardRef, ForwardedRef, MutableRefObject } from 'react';
+import { ForwardedRef, MutableRefObject, forwardRef, useEffect } from 'react';
+import { OrbitControls } from '@react-three/drei';
 import { Vector3 } from 'three';
 import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
-import { OrbitControls } from '@react-three/drei';
 
 type Props = {
   target: number[];

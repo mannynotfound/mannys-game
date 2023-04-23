@@ -1,4 +1,4 @@
-import { useCallback, Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useCallback } from 'react';
 import DatGui, { DatNumber } from 'react-dat-gui';
 import type { Offset } from '@/fixtures/accessories';
 
@@ -8,21 +8,24 @@ type Props = {
 };
 
 export function AccessoryGUI({ datData, setDatData }: Props) {
-  const handleUpdate = useCallback((newData: Offset) => {
-    setDatData((prev) => ({
-      ...prev,
-      rotation: {
-        x: newData.rotation?.x ?? prev.rotation?.x,
-        y: newData.rotation?.y ?? prev.rotation?.y,
-        z: newData.rotation?.z ?? prev.rotation?.z,
-      },
-      position: {
-        x: newData.position?.x ?? prev.position?.x,
-        y: newData.position?.y ?? prev.position?.y,
-        z: newData.position?.z ?? prev.position?.z,
-      },
-    }));
-  }, []);
+  const handleUpdate = useCallback(
+    (newData: Offset) => {
+      setDatData((prev) => ({
+        ...prev,
+        rotation: {
+          x: newData.rotation?.x ?? prev.rotation?.x,
+          y: newData.rotation?.y ?? prev.rotation?.y,
+          z: newData.rotation?.z ?? prev.rotation?.z,
+        },
+        position: {
+          x: newData.position?.x ?? prev.position?.x,
+          y: newData.position?.y ?? prev.position?.y,
+          z: newData.position?.z ?? prev.position?.z,
+        },
+      }));
+    },
+    [setDatData]
+  );
   return (
     <DatGui
       data={datData}

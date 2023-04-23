@@ -1,13 +1,13 @@
 import { Dispatch, Suspense, useRef } from 'react';
-import useSWR from 'swr';
-import { fetcher } from '@/utils';
-import { API_URL } from '@/utils/constants';
 import { Canvas } from '@react-three/fiber';
+import useSWR from 'swr';
 import { NoToneMapping, sRGBEncoding } from 'three';
 import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 import { ForwardControls, Lighting } from '@/components/three';
+import { fetcher } from '@/utils';
+import { API_URL } from '@/utils/constants';
 import MannyTattoo from '@/views/tattoo-shop/MannyTattoo';
-import { TattooCoordinates, TattooAPIResponse } from './types';
+import { TattooAPIResponse, TattooCoordinates } from './types';
 
 type Props = {
   tokenId: number;

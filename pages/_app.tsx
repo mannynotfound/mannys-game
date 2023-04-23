@@ -1,14 +1,14 @@
 import '@/styles/fonts.css';
 import '@/styles/globals.css';
-import '@/styles/stars.css';
 import '@/styles/misc.css';
-import type { AppProps } from 'next/app';
+import '@/styles/stars.css';
 import { ConnectKitProvider, getDefaultClient } from 'connectkit';
-import { createClient, WagmiConfig, mainnet } from 'wagmi';
-import { INFURA_ID } from '@/utils/constants';
-import connectKitTheme from '@/utils/connectKitTheme';
-import useWeb3 from '@/hooks/useWeb3';
+import type { AppProps } from 'next/app';
+import { WagmiConfig, createClient, mainnet } from 'wagmi';
 import useMannys from '@/hooks/useMannys';
+import useWeb3 from '@/hooks/useWeb3';
+import connectKitTheme from '@/utils/connectKitTheme';
+import { INFURA_ID } from '@/utils/constants';
 
 const client = createClient(
   getDefaultClient({

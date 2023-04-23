@@ -1,17 +1,17 @@
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import { useAppSelector } from '@/views/token/hooks';
+import { getTokenProps } from '@/utils';
+import { MANNY_TEXTURE_DEFAULT } from '@/utils/constants';
+import { AppProps, TokenId } from '@/utils/types';
+import Footer from '@/views/token/Footer';
+import ToadzGame from '@/views/token/Quests/ToadzGame';
+import Scene from '@/views/token/Scene';
+import BagTools from '@/views/token/Tools/Bag';
+import CameraTools from '@/views/token/Tools/Camera';
+import ImageUpload from '@/views/token/Tools/ImageUpload';
 import { initialState } from '@/views/token/reducer';
 import store, { persistor } from '@/views/token/store';
-import { PersistGate } from 'redux-persist/integration/react';
-import { getTokenProps } from '@/utils';
-import { AppProps, TokenId } from '@/utils/types';
-import Scene from '@/views/token/Scene';
-import Footer from '@/views/token/Footer';
-import ImageUpload from '@/views/token/Tools/ImageUpload';
-import CameraTools from '@/views/token/Tools/Camera';
-import BagTools from '@/views/token/Tools/Bag';
-import ToadzGame from '@/views/token/Quests/ToadzGame';
-import { MANNY_TEXTURE_DEFAULT } from '@/utils/constants';
 
 interface Props extends AppProps {
   tokenId: TokenId;

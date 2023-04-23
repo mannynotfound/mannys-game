@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import { useContract } from 'wagmi';
+import { useEffect, useState } from 'react';
 import type { Provider } from '@wagmi/core';
-import { EthAddress } from '@/utils/types';
+import { useContract } from 'wagmi';
 import abi from '@/fixtures/contracts/FWBabi';
+import { EthAddress } from '@/utils/types';
 
 const FWB_CONTRACT = '0x35bd01fc9d6d5d81ca9e055db88dc49aa2c699a8';
 
@@ -24,7 +24,7 @@ export default function useFWB(provider: Provider, address: EthAddress) {
       setHasFWB(balance > 0);
     };
     getBalance();
-  }, [contract]);
+  }, [contract, address]);
 
   return hasFWB;
 }

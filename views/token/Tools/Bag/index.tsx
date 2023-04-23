@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import type { Account, TokenId } from '@/utils/types';
 import { useAppDispatch } from '@/views/token/hooks';
-import { TokenState, toggleBagOpen } from '@/views/token/reducer';
+import type { Account, TokenId } from '@/utils/types';
 import AccessoryItems from '@/views/token/Tools/Bag/AccessoryItems';
 import QuestItems from '@/views/token/Tools/Bag/QuestItems';
 import Tooltip, { BagTooltip } from '@/views/token/Tools/Bag/Tooltip';
+import { TokenState, toggleBagOpen } from '@/views/token/reducer';
 
 type Props = {
   tokenId: TokenId;

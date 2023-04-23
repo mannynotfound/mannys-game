@@ -1,8 +1,8 @@
 import { useProvider } from 'wagmi';
 import useLoot from '@/hooks/useLoot';
+import { useAppDispatch } from '@/views/token/hooks';
 import { getTokenProps } from '@/utils';
 import type { Account, TokenId } from '@/utils/types';
-import { useAppDispatch } from '@/views/token/hooks';
 import { setMood } from '@/views/token/reducer';
 
 type Props = {

@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { ConnectKitButton } from 'connectkit';
-import { useSignMessage } from 'wagmi';
 import b64ToBlob from 'b64-to-blob';
+import { ConnectKitButton } from 'connectkit';
 import fileSaver from 'file-saver';
+import { useSignMessage } from 'wagmi';
 import Button from '@/components/Button';
-import { AppProps } from '@/utils/types';
 import { API_URL } from '@/utils/constants';
+import { AppProps } from '@/utils/types';
 
 const NoMannys = () => (
   <p>
@@ -107,12 +107,14 @@ export default function OnCyber(props: AppProps) {
   return (
     <div className="p-8 rounded-xl bg-black bg-opacity-75">
       <div className="flex items-center justify-center mb-10">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           className="mr-4 h-[80px] w-auto"
           alt="mannys game logo"
           src="/logo.png"
         />{' '}
         <span className="text-3xl opacity-50">X</span>{' '}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           className="ml-4 h-[70px] w-auto"
           alt="oncyber logo"

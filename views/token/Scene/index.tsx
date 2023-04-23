@@ -1,14 +1,14 @@
-import { useRouter } from 'next/router';
-import { Suspense, useState, useMemo } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { NoToneMapping, sRGBEncoding, Vector3 } from 'three';
+import { Suspense, useMemo, useState } from 'react';
 import { Environment } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
+import { useRouter } from 'next/router';
+import { NoToneMapping, Vector3, sRGBEncoding } from 'three';
+import { CameraZoom, Controls, Lighting, Manny } from '@/components/three';
 import type { Offset } from '@/fixtures/accessories';
-import { AccessoryGUI } from '../Debug';
-import { Manny, Controls, Lighting, CameraZoom } from '@/components/three';
-import AsciiRenderer from '@/views/token/Quests/AsciiRenderer';
 import { getTextureURL } from '@/utils';
 import type { TokenId } from '@/utils/types';
+import AsciiRenderer from '@/views/token/Quests/AsciiRenderer';
+import { AccessoryGUI } from '../Debug';
 
 type Props = {
   accessories?: {

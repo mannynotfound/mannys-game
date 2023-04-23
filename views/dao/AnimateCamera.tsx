@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useThree, useFrame } from '@react-three/fiber';
 import { useSpring } from '@react-spring/three';
+import { useFrame, useThree } from '@react-three/fiber';
 import { Group, MathUtils } from 'three';
 
 type Props = {
@@ -42,7 +42,7 @@ export default function AnimateCamera({
 
   useEffect(() => {
     api.start();
-  }, []);
+  }, [api]);
 
   return null;
 }

@@ -1,8 +1,8 @@
-import Page from '@/components/Page';
-import Token from '@/views/token';
 import type { ParsedUrlQuery } from 'querystring';
-import type { AppProps, TokenId } from '@/utils/types';
+import Page from '@/components/Page';
 import { getTokenProps } from '@/utils';
+import type { AppProps, TokenId } from '@/utils/types';
+import Token from '@/views/token';
 
 function TokenPage(props: AppProps & { tokenId: TokenId }) {
   return (

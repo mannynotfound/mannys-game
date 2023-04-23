@@ -1,6 +1,6 @@
 import { Dispatch } from 'react';
-import Token from '@/views/about/Token';
 import type { TokenId } from '@/utils/types';
+import Token from '@/views/about/Token';
 
 type Props = {
   setTokenId: Dispatch<TokenId>;

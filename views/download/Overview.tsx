@@ -1,5 +1,5 @@
-import { CodeProps } from 'react-markdown/lib/ast-to-react';
 import ReactMarkdown from 'react-markdown';
+import { CodeProps } from 'react-markdown/lib/ast-to-react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
@@ -41,7 +41,7 @@ export default function Overview() {
       <div className="max-w-[800px]">
         <ReactMarkdown
           components={{
-            code({ node, inline, className, children, ...props }: CodeProps) {
+            code({ inline, className, children, ...props }: CodeProps) {
               const match = /language-(\w+)/.exec(className || '');
               return !inline && match ? (
                 <SyntaxHighlighter

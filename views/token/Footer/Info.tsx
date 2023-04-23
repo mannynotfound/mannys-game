@@ -1,6 +1,6 @@
-import { useEnsName } from 'wagmi';
-import { useRouter } from 'next/router';
 import type { Contract } from 'ethers';
+import { useRouter } from 'next/router';
+import { useEnsName } from 'wagmi';
 import useTokenOwner from '@/hooks/useTokenOwner';
 import type { Account, EthAddress, TokenId } from '@/utils/types';
 
@@ -47,13 +47,13 @@ type Props = {
 
 export default function Info({ account, mannyContract, tokenId }: Props) {
   const router = useRouter();
+  const tokenOwner = useTokenOwner(mannyContract, tokenId);
   if (!tokenId) {
     const input = router.query.tokenId;
     return (
       <div className="text-white text-2xl">Manny #{input} not found...</div>
     );
   }
-  const tokenOwner = useTokenOwner(mannyContract, tokenId);
 
   return (
     <div className="text-xl text-green leading-tight">

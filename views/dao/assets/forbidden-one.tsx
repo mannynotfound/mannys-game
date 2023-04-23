@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import { twMerge } from 'tailwind-merge';
 import useSWR from 'swr';
-import { API_URL } from '@/utils/constants';
+import { twMerge } from 'tailwind-merge';
 import { fetcher } from '@/utils';
+import { API_URL } from '@/utils/constants';
 import { FractionsObject, FractionsResponse } from '@/utils/types';
 
 export default function ForbiddenOne() {
@@ -46,6 +46,7 @@ export default function ForbiddenOne() {
         )}
         key={image}
       >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img alt="drop 1 piece" src={image} className="absolute inset-0" />
         {fractionMatches[i] && (
           <a
@@ -89,6 +90,7 @@ export default function ForbiddenOne() {
       <div className="flex flex-col md:flex-row w-full max-w-screen-xl mx-auto">
         <div className="flex-1 font-body text-xl mb-10 md:pr-8">
           <div className="w-full mb-6">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt="yugi pulls exodia"
               src="/drops/yugiexodia.jpg"
@@ -107,6 +109,7 @@ export default function ForbiddenOne() {
           </p>
           <div className="w-full flex my-6">
             <div className="flex-1 pr-4">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 alt="yugi pulls exodia"
                 src="/drops/exodiameme.png"
@@ -114,6 +117,7 @@ export default function ForbiddenOne() {
               />
             </div>
             <div className="flex-1 pl-4">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 alt="kaiba gets obliterated"
                 src="/drops/kaibameme.png"
@@ -138,6 +142,7 @@ export default function ForbiddenOne() {
           </p>
         </div>
         <div className="flex-1 md:pl-8">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             className="mx-auto w-full h-auto"
             alt="exodia the forbidden one psa 10"

@@ -1,10 +1,10 @@
 import { useRef } from 'react';
+import useHasMounted from '@/hooks/useHasMounted';
 import { AppProps } from '@/utils/types';
 import Intro from '@/views/download/Intro';
-import DownloadToken from '@/views/download/Token';
 import Overview from '@/views/download/Overview';
 import Scene from '@/views/download/Scene';
-import useHasMounted from '@/hooks/useHasMounted';
+import DownloadToken from '@/views/download/Token';
 
 export default function Download({ web3, mannys }: AppProps) {
   const getStartedRef = useRef<HTMLDivElement>(null);

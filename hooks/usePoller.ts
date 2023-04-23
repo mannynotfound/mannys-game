@@ -20,5 +20,5 @@ export default function usePoller(fn: () => void, delay: number) {
   // run at start too
   useEffect(() => {
     fn();
-  }, []);
+  }, [fn]);
 }

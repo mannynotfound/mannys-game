@@ -1,8 +1,7 @@
 import { Suspense } from 'react';
-import { LinearToneMapping, sRGBEncoding } from 'three';
-import { Canvas } from '@react-three/fiber';
 import { useFBX } from '@react-three/drei';
-
+import { Canvas } from '@react-three/fiber';
+import { LinearToneMapping, sRGBEncoding } from 'three';
 import { Controls, Lighting, Manny } from '@/components/three';
 import { MODELS_HOST } from '@/utils/constants';
 

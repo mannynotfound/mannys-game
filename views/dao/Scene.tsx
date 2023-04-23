@@ -1,11 +1,11 @@
-import { Suspense, useEffect, useState, useRef } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { getTokenProps } from '@/utils';
-import { Manny, DAOLogo, Controls, Lighting } from '@/components/three';
-import AnimateCamera from '@/views/dao/AnimateCamera';
-import { getRandomSix } from '@/views/dao/utils';
-import { TokenMetadata } from '@/utils/types';
 import { Group, NoToneMapping, sRGBEncoding } from 'three';
+import { Controls, DAOLogo, Lighting, Manny } from '@/components/three';
+import { getTokenProps } from '@/utils';
+import { TokenMetadata } from '@/utils/types';
+import { getRandomSix } from '@/views/dao/utils';
+import AnimateCamera from '@/views/dao/AnimateCamera';
 
 export default function DaoScene() {
   const [randomSix, setRandomSix] = useState<TokenMetadata[]>([]);

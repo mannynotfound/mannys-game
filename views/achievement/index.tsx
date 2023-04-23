@@ -2,11 +2,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import { twMerge } from 'tailwind-merge';
+import AchievementBanner from '@/components/AchievementBanner';
+import allAchievements from '@/fixtures/achievements.json';
 import { fetcher } from '@/utils';
 import { API_URL } from '@/utils/constants';
 import { AchievementGamersResponseObject } from '@/utils/types';
-import allAchievements from '@/fixtures/achievements.json';
-import AchievementBanner from '@/components/AchievementBanner';
 
 const AchievementGamers = ({ achievementId }: { achievementId: number }) => {
   const { data: gamers } = useSWR<AchievementGamersResponseObject[]>(

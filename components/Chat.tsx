@@ -1,4 +1,4 @@
-import { useState, useEffect, ReactNode, ReactElement, useRef } from 'react';
+import { ReactElement, ReactNode, useEffect, useRef, useState } from 'react';
 import { renderToString } from 'react-dom/server';
 import { useRouter } from 'next/router';
 import { Account, Token } from '@/utils/types';

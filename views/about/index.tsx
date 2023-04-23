@@ -1,13 +1,13 @@
-import { useEffect, useState, useRef, Suspense } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { NoToneMapping, sRGBEncoding } from 'three';
 import { Lighting, MannyAbout } from '@/components/three';
-import Intro from '@/views/about/Intro';
-import Community from '@/views/about/Community';
-import Tokens from '@/views/about/Tokens';
-import Timeline from '@/views/about/Timeline';
-import Podium from '@/views/about/Podium';
 import type { TokenId } from '@/utils/types';
+import Community from '@/views/about/Community';
+import Intro from '@/views/about/Intro';
+import Podium from '@/views/about/Podium';
+import Timeline from '@/views/about/Timeline';
+import Tokens from '@/views/about/Tokens';
 
 type SectionsMap = {
   [key: string]: {
@@ -38,6 +38,7 @@ export default function About() {
         window.removeEventListener('scroll', onScroll.current);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // set animation + position

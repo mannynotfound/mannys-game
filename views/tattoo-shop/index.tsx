@@ -1,9 +1,9 @@
 import { useState } from 'react';
+import Button from '@/components/Button';
+import { AppProps } from '@/utils/types';
 import IntroScene from '@/views/tattoo-shop/IntroScene';
 import TattooAdd from '@/views/tattoo-shop/TattooAdd';
 import TattooRemove from '@/views/tattoo-shop/TattooRemove';
-import Button from '@/components/Button';
-import { AppProps } from '@/utils/types';
 
 const TattooShop = ({ web3, mannys }: AppProps) => {
   const [jobType, setJobType] = useState('');

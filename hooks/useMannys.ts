@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import type { Contract } from 'ethers';
 import type { EthAddress, Token, TokenId } from '@/utils/types';
 
@@ -17,6 +17,7 @@ export default function useMannys(
     };
 
     getBalances();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [address, mannyContract !== null]);
 
   return mannys;

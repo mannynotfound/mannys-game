@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { ConnectKitButton } from 'connectkit';
-import { useSignMessage } from 'wagmi';
-import { twMerge } from 'tailwind-merge';
 import b64ToBlob from 'b64-to-blob';
+import { ConnectKitButton } from 'connectkit';
 import fileSaver from 'file-saver';
-import { Account, Token } from '@/utils/types';
+import { twMerge } from 'tailwind-merge';
+import { useSignMessage } from 'wagmi';
 import { API_URL } from '@/utils/constants';
+import { Account, Token } from '@/utils/types';
 
 const WalletConnect = () => (
   <div className="flex items-center relative z-50 pb-10">
@@ -113,6 +113,7 @@ export default function DownloadToken({ account, mannys }: Props) {
               }}
               key={ym.tokenId}
             >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 alt="manny token option"
                 src={`${S3_URL}/${ym.tokenId}.png`}

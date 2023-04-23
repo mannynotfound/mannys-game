@@ -5,7 +5,7 @@ type Props = {
 };
 
 export default function HoverText({ text }: Props) {
-  let delayIndex = useRef(0);
+  const delayIndex = useRef(0);
 
   return (
     <div className="flex items-center justify-center float">

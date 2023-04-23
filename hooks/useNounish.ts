@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import { useContract } from 'wagmi';
+import { useEffect, useState } from 'react';
 import type { Provider } from '@wagmi/core';
-import { EthAddress } from '@/utils/types';
+import { useContract } from 'wagmi';
 import toadzAbi from '@/fixtures/contracts/CRYPTOADZabi';
 import lilNounsAbi from '@/fixtures/contracts/LILNOUNSabi';
 import nounsAbi from '@/fixtures/contracts/NOUNSabi';
+import { EthAddress } from '@/utils/types';
 
 const LILNOUNS_CONTRACT = '0x4b10701Bfd7BFEdc47d50562b76b436fbB5BdB3B';
 const NOUNS_CONTRACT = '0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03';
@@ -43,6 +43,7 @@ export default function useNounish(provider: Provider, address: EthAddress) {
     };
 
     getBalance();
+    /* eslint-disable react-hooks/exhaustive-deps */
   }, [
     lilNounsContract !== null,
     nounsContract !== null,

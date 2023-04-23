@@ -1,5 +1,5 @@
+import { Euler, Vector3 } from 'three';
 import { EthAddress } from '@/utils/types';
-import { Vector3, Euler } from 'three';
 
 export type SubmitResponse = {
   type: string;

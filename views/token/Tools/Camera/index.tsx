@@ -1,13 +1,13 @@
-import type { Account, TokenId } from '@/utils/types';
 import { useAppDispatch } from '@/views/token/hooks';
-import { toggleCameraOpen } from '@/views/token/reducer';
+import type { Account, TokenId } from '@/utils/types';
 import OptionBackground from '@/views/token/Tools/Camera/OptionBackground';
+import OptionEditNFT from '@/views/token/Tools/Camera/OptionEditNFT';
 import OptionMood from '@/views/token/Tools/Camera/OptionMood';
 import OptionPaused from '@/views/token/Tools/Camera/OptionPaused';
+import OptionSave from '@/views/token/Tools/Camera/OptionSave';
 import OptionTextureHD from '@/views/token/Tools/Camera/OptionTextureHD';
 import OptionZoomed from '@/views/token/Tools/Camera/OptionZoomed';
-import OptionSave from '@/views/token/Tools/Camera/OptionSave';
-import OptionEditNFT from '@/views/token/Tools/Camera/OptionEditNFT';
+import { toggleCameraOpen } from '@/views/token/reducer';
 
 type Props = {
   account: Account;

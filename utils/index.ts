@@ -1,10 +1,10 @@
-import mannyTokens from 'fixtures/tokens.json';
 import allAchievements from 'fixtures/achievements.json';
+import mannyTokens from 'fixtures/tokens.json';
 import {
+  AchievementEarnedObject,
   SkinsConfig,
   Token,
   TokenId,
-  AchievementEarnedObject,
 } from 'utils/types';
 
 const now = Date.now();
@@ -34,7 +34,7 @@ export const findRarestManny = (tokens: number[]): number => {
 
   tokens.sort().forEach((tokenId: number) => {
     const pointsMatch =
-      Object.entries(SkinsConfig).find(([_, skinOptions]) => {
+      Object.entries(SkinsConfig).find(([, skinOptions]) => {
         return skinOptions.tokens.includes(tokenId);
       })?.[1].points ?? 0;
 

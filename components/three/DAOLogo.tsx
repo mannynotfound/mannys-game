@@ -1,8 +1,8 @@
-import { useEffect, useState, useRef } from 'react';
-import { Group, Color } from 'three';
+import { useEffect, useRef, useState } from 'react';
 import { useSpring } from '@react-spring/three';
-import { useFrame } from '@react-three/fiber';
 import { useFBX } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
+import { Color, Group } from 'three';
 
 export const DAO_LOGO_FBX = '/misc/mannyDAOlogomark.fbx';
 

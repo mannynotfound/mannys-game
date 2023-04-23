@@ -1,7 +1,8 @@
-export * from '@/utils/types/token';
-import type { TokenId } from '@/utils/types/token';
-import type { Contract } from 'ethers';
 import type { GetAccountResult } from '@wagmi/core';
+import type { Contract } from 'ethers';
+import type { TokenId } from '@/utils/types/token';
+
+export * from '@/utils/types/token';
 
 export type FractionsObject = {
   owner: EthAddress;

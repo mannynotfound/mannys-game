@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --fix"
+    "lint": "eslint \"*/**/*.{js,ts,tsx}\" --fix"
   },
   "dependencies": {
     "@mdx-js/loader": "^2.3.0",
@@ -45,6 +45,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
+    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/file-saver": "^2.0.5",
     "@types/node": "18.14.0",
     "@types/react": "18.0.28",

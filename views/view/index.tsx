@@ -1,7 +1,7 @@
 import { Suspense, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Vector3, NoToneMapping, sRGBEncoding } from 'three';
-import { Manny, Controls, Lighting, CameraZoom } from '@/components/three';
+import { NoToneMapping, Vector3, sRGBEncoding } from 'three';
+import { CameraZoom, Controls, Lighting, Manny } from '@/components/three';
 
 type Props = {
   textureUrl?: string;

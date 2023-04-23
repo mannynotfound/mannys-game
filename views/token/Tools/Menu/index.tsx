@@ -1,8 +1,8 @@
 import { twMerge } from 'tailwind-merge';
 import { Backpack, Camera } from '@/components/Svg';
-import type { TokenId } from '@/utils/types';
 import { useAppDispatch } from '@/views/token/hooks';
-import { toggleCameraOpen, toggleBagOpen } from '@/views/token/reducer';
+import type { TokenId } from '@/utils/types';
+import { toggleBagOpen, toggleCameraOpen } from '@/views/token/reducer';
 
 type Props = {
   tokenId: TokenId;

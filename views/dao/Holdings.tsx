@@ -1,9 +1,9 @@
+import { useMemo } from 'react';
 import { useBalance } from 'wagmi';
+import { LinkOut } from '@/components/Svg';
 import useExchangePrice from '@/hooks/useExchangePrice';
 import useFloorPrice from '@/hooks/useFloorPrice';
 import { MANNY_DAO } from '@/utils/constants';
-import { useMemo } from 'react';
-import { LinkOut } from '@/components/Svg';
 
 export default function Holdings() {
   const { data } = useBalance({ address: MANNY_DAO });
@@ -35,10 +35,11 @@ export default function Holdings() {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     });
-  }, [floorPrices, exchangePrice]);
+  }, [floorPrices, exchangePrice, balance]);
   return (
     <div className="p-8 text-left">
       <div className="mb-4">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           className="w-4/5"
           alt="manny dao logo"

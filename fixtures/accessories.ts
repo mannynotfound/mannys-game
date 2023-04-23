@@ -69,6 +69,8 @@ export type Accessory = {
   offset?: Offset;
   rarity?: 'rare' | 'legendary';
   requirement?: string;
+  // TODO: make this less chaotic
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   validator?: (args: any) => boolean;
 };
 
@@ -453,8 +455,7 @@ const wand: Accessory = {
   label: 'Wand',
   level: 50,
   requirement: 'Requires owning mLoot or Loot NFT.',
-  validator: ({ hasMLoot, hasLoot }: { hasLoot: boolean; hasMLoot: boolean }) =>
-    hasMLoot || hasLoot,
+  validator: ({ hasMLoot, hasLoot }) => hasMLoot || hasLoot,
   stats: {
     fanfic: 55,
     magic: 55,

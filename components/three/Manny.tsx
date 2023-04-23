@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Vector3, Euler, Group } from 'three';
 // @ts-expect-error: add types to manny module
 import manny from 'manny';
-import useAccessories from '@/hooks/useAccessories';
+import { Euler, Group, Vector3 } from 'three';
 import type { Offset } from '@/fixtures/accessories';
-import { MANNY_TEXTURE_DEFAULT, MANNY_FBX, LIBRARY } from '@/utils/constants';
+import useAccessories from '@/hooks/useAccessories';
+import { LIBRARY, MANNY_FBX, MANNY_TEXTURE_DEFAULT } from '@/utils/constants';
 
 type Props = {
   textureUrl?: string;

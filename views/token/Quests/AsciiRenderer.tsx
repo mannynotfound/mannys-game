@@ -18,14 +18,14 @@ const AsciiRenderer = ({
     effect.domElement.style.backgroundColor = 'black';
     effect.domElement.style.pointerEvents = 'none';
     return effect;
-  }, [characters, options.invert]);
+  }, [characters, options, gl]);
 
   useEffect(() => {
     gl.domElement.parentNode?.appendChild(effect.domElement);
     return () => {
       gl.domElement.parentNode?.removeChild(effect.domElement);
     };
-  }, [effect]);
+  }, [effect, gl]);
 
   useEffect(() => {
     effect.setSize(size.width, size.height);

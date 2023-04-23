@@ -1,5 +1,5 @@
-import type { TokenId } from '@/utils/types';
 import { useAppDispatch } from '@/views/token/hooks';
+import type { TokenId } from '@/utils/types';
 import { setBgColor } from '@/views/token/reducer';
 
 type Props = {

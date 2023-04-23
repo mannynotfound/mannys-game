@@ -1,7 +1,7 @@
-import { Vector3, Euler, Color, CubeTexture } from 'three';
-import { extend, BufferGeometryNode } from '@react-three/fiber';
-import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
+import { BufferGeometryNode, extend } from '@react-three/fiber';
+import { Color, CubeTexture, Euler, Vector3 } from 'three';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
 import Helvetiker from '@/components/three/helvetiker_regular.typeface.json';
 
 extend({ TextGeometry });

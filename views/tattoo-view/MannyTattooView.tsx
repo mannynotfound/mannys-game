@@ -1,21 +1,22 @@
-import { useMemo, useEffect, useState } from 'react';
-import {
-  TextureLoader,
-  MeshPhongMaterial,
-  Mesh,
-  Vector3,
-  Vector2,
-  Euler,
-  Object3D,
-  SkinnedMesh,
-} from 'three';
-import { clone } from 'three/examples/jsm/utils/SkeletonUtils';
-import { DecalGeometry } from 'three/examples/jsm/geometries/DecalGeometry';
+import { useEffect, useMemo, useState } from 'react';
 import { useThree } from '@react-three/fiber';
 // TODO: add types to manny module
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import manny from 'manny';
+import {
+  Euler,
+  Mesh,
+  MeshPhongMaterial,
+  Object3D,
+  SkinnedMesh,
+  TextureLoader,
+  Vector2,
+  Vector3,
+} from 'three';
+import { DecalGeometry } from 'three/examples/jsm/geometries/DecalGeometry';
 import { getTokenProps } from '@/utils';
+import { clone } from 'three/examples/jsm/utils/SkeletonUtils';
 import { TattooAPIObject } from '@/views/tattoo-shop/types';
 
 type Props = {
@@ -48,7 +49,7 @@ const MannyTattooView = ({ tokenId, position, existing }: Props) => {
     });
 
     return _clone;
-  }, [ogManny]);
+  }, [ogManny, tokenId]);
 
   // set "mesh" in state to be the body mesh of manny model
   useEffect(() => {
@@ -62,15 +63,19 @@ const MannyTattooView = ({ tokenId, position, existing }: Props) => {
   }, [mannyObj?.children]);
 
   // create decal material which acts as our tattoo
-  const decalMaterial = new MeshPhongMaterial({
-    normalScale: new Vector2(1, 1),
-    transparent: true,
-    depthTest: true,
-    depthWrite: false,
-    polygonOffset: true,
-    polygonOffsetFactor: -4,
-    wireframe: false,
-  });
+  const decalMaterial = useMemo(
+    () =>
+      new MeshPhongMaterial({
+        normalScale: new Vector2(1, 1),
+        transparent: true,
+        depthTest: true,
+        depthWrite: false,
+        polygonOffset: true,
+        polygonOffsetFactor: -4,
+        wireframe: false,
+      }),
+    []
+  );
 
   useEffect(() => {
     if (!existing?.length || !mesh) return;
@@ -113,7 +118,7 @@ const MannyTattooView = ({ tokenId, position, existing }: Props) => {
         }
       );
     });
-  }, [existing, mesh]);
+  }, [existing, mesh, scene, decalMaterial]);
 
   return (
     <group position={new Vector3(...position)} scale={1}>

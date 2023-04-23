@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
 import Link from 'next/link';
 import useSWR from 'swr';
-import { SkinsConfig, LeaderboardResponse } from '@/utils/types';
 import { fetcher } from '@/utils';
 import { API_URL } from '@/utils/constants';
+import { LeaderboardResponse, SkinsConfig } from '@/utils/types';
 
 const getTokenLink = (tokenId: number) =>
   `https://opensea.io/assets/0x2bd58a19c7e4abf17638c5ee6fa96ee5eb53aed9/${tokenId}`;
@@ -26,6 +26,7 @@ const Tokens = ({ tokenData }: { tokenData: number[] }) => {
               target="_blank"
               rel="noreferrer noopener"
             >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 className="w-full h-auto"
                 src={`/tokens/emoji_${emoji}.png`}

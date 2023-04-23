@@ -1,7 +1,7 @@
 import { ParsedUrlQuery } from 'querystring';
 import Page from '@/components/Page';
-import PlaqueViewer from '@/views/plaque';
 import gamerPlaques from '@/fixtures/gamer-plaques.json';
+import PlaqueViewer from '@/views/plaque';
 
 export type Props = {
   name: string;

@@ -1,8 +1,10 @@
-import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers } from 'redux';
+import { persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import reducer from '@/views/token/reducer';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+
+// defaults to localStorage for web
 
 const persistConfig = {
   key: 'mg-tokens-v1',

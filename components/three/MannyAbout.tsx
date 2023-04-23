@@ -1,10 +1,10 @@
 import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Vector3, Mesh } from 'three';
 // @ts-expect-error: add types to manny module
 import manny from 'manny';
+import { Mesh, Vector3 } from 'three';
 import { getTokenProps } from '@/utils';
-import { MANNY_FBX, LIBRARY } from '@/utils/constants';
+import { LIBRARY, MANNY_FBX } from '@/utils/constants';
 import type { TokenId } from '@/utils/types';
 
 type Props = {

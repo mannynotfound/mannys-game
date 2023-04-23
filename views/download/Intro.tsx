@@ -1,6 +1,6 @@
 import { RefObject } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { Version, License, Stars, Sponsors } from '@/components/Svg';
+import { License, Sponsors, Stars, Version } from '@/components/Svg';
 
 type Props = {
   getStartedRef: RefObject<HTMLDivElement>;
@@ -84,6 +84,7 @@ export default function Intro({ getStartedRef, downloadRef }: Props) {
                 'bg-gray-code rounded-lg text-center h-16 mt-4'
               )}
             >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 className="h-12 w-auto mr-2"
                 alt="archive icon"

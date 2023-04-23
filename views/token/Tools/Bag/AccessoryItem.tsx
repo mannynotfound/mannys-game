@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import type { Accessory } from '@/fixtures/accessories';
 import type { SetTooltipArgs } from '@/views/token/Tools/Bag/Tooltip';
@@ -39,11 +39,14 @@ export default function AccessoryItem({
       ? 'bg-magenta'
       : 'bg-green';
 
-  const tooltip = {
-    ...accessory,
-    bgColor,
-    distanceFromEdge,
-  };
+  const tooltip = useMemo(
+    () => ({
+      ...accessory,
+      bgColor,
+      distanceFromEdge,
+    }),
+    [accessory, bgColor, distanceFromEdge]
+  );
 
   const itemClasses = twMerge(
     className,
@@ -53,7 +56,10 @@ export default function AccessoryItem({
     isEnabled ? 'cursor-pointer' : 'opacity-25'
   );
 
-  const onMouseEnter = useCallback(() => setTooltip(tooltip), [tooltip]);
+  const onMouseEnter = useCallback(
+    () => setTooltip(tooltip),
+    [tooltip, setTooltip]
+  );
   const onClickHandler = useCallback(() => {
     if (isEnabled) {
       onClick();

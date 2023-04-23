@@ -1,6 +1,6 @@
+import useHasMounted from '@/hooks/useHasMounted';
 import Holdings from '@/views/dao/Holdings';
 import DaoScene from '@/views/dao/Scene';
-import useHasMounted from '@/hooks/useHasMounted';
 
 const Dao = () => {
   const hasMounted = useHasMounted();

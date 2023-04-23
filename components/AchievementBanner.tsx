@@ -1,13 +1,13 @@
-import { twMerge } from 'tailwind-merge';
 import Link from 'next/link';
+import { twMerge } from 'tailwind-merge';
+import {
+  CommonShield,
+  LegendaryShield,
+  LinkOut,
+  RareShield,
+} from '@/components/Svg';
 import allAchievements from '@/fixtures/achievements.json';
 import type { AchievementEarnedObject } from '@/utils/types';
-import {
-  LinkOut,
-  CommonShield,
-  RareShield,
-  LegendaryShield,
-} from '@/components/Svg';
 
 type Props = {
   achievement: AchievementEarnedObject;

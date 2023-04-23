@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { useSignMessage } from 'wagmi';
 import type { Crop } from 'react-image-crop/dist/types';
-import PreviewImage from '@/views/token/Tools/ImageUpload/PreviewImage';
+import { useSignMessage } from 'wagmi';
 import Button from '@/components/Button';
-import type { TokenId } from '@/utils/types';
 import ToggleSwitch from '@/components/ToggleSwitch';
-import { createCroppedImage } from '@/views/token/Tools/ImageUpload/utils';
-import { API_URL } from '@/utils/constants';
 import { useAppDispatch } from '@/views/token/hooks';
+import { API_URL } from '@/utils/constants';
+import type { TokenId } from '@/utils/types';
+import { createCroppedImage } from '@/views/token/Tools/ImageUpload/utils';
+import PreviewImage from '@/views/token/Tools/ImageUpload/PreviewImage';
 import { closeImageUpload } from '../../reducer';
 
 type CanvasImagesState = {

@@ -1,38 +1,39 @@
 import {
   Dispatch,
   RefObject,
+  useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
-  useLayoutEffect,
-  useEffect,
   useState,
 } from 'react';
+import { useTexture } from '@react-three/drei';
+import { useThree } from '@react-three/fiber';
+// TODO: add types to manny module
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import manny from 'manny';
 import {
-  Material,
-  TextureLoader,
+  BufferAttribute,
   BufferGeometry,
-  Raycaster,
-  MeshPhongMaterial,
-  SkinnedMesh,
-  Mesh,
-  Object3D,
-  Vector3,
-  Vector2,
   Euler,
   Intersection,
   Line,
-  BufferAttribute,
+  Material,
+  Mesh,
+  MeshPhongMaterial,
+  Object3D,
+  Raycaster,
+  SkinnedMesh,
+  TextureLoader,
+  Vector2,
+  Vector3,
 } from 'three';
-import { clone } from 'three/examples/jsm/utils/SkeletonUtils';
-import { DecalGeometry } from 'three/examples/jsm/geometries/DecalGeometry';
-import { useThree } from '@react-three/fiber';
-import { useTexture } from '@react-three/drei';
 import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
-// TODO: add types to manny module
-// @ts-ignore
-import manny from 'manny';
+import { DecalGeometry } from 'three/examples/jsm/geometries/DecalGeometry';
 import { getTokenProps } from '@/utils';
-import { TattooCoordinates, TattooAPIObject } from '@/views/tattoo-shop/types';
+import { clone } from 'three/examples/jsm/utils/SkeletonUtils';
+import { TattooAPIObject, TattooCoordinates } from '@/views/tattoo-shop/types';
 
 type Props = {
   tokenId: number;
@@ -83,7 +84,7 @@ const MannyTattoo = ({
     });
 
     return _clone;
-  }, [ogManny]);
+  }, [ogManny, tokenId]);
 
   // set "mesh" in state to be the body mesh of manny model
   useEffect(() => {
@@ -126,16 +127,20 @@ const MannyTattoo = ({
   });
 
   // create decal material which acts as our tattoo
-  const decalMaterial = new MeshPhongMaterial({
-    map: decalTexture,
-    normalScale: new Vector2(1, 1),
-    transparent: true,
-    depthTest: true,
-    depthWrite: false,
-    polygonOffset: true,
-    polygonOffsetFactor: -4,
-    wireframe: false,
-  });
+  const decalMaterial = useMemo(
+    () =>
+      new MeshPhongMaterial({
+        map: decalTexture,
+        normalScale: new Vector2(1, 1),
+        transparent: true,
+        depthTest: true,
+        depthWrite: false,
+        polygonOffset: true,
+        polygonOffsetFactor: -4,
+        wireframe: false,
+      }),
+    [decalTexture]
+  );
 
   const setSize = (w: number, h: number) => {
     const proportion = w / h;
@@ -318,9 +323,10 @@ const MannyTattoo = ({
   // this useEffect adds listeners for tattoo editing if setTattooCoords passed
   useEffect(() => {
     if (!setTattooCoords || !mesh) return;
+    const ctrlRef = controlsRef?.current;
 
     domElement.addEventListener('pointermove', onPointerMove);
-    controlsRef?.current?.addEventListener('change', onControlsChange);
+    ctrlRef?.addEventListener('change', onControlsChange);
     domElement.addEventListener('pointerdown', onPointerDown);
     domElement.addEventListener('pointerup', onPointerUp);
     document.addEventListener('keydown', onKeyDown);
@@ -329,9 +335,10 @@ const MannyTattoo = ({
       domElement.removeEventListener('pointermove', onPointerMove);
       domElement.removeEventListener('pointerdown', onPointerDown);
       domElement.removeEventListener('pointerup', onPointerDown);
-      controlsRef?.current?.removeEventListener('change', onControlsChange);
+      ctrlRef?.removeEventListener('change', onControlsChange);
       document.removeEventListener('keydown', onKeyDown);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [domElement, mesh, controlsRef?.current, setTattooCoords]);
 
   // this useEffect will take passed in coordinates and load the tattoo in with no editing
@@ -354,7 +361,7 @@ const MannyTattoo = ({
     decals.current.push(m);
     scene.add(m);
     tattooSet.current = true;
-  }, [coordinates, mesh]);
+  }, [coordinates, mesh, scene, decalMaterial]);
 
   useEffect(() => {
     if (!existing?.length || !mesh) return;
@@ -388,7 +395,7 @@ const MannyTattoo = ({
         }
       );
     });
-  }, [existing, mesh]);
+  }, [existing, mesh, decalMaterial, scene]);
 
   return (
     <>
@@ -398,6 +405,7 @@ const MannyTattoo = ({
       {setTattooCoords !== undefined && (
         <>
           {/* TODO: clean these refs up */}
+          {/* eslint-disable @typescript-eslint/ban-ts-comment*/}
           {/* @ts-ignore */}
           <mesh ref={mouseHelperRef} dispose={null}>
             <boxGeometry args={[1, 1, 10]} />

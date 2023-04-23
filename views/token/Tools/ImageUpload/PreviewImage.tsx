@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, Dispatch, SyntheticEvent } from 'react';
+import { Dispatch, SyntheticEvent, useEffect, useRef, useState } from 'react';
 import ReactCrop, { centerCrop, makeAspectCrop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import type { Crop } from 'react-image-crop/dist/types';
@@ -92,7 +92,7 @@ export default function PreviewImage({
         [tokenId]: image,
       });
     }
-  }, [tokenId, useTransparent]);
+  }, [tokenId, useTransparent, canvasImages, setCanvasImages]);
 
   const onImageLoad = (e: SyntheticEvent<HTMLImageElement, Event>) => {
     if (aspect && crop === undefined) {
@@ -112,13 +112,13 @@ export default function PreviewImage({
       aspect={aspect}
       keepSelection
     >
+      {/* eslint-disable @next/next/no-img-element */}
       <img
         id="crop-image"
         ref={imgRef}
         alt="canvas crop"
-        src={canvasImages?.[tokenId]}
+        src={canvasImages?.[tokenId] ?? ''}
         onLoad={onImageLoad}
-        className=""
       />
     </ReactCrop>
   );

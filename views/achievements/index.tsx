@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { twMerge } from 'tailwind-merge';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
+import { twMerge } from 'tailwind-merge';
 import allAchievements from '@/fixtures/achievements.json';
 import { calculateAchievementPoints, fetcher } from '@/utils';
 import { API_URL } from '@/utils/constants';

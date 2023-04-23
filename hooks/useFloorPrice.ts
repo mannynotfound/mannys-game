@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 type FloorResponse = {
   [collection: string]: number;
@@ -26,7 +26,7 @@ export default function useFloorPrice(
     };
 
     getFloors();
-  }, []);
+  }, [collections]);
 
   return floorPrices;
 }

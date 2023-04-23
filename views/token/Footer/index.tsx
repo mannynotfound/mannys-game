@@ -1,8 +1,8 @@
 import type { Contract } from 'ethers';
+import Chat from '@/components/Chat';
 import type { Account, Token, TokenId } from '@/utils/types';
 import Info from '@/views/token/Footer/Info';
 import ToolsMenu from '@/views/token/Tools/Menu';
-import Chat from '@/components/Chat';
 
 type Props = {
   account: Account;

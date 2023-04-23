@@ -1,7 +1,7 @@
 import { ParsedUrlQuery } from 'querystring';
 import Page from '@/components/Page';
-import TokenViewer from '@/views/view';
 import { getTokenProps } from '@/utils';
+import TokenViewer from '@/views/view';
 
 type Props = {
   textureUrl?: string;

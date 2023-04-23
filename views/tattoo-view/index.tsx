@@ -1,14 +1,13 @@
 import { Suspense } from 'react';
-import { LinearToneMapping, sRGBEncoding } from 'three';
-import useSWR from 'swr';
-import { useRouter } from 'next/router';
 import { Canvas } from '@react-three/fiber';
-
+import { useRouter } from 'next/router';
+import useSWR from 'swr';
+import { LinearToneMapping, sRGBEncoding } from 'three';
 import { Controls, Lighting } from '@/components/three';
-import MannyTattooView from '@/views/tattoo-view/MannyTattooView';
-import { TattooAPIObject, TattooAPIResponse } from '@/views/tattoo-shop/types';
-import { API_URL } from '@/utils/constants';
 import { fetcher } from '@/utils';
+import { API_URL } from '@/utils/constants';
+import { TattooAPIObject, TattooAPIResponse } from '@/views/tattoo-shop/types';
+import MannyTattooView from '@/views/tattoo-view/MannyTattooView';
 
 type Props = {
   tokenId: number;

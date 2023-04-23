@@ -1,14 +1,14 @@
 // TODO: bake a lot of this functionality into Manny module
 import { useEffect, useMemo } from 'react';
-import { MeshPhongMaterial, Object3D, Mesh } from 'three';
-import { useLoader } from '@react-three/fiber';
-import { TextureLoader } from 'three/src/loaders/TextureLoader';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import { useFBX } from '@react-three/drei';
+import { useLoader } from '@react-three/fiber';
+import { Mesh, MeshPhongMaterial, Object3D } from 'three';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { TextureLoader } from 'three/src/loaders/TextureLoader';
+import type { Offset, Slot } from '@/fixtures/accessories';
+import { allAccessories, slot2BoneMap, slots } from '@/fixtures/accessories';
 import { MODELS_HOST } from '@/utils/constants';
-import { allAccessories, slots, slot2BoneMap } from '@/fixtures/accessories';
-import type { Slot, Offset } from '@/fixtures/accessories';
 
 // cache for loaded models
 const accessoryModels: {
@@ -39,7 +39,8 @@ export default function useAccessories(
       const { offset = {}, fileName, slot } = accCfg;
       const { scale = {}, position = {}, rotation = {} } = offset;
 
-      // TODO: remove fbx loader
+      // TODO: remove fbx loader, rewrite to not be inside callback
+      /* eslint-disable react-hooks/rules-of-hooks */
       let model;
       if (accessoryModels[accId]) {
         model = accessoryModels[accId].model;

@@ -1,12 +1,12 @@
 import { Dispatch, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-import StepControls from '@/views/tattoo-shop/StepControls';
-import WalletConnect from '@/views/tattoo-shop/WalletConnect';
-import NoMannys from '@/views/tattoo-shop/NoMannys';
-import { StepOne, StepFour } from '@/views/tattoo-shop/Steps';
-import { SubmitResponse } from '@/views/tattoo-shop/types';
 import Button from '@/components/Button';
 import { Account, Token } from '@/utils/types';
+import NoMannys from '@/views/tattoo-shop/NoMannys';
+import StepControls from '@/views/tattoo-shop/StepControls';
+import { StepFour, StepOne } from '@/views/tattoo-shop/Steps';
+import WalletConnect from '@/views/tattoo-shop/WalletConnect';
+import { SubmitResponse } from '@/views/tattoo-shop/types';
 
 type Props = {
   account: Account;

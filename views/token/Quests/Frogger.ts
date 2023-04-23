@@ -6,9 +6,9 @@ const SPRITES_URL =
 
 const createFrogger = (tokenId) => {
   console.log('CREATING FROGGER ', tokenId);
-  var Frogger = (function () {
+  const Frogger = (function () {
     // Locate the main <canvas> element on the page
-    var canvas = document.getElementById('frogger-canvas'),
+    const canvas = document.getElementById('frogger-canvas'),
       // Get a reference to the <canvas> element's 2-D drawing surface context
       drawingSurface = canvas.getContext('2d'),
       // Locate the background <canvas> element on the page
@@ -43,7 +43,7 @@ const createFrogger = (tokenId) => {
       // application-wide communication without the need for tightly-coupled modules. See
       // Chapter 5 for more information on this design pattern.
       observer: (function () {
-        var events = {};
+        const events = {};
 
         return {
           subscribe: function (eventName, callback) {
@@ -55,7 +55,7 @@ const createFrogger = (tokenId) => {
           },
 
           publish: function (eventName) {
-            var data = Array.prototype.slice.call(arguments, 1),
+            let data = Array.prototype.slice.call(arguments, 1),
               index = 0,
               length = 0;
 
@@ -77,7 +77,7 @@ const createFrogger = (tokenId) => {
       // each other - if they do, and they are both on the same row as each other on the
       // game board, this can be considered a collision between these two obstacles
       intersects: function (position1, position2) {
-        var doesIntersect = false;
+        let doesIntersect = false;
 
         if (
           (position1.left > position2.left &&
@@ -113,7 +113,7 @@ const createFrogger = (tokenId) => {
   // code modules to do the heavy lifting through the use of the observer design pattern.
   (function (Frogger) {
     // Define a variable to hold the current player's score
-    var _score = 0,
+    let _score = 0,
       // Define and initialize a variable to hold the high score achieved in the game
       _highScore = 1000,
       // Define the number of lives the player has remaining before the game is over
@@ -300,7 +300,7 @@ const createFrogger = (tokenId) => {
     function gameLoop() {
       // Calculate how many milliseconds have passed since the last time the game loop
       // was called
-      var currentTime = new Date().getTime(),
+      const currentTime = new Date().getTime(),
         timeDifference = currentTime - _lastTimeGameLoopRan;
 
       // Execute this function again when the next animation frame is ready for use by
@@ -440,7 +440,7 @@ const createFrogger = (tokenId) => {
     // Define a function to start playing the animation - essentially incrementing the
     // frame index on a timer at the rate supplied upon instantiation
     play: function () {
-      var that = this;
+      const that = this;
 
       // If the animation is not currently playing, then reset it to its initial state
       if (!this.playing) {
@@ -527,7 +527,7 @@ const createFrogger = (tokenId) => {
     // large sprite map image. Because this is an object, it will be shared across all
     // instances of the Frogger.ImageSprite "class", saving on memory usage
     sprite: (function () {
-      var img = document.createElement('img');
+      const img = document.createElement('img');
       // img.src = window.spriteMap || "images/spritemap.png";
       img.src = `${SPRITES_URL}/${tokenId}.png`;
       console.log(window.spriteMap);
@@ -574,7 +574,7 @@ const createFrogger = (tokenId) => {
     // Define a function to associate one or more animation with this image - data is
     // passed in as an object literal with each key representing the name of the animation
     registerAnimation: function (animations) {
-      var key, animation;
+      let key, animation;
 
       // Loop through the supplied object literal data indicating the animations to
       // register
@@ -620,7 +620,7 @@ const createFrogger = (tokenId) => {
     // value
     renderAt: function (left, top) {
       // Locate the animation that is currently playing, if any
-      var animation = this.animations[this.currentAnimation],
+      const animation = this.animations[this.currentAnimation],
         // If an animation is playing, get its current sequence value based on its
         // internal frame index. If no animation is playing, assume a sequence value
         // of 0. This value will be multiplied by the width of the individual image
@@ -706,7 +706,7 @@ const createFrogger = (tokenId) => {
     // Define the width and height of each square on the game board grid, in pixels. The
     // game board is divided into rows with different obstacles on each, and columns within
     // which the player's character can move
-    var _grid = {
+    const _grid = {
         width: 80,
         height: 80,
       },
@@ -740,7 +740,7 @@ const createFrogger = (tokenId) => {
       // multiple of the grid width. This allows easy access to pixel positions by
       // row number.
       _rows = (function () {
-        var output = [],
+        let output = [],
           index = 0,
           length = _numRows;
 
@@ -755,7 +755,7 @@ const createFrogger = (tokenId) => {
       // multiple of the grid height. This allows easy access to pixel positions by
       // column number.
       _columns = (function () {
-        var output = [],
+        let output = [],
           index = 0,
           length = _numColumns;
 
@@ -804,7 +804,7 @@ const createFrogger = (tokenId) => {
   (function (Frogger) {
     // Define the text size and font name to use for the text. You can find the Arcade
     // Classic font for download for free online at http://bit.ly/arcade_font
-    var _font = '67px Arcade Classic',
+    let _font = '67px Arcade Classic',
       // Define variables to store the current game state locally in this module
       _score = 0,
       _highScore = 0,
@@ -984,7 +984,7 @@ const createFrogger = (tokenId) => {
   (function (Frogger) {
     // To draw an image file onto the <canvas> we need to create a new <img> element to
     // contain the image first
-    var _background = document.createElement('img');
+    const _background = document.createElement('img');
 
     // Once the image has loaded, draw the image onto the background <canvas> element's
     // drawing surface, starting at the top-left corner and covering the full width and
@@ -1018,7 +1018,7 @@ const createFrogger = (tokenId) => {
   (function (Frogger) {
     // Define an array, to be populated later, which will represent the number of lives the
     // player has remaining
-    var _lives = [],
+    let _lives = [],
       // Define a variable indicating the time remaining on the countdown before the
       // player automatically loses a life, represented as a percentage, starting at
       // 100% and counting down to 0
@@ -1053,7 +1053,7 @@ const createFrogger = (tokenId) => {
     function initialize(gameBoard) {
       // Define a variable representing the position from the top of the game board
       // to display the remaining lives
-      var lifePositionTop;
+      let lifePositionTop;
 
       // Store the game board properties and settings in a local variable within this
       // code module
@@ -1084,7 +1084,7 @@ const createFrogger = (tokenId) => {
 
     // Define a function to render the number of lives remaining on the game board
     function renderLives() {
-      var index = 0,
+      let index = 0,
         length = _lives.length,
         life;
 
@@ -1104,7 +1104,7 @@ const createFrogger = (tokenId) => {
       // Define the width of the rectangle. When full, this will be the width of 10
       // columns on the game board. As the time remaining decreases, the width will
       // decrease accordingly
-      var rectangleWidth = _timeRemainingAsPercentage * _gameBoard.rows[10],
+      const rectangleWidth = _timeRemainingAsPercentage * _gameBoard.rows[10],
         // Define the height of the rectangle, which will always be half of one grid
         // square on the game board
         rectangleHeight = _gameBoard.grid.height / 2,
@@ -1278,7 +1278,7 @@ const createFrogger = (tokenId) => {
     // collision detection code later, but for now we just need to create a method to
     // tell us when the turtle in underwater
     Turtle.prototype.isUnderwater = function () {
-      var isUnderwater = false,
+      let isUnderwater = false,
         // Get a reference to the current animation of the turtle diving underwater
         // and resurfacing
         animation = this.animations[this.currentAnimation];
@@ -1434,7 +1434,7 @@ const createFrogger = (tokenId) => {
   // handle its movement and behavior according to the current game state
   Frogger.Character = (function (Frogger) {
     // Define a variable to store the image representing the player's character
-    var _character,
+    let _character,
       // Define a variable to store the game board properties and settings
       _gameBoard = {},
       // Define a variable to denote the starting row of the player's character on the
@@ -1719,12 +1719,12 @@ const createFrogger = (tokenId) => {
       'keydown',
       function (event) {
         // Define the key codes for the arrow keys
-        var LEFT_ARROW = 37,
+        const LEFT_ARROW = 37,
           UP_ARROW = 38,
           RIGHT_ARROW = 39,
           DOWN_ARROW = 40;
 
-        var W = 87,
+        const W = 87,
           A = 65,
           S = 83,
           D = 68;
@@ -1762,7 +1762,7 @@ const createFrogger = (tokenId) => {
       function (event) {
         // Get a reference to the position of the touch on the screen in pixels from the
         // top-left position of the touched element, in this case the game board
-        var touchLeft = event.targetTouches[0].clientX,
+        const touchLeft = event.targetTouches[0].clientX,
           touchTop = event.targetTouches[0].clientY;
 
         // Execute the move() function, passing along the correct direction based on the
@@ -1817,7 +1817,7 @@ const createFrogger = (tokenId) => {
       // Define a method to render each of the obstacles in the correct place on the
       // current row
       render: function () {
-        var index = 0,
+        let index = 0,
           length = this.obstacles.length,
           left,
           obstaclesItem;
@@ -1854,7 +1854,7 @@ const createFrogger = (tokenId) => {
       // Define a method to detect whether the player's character is currently colliding
       // with an obstacle on this row
       isCollision: function (characterPosition) {
-        var index = 0,
+        let index = 0,
           length = this.obstacles.length,
           obstaclesItem,
           isCollision = false;
@@ -1878,7 +1878,7 @@ const createFrogger = (tokenId) => {
       // Define a method to reset the obstacles on this row to their default state and
       // position on the game board
       reset: function () {
-        var index = 0,
+        let index = 0,
           length = this.obstacles.length;
 
         // Loop through each of the obstacles within this row, and call their reset()
@@ -1945,7 +1945,10 @@ const createFrogger = (tokenId) => {
     // the Log "class" apart from when the turtle obstacle has dipped underwater, in which
     // case there will always be a collision if the player's character is on this row
     Turtle.prototype.isCollision = function (characterPosition) {
-      var isCollision = Log.prototype.isCollision.call(this, characterPosition);
+      const isCollision = Log.prototype.isCollision.call(
+        this,
+        characterPosition
+      );
       return this.obstacles[0].isUnderwater() || isCollision;
     };
 
@@ -1965,7 +1968,7 @@ const createFrogger = (tokenId) => {
     // Override the isCollision() method to detect if the player's character has reached
     // one of the available goals stored in this row
     Goal.prototype.isCollision = function (characterPosition) {
-      var index = 0,
+      let index = 0,
         length = this.obstacles.length,
         obstaclesItem,
         isCollision = true;
@@ -2017,7 +2020,7 @@ const createFrogger = (tokenId) => {
   (function (Frogger) {
     // Define variables to store the populated rows on the game board, and the properties
     // and settings of the game board itself
-    var _rows = [],
+    let _rows = [],
       _gameBoard = {};
 
     // Define a function to be called when the game board has initialized onto which we
@@ -2179,7 +2182,7 @@ const createFrogger = (tokenId) => {
 
     // Define a function to render each of the defined rows of obstacles onto the game board
     function render() {
-      var row,
+      let row,
         index = 0,
         length = _rows.length;
 
@@ -2194,7 +2197,7 @@ const createFrogger = (tokenId) => {
     // Define a function to detect whether a collision has occured between the player's
     // character and the obstacles within each row
     function isCollision() {
-      var collided = false,
+      let collided = false,
         row,
         index = 0,
         length = _rows.length;
@@ -2224,11 +2227,11 @@ const createFrogger = (tokenId) => {
 
     // Define a function to reset each of the rows to reset to their initial state
     function reset() {
-      var row;
+      let row;
 
       // Loop through each row calling its reset() method, which in turn calls the
       // reset() method of each of the obstacles within that row
-      for (var index = 0, length = _rows.length; index < length; index++) {
+      for (let index = 0, length = _rows.length; index < length; index++) {
         row = _rows[index];
         row.reset();
       }

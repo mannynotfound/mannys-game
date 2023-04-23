@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { twMerge } from 'tailwind-merge';
-import { ConnectKitButton } from 'connectkit';
-import Pulse from 'react-reveal/Pulse';
 import Fade from 'react-reveal/Fade';
-import Link from 'next/link';
+import Pulse from 'react-reveal/Pulse';
+import { ConnectKitButton } from 'connectkit';
 import Image from 'next/image';
-import { EtherScan, OpenSea, Twitter, Discord } from '@/components/Svg';
+import Link from 'next/link';
+import { twMerge } from 'tailwind-merge';
+import { Discord, EtherScan, OpenSea, Twitter } from '@/components/Svg';
 
 function InnerHeader() {
   return (

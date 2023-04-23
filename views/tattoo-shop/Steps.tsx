@@ -1,10 +1,10 @@
-import { Dispatch, ChangeEvent, useState } from 'react';
+import { ChangeEvent, Dispatch, useState } from 'react';
 import { ethers } from 'ethers';
-import Button from '@/components/Button';
 import { useSigner } from 'wagmi';
+import Button from '@/components/Button';
+import { Account, Token } from '@/utils/types';
 import TattooEditor from '@/views/tattoo-shop/TattooEditor';
 import { TattooCoordinates } from '@/views/tattoo-shop/types';
-import { Account, Token } from '@/utils/types';
 
 const S3_URL = 'https://mannys-game.s3.us-east-1.amazonaws.com/images';
 
@@ -63,6 +63,7 @@ export const StepOne = ({
             }}
             key={ym.tokenId}
           >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt="manny tattoo option"
               src={`${S3_URL}/${ym.tokenId}.png`}

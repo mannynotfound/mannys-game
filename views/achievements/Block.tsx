@@ -1,5 +1,5 @@
-import allAchievements from '@/fixtures/achievements.json';
 import AchievementBanner from '@/components/AchievementBanner';
+import allAchievements from '@/fixtures/achievements.json';
 import { AchievementEarnedObject } from '@/utils/types';
 
 type Props = {

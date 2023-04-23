@@ -27,6 +27,7 @@ export default function AboutToken({
       onClick={onClick}
     >
       <div className="flex items-end relative mb-2">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           className="w-full h-full"
           alt={srcKey}

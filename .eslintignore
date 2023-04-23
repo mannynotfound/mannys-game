@@ -1,5 +1,7 @@
 # folders
+
 build/
+public/
 node_modules/
 contracts/
-Frogger.js
+views/token/Quests/Frogger.ts

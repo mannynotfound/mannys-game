@@ -1,20 +1,20 @@
-import { useState, Dispatch, ChangeEvent } from 'react';
-import StepControls from '@/views/tattoo-shop/StepControls';
-import WalletConnect from '@/views/tattoo-shop/WalletConnect';
-import NoMannys from '@/views/tattoo-shop/NoMannys';
-import {
-  StepOne,
-  StepTwo,
-  StepThree,
-  StepFour,
-} from '@/views/tattoo-shop/Steps';
+import { ChangeEvent, Dispatch, useState } from 'react';
 import Button from '@/components/Button';
-import { Account, Token, EthAddress } from '@/utils/types';
 import { API_URL } from '@/utils/constants';
+import { Account, EthAddress, Token } from '@/utils/types';
+import NoMannys from '@/views/tattoo-shop/NoMannys';
+import StepControls from '@/views/tattoo-shop/StepControls';
 import {
-  UploadResponse,
+  StepFour,
+  StepOne,
+  StepThree,
+  StepTwo,
+} from '@/views/tattoo-shop/Steps';
+import WalletConnect from '@/views/tattoo-shop/WalletConnect';
+import {
   SubmitResponse,
   TattooCoordinates,
+  UploadResponse,
 } from '@/views/tattoo-shop/types';
 
 type Props = {

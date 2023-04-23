@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { NoToneMapping, sRGBEncoding } from 'three';
-import { Manny, Lighting } from '@/components/three';
+import { Lighting, Manny } from '@/components/three';
 
 export default function Scene() {
   return (

@@ -28,6 +28,7 @@ export default function MarioPikachu() {
           </p>
         </div>
         <div className="flex-1 mb-6 md:mb-0 md:pl-8">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             className="mx-auto w-full h-auto"
             alt="mario pikachu full art promo"

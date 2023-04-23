@@ -1,20 +1,20 @@
 import { Suspense } from 'react';
-import {
-  Mesh,
-  Color,
-  MeshLambertMaterial,
-  LinearToneMapping,
-  LinearEncoding,
-  CubeTextureLoader,
-} from 'three';
-import { Canvas } from '@react-three/fiber';
+import type { Props } from '@/pages/plaque/[tokenId]';
 import { useFBX } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
+import {
+  Color,
+  CubeTextureLoader,
+  LinearEncoding,
+  LinearToneMapping,
+  Mesh,
+  MeshLambertMaterial,
+} from 'three';
 import { Controls, Text3D } from 'components/three';
+import useHasMounted from '@/hooks/useHasMounted';
 import { MODELS_HOST } from '@/utils/constants';
 import { getFormattedDate } from '@/views/plaque/utils';
 import Lighting from '@/views/plaque/Lighting';
-import useHasMounted from '@/hooks/useHasMounted';
-import type { Props } from '@/pages/plaque/[tokenId]';
 
 const Scene = ({ name, address, dateEarned, posX, posY, size }: Props) => {
   const path = `${MODELS_HOST}/skybox/default-sky/`;

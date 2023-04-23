@@ -1,7 +1,7 @@
 const primaryColor = '#70bf44';
 const secondaryColor = '#f0c925';
 
-export default {
+const theme = {
   '--ck-font-family': '"PP Mono"',
   '--ck-accent-color': secondaryColor,
   '--ck-accent-text-color': '#000',
@@ -29,3 +29,5 @@ export default {
   '--ck-tooltip-border-radius': '0px',
   '--ck-tooltip-shadow': `0 0 0 2px ${primaryColor}`,
 };
+
+export default theme;

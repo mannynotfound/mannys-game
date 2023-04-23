@@ -1,6 +1,6 @@
 import Page from '@/components/Page';
-import Token from '@/views/token';
 import { AppProps } from '@/utils/types';
+import Token from '@/views/token';
 
 export default function TokenPage(props: AppProps) {
   return (

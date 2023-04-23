@@ -1,5 +1,5 @@
-import type { TokenId } from '@/utils/types';
 import { allQuests } from '@/fixtures/quests';
+import type { TokenId } from '@/utils/types';
 import QuestItem from '@/views/token/Tools/Bag/QuestItem';
 import type { SetTooltipArgs } from '@/views/token/Tools/Bag/Tooltip';
 
