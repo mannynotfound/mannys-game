@@ -4,10 +4,8 @@ import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import reducer from '@/views/token/reducer';
 
-// defaults to localStorage for web
-
 const persistConfig = {
-  key: 'mg-tokens-v2',
+  key: 'mg-tokens-v3',
   storage,
 };
 

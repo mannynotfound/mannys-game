@@ -60,8 +60,6 @@ export type Accessory = {
   id: string;
   description: string;
   category: Category;
-  fileName: string; // temp can standardize on id once all are gltf
-  textureUrl?: string; // temp should be removed once all are gltf
   level: number;
   label: string;
   slot: Slot;
@@ -75,11 +73,9 @@ export type Accessory = {
 };
 
 const partyHat: Accessory = {
-  id: 'hats_head_phat',
+  id: 'hats_head_partyhat',
   description:
     'One of the rarest and most valuable items from Runescape, partyhats were obtained by opening crackers during the 2001 Christmas event.',
-  textureUrl: 'phat.jpg',
-  fileName: 'phat.fbx',
   level: 40,
   label: 'Partyhat',
   category: 'hats',
@@ -90,21 +86,19 @@ const partyHat: Accessory = {
   },
   offset: {
     position: {
-      x: 1.08,
-      y: 14,
-      z: -2.64,
+      y: -0.4,
+      z: 1,
     },
     rotation: {
-      x: -0.3,
+      x: -0.1,
     },
   },
 };
 
 const propellerHat: Accessory = {
-  id: 'hats_head_propeller',
+  id: 'hats_head_propeller_cap',
   description:
     'Originally created in 1947 by Ray Faraday, the propeller beanie became an icon for science fiction fans and beyond around the world.',
-  fileName: 'hats_head_cap_propellor.gltf',
   label: 'Propeller Hat',
   level: 22,
   stats: {
@@ -126,7 +120,6 @@ const roseCrown: Accessory = {
   id: 'hats_head_roses_crown',
   description: 'A headdress made of the blitmap rose.',
   label: 'Rose Crown',
-  fileName: 'hats_head_roses_crown.gltf',
   category: 'hats',
   slot: 'Head',
   level: 14,
@@ -148,7 +141,6 @@ const leatherHat: Accessory = {
   id: 'hats_head_leather_hat',
   description:
     'A high-crowned, wide brimmed hat adorned with the teeth of market bears.',
-  fileName: 'hats_head_leather_hat.gltf',
   label: 'Cowboy Hat',
   category: 'hats',
   slot: 'Head',
@@ -171,7 +163,6 @@ const fwbHat: Accessory = {
   id: 'hats_head_fwb_cap',
   description:
     'A hat commemorating Friends With Benefits, where Manny gained a lot of his early NFT knowledge.',
-  fileName: 'hats_head_fwb_cap.gltf',
   category: 'hats',
   slot: 'Head',
   label: 'FWB Hat',
@@ -194,11 +185,9 @@ const fwbHat: Accessory = {
 };
 
 const stupidHat: Accessory = {
-  id: 'hats_head_stupid_hat',
+  id: 'hats_head_stupid',
   description:
     "Omg did you see Manny's stupid fucking hat? It's a fedora with flaps on the back...",
-  fileName: 'stupidhat.fbx',
-  textureUrl: 'stupidhat.jpg',
   label: 'Stupid Hat',
   category: 'hats',
   slot: 'Head',
@@ -211,12 +200,10 @@ const stupidHat: Accessory = {
   },
   offset: {
     position: {
-      x: 0.9,
-      y: -0.5,
-      z: -7,
+      z: 2,
     },
     rotation: {
-      x: -0.28,
+      x: -0.2,
     },
   },
 };
@@ -225,7 +212,6 @@ const vape: Accessory = {
   id: 'face_mouth_vape',
   description:
     'A device so well designed Manny had to quit them forever to avoid vaping non-stop.',
-  fileName: 'face_mouth_vape.gltf',
   label: 'Vape',
   category: 'face',
   slot: 'Mouth',
@@ -246,7 +232,6 @@ const vape: Accessory = {
 const cig: Accessory = {
   id: 'face_mouth_cigarette',
   description: 'An analogue vape popular among boomers.',
-  fileName: 'face_mouth_cigarette.gltf',
   label: 'Cigarette',
   category: 'face',
   slot: 'Mouth',
@@ -265,7 +250,6 @@ const cig: Accessory = {
 const pipe: Accessory = {
   id: 'face_mouth_pipe',
   description: "Ceci n'est pas une pipe.",
-  fileName: 'face_mouth_pipe.gltf',
   label: 'Pipe',
   category: 'face',
   slot: 'Mouth',
@@ -284,7 +268,6 @@ const pipe: Accessory = {
 const joint: Accessory = {
   id: 'face_mouth_joint',
   description: 'A nicely rolled cone complete with a paper filter.',
-  fileName: 'face_mouth_joint.gltf',
   label: 'Joint',
   category: 'face',
   slot: 'Mouth',
@@ -310,7 +293,6 @@ const facemask: Accessory = {
   id: 'face_mouth_mask_n40',
   description:
     'A surgical face mask that can prevent the spread of droplets and particles.',
-  fileName: 'face_mouth_mask_n40.gltf',
   label: 'Face Mask',
   category: 'face',
   level: 10,
@@ -332,7 +314,6 @@ const facemask: Accessory = {
 const earrings: Accessory = {
   id: 'face_ears_ring_ear',
   description: 'Golden hoop earrings to instantly turn into a hot guy.',
-  fileName: 'face_ears_ring_ear.gltf',
   label: 'Earrings',
   category: 'face',
   level: 72,
@@ -357,7 +338,6 @@ const earrings: Accessory = {
 const nosering: Accessory = {
   id: 'face_nose_ring_nose',
   description: 'A septum ring to channel your inner bull.',
-  fileName: 'face_nose_ring_nose.gltf',
   label: 'Nose Ring',
   level: 24,
   category: 'face',
@@ -377,7 +357,6 @@ const nosering: Accessory = {
 const lipring: Accessory = {
   id: 'face_mouth_ring_lip',
   description: 'A silver lip ring shoplifted from Hot Topic.',
-  fileName: 'face_mouth_ring_lip.gltf',
   label: 'Lip Ring',
   category: 'face',
   slot: 'Mouth',
@@ -397,7 +376,6 @@ const lipring: Accessory = {
 const book: Accessory = {
   id: 'weapons_left_hand_book',
   description: 'An analogue website popular among boomers',
-  fileName: 'weapons_left_hand_book.gltf',
   label: 'Book',
   level: 50,
   requirement: 'Requires owning mLoot or Loot NFT.',
@@ -424,7 +402,6 @@ const book: Accessory = {
 const sword: Accessory = {
   id: 'weapons_right_hand_sword',
   description: 'A bladed weapon stolen from Toan of Dark Cloud.',
-  fileName: 'weapons_right_hand_sword.gltf',
   label: 'Sword',
   rarity: 'rare',
   level: 60,
@@ -451,7 +428,6 @@ const sword: Accessory = {
 const wand: Accessory = {
   id: 'weapons_right_hand_wand',
   description: 'A thin rod used to conjure supernatural headassery.',
-  fileName: 'weapons_right_hand_wand.gltf',
   label: 'Wand',
   level: 50,
   requirement: 'Requires owning mLoot or Loot NFT.',
@@ -477,7 +453,6 @@ const wand: Accessory = {
 const scimitar: Accessory = {
   id: 'weapons_right_hand_scimitar',
   description: 'A curvy boi sword popularized by Euros in the 13th century.',
-  fileName: 'weapons_right_hand_scimitar.gltf',
   label: 'Scimitar',
   rarity: 'rare',
   level: 60,
@@ -504,7 +479,6 @@ const scimitar: Accessory = {
 const katana: Accessory = {
   id: 'weapons_right_hand_katana',
   description: 'Japanese sword used by anime characters.',
-  fileName: 'weapons_right_hand_katana.gltf',
   label: 'Katana',
   rarity: 'rare',
   level: 70,
@@ -533,7 +507,6 @@ const katana: Accessory = {
 const quarterstaff: Accessory = {
   id: 'weapons_back_staff',
   description: 'A long stave for conjuring supernatural headassery.',
-  fileName: 'weapons_back_staff.gltf',
   label: 'Quarterstaff',
   rarity: 'legendary',
   level: 90,
@@ -562,7 +535,6 @@ const quarterstaff: Accessory = {
 const warhammer: Accessory = {
   id: 'weapons_right_hand_hammer',
   description: 'A weapon for the finest Manny foot soldiers.',
-  fileName: 'weapons_right_hand_hammer.gltf',
   label: 'Warhammer',
   rarity: 'legendary',
   level: 90,
@@ -591,7 +563,6 @@ const warhammer: Accessory = {
 const cloutGoggle: Accessory = {
   id: 'eyes_eyes_glasses_cool_1',
   description: 'Eskeddittt',
-  fileName: 'eyes_eyes_glasses_cool_1.gltf',
   label: 'Clout Goggles',
   level: 26,
   category: 'eyes',
@@ -613,7 +584,6 @@ const cloutGoggle: Accessory = {
 const fashionGlasses: Accessory = {
   id: 'eyes_eyes_glasses_cool_2',
   description: 'A fashionable pair of red glasses.',
-  fileName: 'eyes_eyes_glasses_cool_2.gltf',
   label: 'Fashion Glasses',
   level: 26,
   category: 'eyes',
@@ -636,7 +606,6 @@ const fashionGlasses: Accessory = {
 const rondoGlasses: Accessory = {
   id: 'eyes_eyes_glasses_funny',
   description: 'Evil pepe emoji.',
-  fileName: 'eyes_eyes_glasses_funny.gltf',
   label: 'Rondo Glasses',
   level: 26,
   category: 'eyes',
@@ -659,7 +628,6 @@ const rondoGlasses: Accessory = {
 const hackerGlasses: Accessory = {
   id: 'eyes_eyes_glasses_hacker',
   description: 'Booting into the mainframe...',
-  fileName: 'eyes_eyes_glasses_hacker.gltf',
   label: 'Hacker Glasses',
   level: 33,
   category: 'eyes',
@@ -682,7 +650,6 @@ const hackerGlasses: Accessory = {
 const holoLens: Accessory = {
   id: 'eyes_eyes_holovisor',
   description: 'Unlock mixed reality experiences with this 5lb headset.',
-  fileName: 'eyes_eyes_holovisor.gltf',
   label: 'Hololens',
   level: 42,
   category: 'eyes',
@@ -697,7 +664,6 @@ const holoLens: Accessory = {
 const monocle: Accessory = {
   id: 'eyes_eyes_monocle',
   description: 'Hmm.....',
-  fileName: 'eyes_eyes_monocle.gltf',
   label: 'Monocle',
   level: 42,
   category: 'eyes',
@@ -718,8 +684,6 @@ const nounish: Accessory = {
   id: 'eyes_eyes_nounish',
   description: '!vibe',
   label: 'Nounish Glasses',
-  fileName: 'nounish.fbx',
-  textureUrl: '3DblueRedLogo.png',
   level: 100,
   category: 'eyes',
   slot: 'Eyes',
@@ -732,9 +696,7 @@ const nounish: Accessory = {
   validator: ({ hasNouns }) => hasNouns,
   offset: {
     position: {
-      x: 0.7,
-      y: 7.25,
-      z: 9.75,
+      y: 1.25,
     },
   },
 };
@@ -742,8 +704,6 @@ const nounish: Accessory = {
 const overTheTops: Accessory = {
   id: 'eyes_eyes_overthetop',
   description: 'The hardest sunglasses design of all time.',
-  fileName: 'overthetop.fbx',
-  textureUrl: 'overthetop.jpg',
   label: 'Over The Tops',
   rarity: 'legendary',
   level: 101,
@@ -755,12 +715,11 @@ const overTheTops: Accessory = {
   },
   offset: {
     position: {
-      x: 1.09,
-      y: 11.1,
-      z: 4.76,
+      y: 0.3,
+      z: 1.15,
     },
     rotation: {
-      x: -0.09,
+      x: -0.15,
     },
   },
 };

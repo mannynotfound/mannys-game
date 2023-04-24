@@ -1,11 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Group, Mesh, MeshPhongMaterial, Object3D } from 'three';
-import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
+import { Group, Object3D } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { TextureLoader } from 'three/src/loaders/TextureLoader';
 import type { Offset, Slot } from '@/fixtures/accessories';
 import { allAccessories, slot2BoneMap, slots } from '@/fixtures/accessories';
-import { ACCESSORIES_HOST, MODELS_HOST } from '@/utils/constants';
+import { ACCESSORIES_HOST } from '@/utils/constants';
 
 interface ModelsCache {
   [accessoryId: string]: Group;
@@ -42,10 +40,11 @@ export default function useAccessories(
       const accCfg = allAccessories.find((a) => a.id === accId);
       if (accCfg === undefined) return;
 
-      const { offset = {}, fileName, slot } = accCfg;
+      const { offset = {}, id, slot } = accCfg;
       const { scale = {}, position = {}, rotation = {} } = offset;
 
       const handleModel = (model: Group) => {
+        model.scale.set(scale.x ?? 100, scale.y ?? 100, scale.z ?? 100);
         model.position.set(
           datData?.position?.x ?? position.x ?? 0,
           datData?.position?.y ?? position.y ?? 0,
@@ -60,45 +59,9 @@ export default function useAccessories(
         return model;
       };
 
-      // TODO: remove fbx loader
-      if (fileName.endsWith('fbx')) {
-        const loader = new FBXLoader();
-        loader.load(`${MODELS_HOST}/${fileName}`, (model) => {
-          model = handleModel(model);
-          model.scale.set(scale.x ?? 1, scale.y ?? 1, scale.z ?? 1);
-          // TODO: remove
-          if (accCfg.textureUrl) {
-            const textureLoader = new TextureLoader();
-            textureLoader.load(
-              `${MODELS_HOST}/${accCfg.textureUrl}`,
-              (texture) => {
-                model.traverse((child) => {
-                  const childMesh = child as Mesh;
-                  if (childMesh.isMesh) {
-                    childMesh.material = new MeshPhongMaterial({
-                      map: texture,
-                    });
-                  }
-                });
-                setModels((prev) => ({
-                  ...prev,
-                  [accId]: {
-                    model,
-                    slot,
-                  },
-                }));
-              }
-            );
-          }
-        });
-
-        return;
-      }
-
       // already loaded, just apply new offset if any
       if (modelsCache.current[accId] !== undefined) {
         const model = handleModel(modelsCache.current[accId]);
-        model.scale.set(scale.x ?? 100, scale.y ?? 100, scale.z ?? 100);
         setModels((prev) => ({
           ...prev,
           [accId]: {
@@ -109,10 +72,9 @@ export default function useAccessories(
       } else {
         // load model for first time
         const loader = new GLTFLoader();
-        loader.load(`${ACCESSORIES_HOST}/${fileName}`, (gltf) => {
+        loader.load(`${ACCESSORIES_HOST}/${id}.gltf`, (gltf) => {
           const innerModel = gltf.scene;
           const model = handleModel(innerModel);
-          model.scale.set(scale.x ?? 100, scale.y ?? 100, scale.z ?? 100);
           // save in cache
           modelsCache.current[accId] = model;
           setModels((prev) => ({
