@@ -719,6 +719,7 @@ const nounish: Accessory = {
   description: '!vibe',
   label: 'Nounish Glasses',
   fileName: 'nounish.fbx',
+  textureUrl: '3DblueRedLogo.png',
   level: 100,
   category: 'eyes',
   slot: 'Eyes',

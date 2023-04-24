@@ -9,6 +9,7 @@ export { default as MANNY_ABI } from '@/fixtures/contracts/MANNYSGAMEabi';
 const AWS_BASE = 'https://mannys-game.s3.us-east-1.amazonaws.com';
 export const TEXTURES_HOST = `${AWS_BASE}/textures-small`;
 export const MODELS_HOST = `${AWS_BASE}/models`;
+export const ACCESSORIES_HOST = `${AWS_BASE}/accessories`;
 export const MANNY_TEXTURE_DEFAULT = `${TEXTURES_HOST}/1.jpg`;
 export const MANNY_FBX =
   'https://d2tm2f4d5v0kas.cloudfront.net/Manny_3.0.0.fbx';

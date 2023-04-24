@@ -1,22 +1,22 @@
-// TODO: bake a lot of this functionality into Manny module
-import { useEffect, useMemo } from 'react';
-import { useFBX } from '@react-three/drei';
-import { useLoader } from '@react-three/fiber';
-import { Mesh, MeshPhongMaterial, Object3D } from 'three';
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { Group, Mesh, MeshPhongMaterial, Object3D } from 'three';
+import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { TextureLoader } from 'three/src/loaders/TextureLoader';
 import type { Offset, Slot } from '@/fixtures/accessories';
 import { allAccessories, slot2BoneMap, slots } from '@/fixtures/accessories';
-import { MODELS_HOST } from '@/utils/constants';
+import { ACCESSORIES_HOST, MODELS_HOST } from '@/utils/constants';
 
-// cache for loaded models
-const accessoryModels: {
+interface ModelsCache {
+  [accessoryId: string]: Group;
+}
+
+interface ModelsState {
   [accessoryId: string]: {
-    model: Object3D;
+    model: Group;
     slot: Slot;
   };
-} = {};
+}
 
 export default function useAccessories(
   mannyObj: Object3D,
@@ -25,13 +25,19 @@ export default function useAccessories(
   },
   datData?: Offset
 ) {
-  const selectedAccessories = Object.values(accessories ?? {}).reduce(
-    (a, b) => a.concat(b),
-    [] as string[]
+  const selectedAccessories = useMemo(
+    () =>
+      Object.values(accessories ?? {}).reduce(
+        (a, b) => a.concat(b),
+        [] as string[]
+      ),
+    [accessories]
   );
 
-  // load any selected accessories
-  const models = useMemo(() => {
+  const modelsCache = useRef<ModelsCache>({});
+  const [models, setModels] = useState<ModelsState>({});
+
+  useEffect(() => {
     selectedAccessories.forEach((accId) => {
       const accCfg = allAccessories.find((a) => a.id === accId);
       if (accCfg === undefined) return;
@@ -39,70 +45,90 @@ export default function useAccessories(
       const { offset = {}, fileName, slot } = accCfg;
       const { scale = {}, position = {}, rotation = {} } = offset;
 
-      // TODO: remove fbx loader, rewrite to not be inside callback
-      /* eslint-disable react-hooks/rules-of-hooks */
-      let model;
-      if (accessoryModels[accId]) {
-        model = accessoryModels[accId].model;
-      } else {
-        model = fileName.endsWith('fbx')
-          ? useFBX(`${MODELS_HOST}/${fileName}`)
-          : useLoader(
-              GLTFLoader,
-              fileName
-                ? `https://mannys-game.s3.amazonaws.com/accessories/${fileName}`
-                : `${MODELS_HOST}/${accId}.glb`,
-              (loader) => {
-                const dracoLoader = new DRACOLoader();
-                dracoLoader.setDecoderPath('/draco/gltf/');
-                (loader as GLTFLoader).setDRACOLoader(dracoLoader);
-              }
-            ).scene;
-      }
-
-      model.position.set(
-        datData?.position?.x ?? position.x ?? 0,
-        datData?.position?.y ?? position.y ?? 0,
-        datData?.position?.z ?? position.z ?? 0
-      );
-      model.rotation.set(
-        datData?.rotation?.x ?? rotation.x ?? 0,
-        datData?.rotation?.y ?? rotation.y ?? 0,
-        datData?.rotation?.z ?? rotation.z ?? 0
-      );
-
-      // TODO: remove logic, default to 100
-      const defaultScale = accCfg.fileName.endsWith('gltf') ? 100 : 1;
-      model.scale.set(
-        scale.x ?? defaultScale,
-        scale.y ?? defaultScale,
-        scale.z ?? defaultScale
-      );
-
-      // TODO: remove
-      if (accCfg.textureUrl) {
-        const texture = useLoader(
-          TextureLoader,
-          `${MODELS_HOST}/${accCfg.textureUrl}`
+      const handleModel = (model: Group) => {
+        model.position.set(
+          datData?.position?.x ?? position.x ?? 0,
+          datData?.position?.y ?? position.y ?? 0,
+          datData?.position?.z ?? position.z ?? 0
         );
-        model.traverse((child) => {
-          const childMesh = child as Mesh;
-          if (childMesh.isMesh) {
-            childMesh.material = new MeshPhongMaterial({ map: texture });
+        model.rotation.set(
+          datData?.rotation?.x ?? rotation.x ?? 0,
+          datData?.rotation?.y ?? rotation.y ?? 0,
+          datData?.rotation?.z ?? rotation.z ?? 0
+        );
+
+        return model;
+      };
+
+      // TODO: remove fbx loader
+      if (fileName.endsWith('fbx')) {
+        const loader = new FBXLoader();
+        loader.load(`${MODELS_HOST}/${fileName}`, (model) => {
+          model = handleModel(model);
+          model.scale.set(scale.x ?? 1, scale.y ?? 1, scale.z ?? 1);
+          // TODO: remove
+          if (accCfg.textureUrl) {
+            const textureLoader = new TextureLoader();
+            textureLoader.load(
+              `${MODELS_HOST}/${accCfg.textureUrl}`,
+              (texture) => {
+                model.traverse((child) => {
+                  const childMesh = child as Mesh;
+                  if (childMesh.isMesh) {
+                    childMesh.material = new MeshPhongMaterial({
+                      map: texture,
+                    });
+                  }
+                });
+                setModels((prev) => ({
+                  ...prev,
+                  [accId]: {
+                    model,
+                    slot,
+                  },
+                }));
+              }
+            );
           }
         });
+
+        return;
       }
 
-      accessoryModels[accId] = {
-        model,
-        slot,
-      };
+      // already loaded, just apply new offset if any
+      if (modelsCache.current[accId] !== undefined) {
+        const model = handleModel(modelsCache.current[accId]);
+        model.scale.set(scale.x ?? 100, scale.y ?? 100, scale.z ?? 100);
+        setModels((prev) => ({
+          ...prev,
+          [accId]: {
+            model,
+            slot,
+          },
+        }));
+      } else {
+        // load model for first time
+        const loader = new GLTFLoader();
+        loader.load(`${ACCESSORIES_HOST}/${fileName}`, (gltf) => {
+          const innerModel = gltf.scene;
+          const model = handleModel(innerModel);
+          model.scale.set(scale.x ?? 100, scale.y ?? 100, scale.z ?? 100);
+          // save in cache
+          modelsCache.current[accId] = model;
+          setModels((prev) => ({
+            ...prev,
+            [accId]: {
+              model,
+              slot,
+            },
+          }));
+        });
+      }
     });
-
-    return accessoryModels;
   }, [selectedAccessories, datData]);
 
   // add remove / accessories to bones as they're changed
+  // TODO: bake a lot of this functionality into Manny module
   useEffect(() => {
     const childrenToRemove: Object3D[] = [];
     slots.forEach((slot) => {
