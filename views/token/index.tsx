@@ -5,7 +5,6 @@ import { getTokenProps } from '@/utils';
 import { MANNY_TEXTURE_DEFAULT } from '@/utils/constants';
 import { AppProps, TokenId } from '@/utils/types';
 import Footer from '@/views/token/Footer';
-import ToadzGame from '@/views/token/Quests/ToadzGame';
 import Scene from '@/views/token/Scene';
 import BagTools from '@/views/token/Tools/Bag';
 import CameraTools from '@/views/token/Tools/Camera';
@@ -30,7 +29,6 @@ function Token(props: Props) {
     cameraOpen,
     imageUploadOpen,
     accessories,
-    questMode,
     mood,
     textureHD,
   } = tokenState;
@@ -46,7 +44,6 @@ function Token(props: Props) {
         paused={paused}
         textureHD={textureHD}
         zoomedIn={zoomedIn}
-        questMode={questMode}
       />
       <Footer
         account={props.web3.account}
@@ -74,7 +71,6 @@ function Token(props: Props) {
           tokenId={tokenId}
         />
       )}
-      {questMode === 'toadz' && <ToadzGame />}
       {imageUploadOpen && <ImageUpload tokenId={tokenId} />}
     </>
   );

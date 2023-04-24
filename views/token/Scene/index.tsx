@@ -7,7 +7,6 @@ import { CameraZoom, Controls, Lighting, Manny } from '@/components/three';
 import type { Offset } from '@/fixtures/accessories';
 import { getTextureURL } from '@/utils';
 import type { TokenId } from '@/utils/types';
-import AsciiRenderer from '@/views/token/Quests/AsciiRenderer';
 import { AccessoryGUI } from '../Debug';
 
 type Props = {
@@ -21,7 +20,6 @@ type Props = {
   paused: boolean;
   textureHD: boolean;
   zoomedIn: boolean;
-  questMode: string | undefined;
 };
 
 const zoomedInCameraPosition = [5, 72, 52];
@@ -37,7 +35,6 @@ export default function Scene({
   paused,
   textureHD,
   zoomedIn,
-  questMode,
 }: Props) {
   const router = useRouter();
   const { debug } = router.query;
@@ -95,7 +92,6 @@ export default function Scene({
           ogCameraPosition={ogCameraPosition}
         />
         <Lighting />
-        {questMode === 'corruption' && <AsciiRenderer invert />}
         <Environment preset="warehouse" />
       </Canvas>
       {debug !== undefined && (

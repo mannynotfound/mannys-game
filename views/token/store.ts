@@ -7,7 +7,7 @@ import reducer from '@/views/token/reducer';
 // defaults to localStorage for web
 
 const persistConfig = {
-  key: 'mg-tokens-v1',
+  key: 'mg-tokens-v2',
   storage,
 };
 

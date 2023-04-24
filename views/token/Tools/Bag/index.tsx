@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useAppDispatch } from '@/views/token/hooks';
 import type { Account, TokenId } from '@/utils/types';
 import AccessoryItems from '@/views/token/Tools/Bag/AccessoryItems';
-import QuestItems from '@/views/token/Tools/Bag/QuestItems';
 import Tooltip, { BagTooltip } from '@/views/token/Tools/Bag/Tooltip';
 import { TokenState, toggleBagOpen } from '@/views/token/reducer';
 
@@ -41,7 +40,6 @@ export default function Bag({ tokenId, account, accessories }: Props) {
           accessories={accessories}
           setTooltip={setTooltip}
         />
-        <QuestItems tokenId={tokenId} setTooltip={setTooltip} />
       </div>
       <Tooltip tooltip={tooltip} />
     </div>

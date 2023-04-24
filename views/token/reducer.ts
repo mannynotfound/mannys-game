@@ -5,7 +5,6 @@ export interface TokenState {
   bagOpen: boolean;
   cameraOpen: boolean;
   imageUploadOpen: boolean;
-  questMode?: string;
   accessories?: {
     [slot: string]: string[];
   };
@@ -26,7 +25,6 @@ export const initialState: TokenState = {
   bagOpen: false,
   cameraOpen: false,
   imageUploadOpen: false,
-  questMode: undefined,
   accessories: undefined,
   mood: 'idle',
   camera: {
@@ -150,15 +148,6 @@ const tokensSlice = createSlice({
           ...state[tokenId].accessories,
           [slot]: newAccessories,
         };
-      })
-      .addCase(setQuestMode, (state, action) => {
-        const { tokenId, value } = action.payload;
-        if (!state[tokenId]) state[tokenId] = initialState;
-        state[tokenId].bagOpen =
-          value === 'toadz' ? false : state[tokenId].bagOpen;
-        state[tokenId].cameraOpen = false;
-        state[tokenId].questMode =
-          state[tokenId].questMode === value ? undefined : value;
       });
   },
 });

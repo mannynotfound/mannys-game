@@ -4,4 +4,3 @@ build/
 public/
 node_modules/
 contracts/
-views/token/Quests/Frogger.ts
