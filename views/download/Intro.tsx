@@ -1,4 +1,6 @@
 import { RefObject } from 'react';
+import archiveIcon from '@/public/misc/icon-archive.png';
+import Image from 'next/image';
 import { twMerge } from 'tailwind-merge';
 import { License, Sponsors, Stars, Version } from '@/components/Svg';
 
@@ -84,11 +86,10 @@ export default function Intro({ getStartedRef, downloadRef }: Props) {
                 'bg-gray-code rounded-lg text-center h-16 mt-4'
               )}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 className="h-12 w-auto mr-2"
                 alt="archive icon"
-                src="/misc/icon-archive.png"
+                src={archiveIcon}
               />{' '}
               <span>Manny.fbx</span>
             </a>

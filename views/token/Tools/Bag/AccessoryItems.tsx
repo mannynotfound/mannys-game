@@ -1,5 +1,4 @@
 import useSWR from 'swr';
-import { useProvider } from 'wagmi';
 import { Accessory, allAccessories } from '@/fixtures/accessories';
 import useFWB from '@/hooks/useFWB';
 import useLoot from '@/hooks/useLoot';
@@ -28,7 +27,6 @@ export default function AccessoryItems({
   setTooltip,
 }: Props) {
   const dispatch = useAppDispatch();
-  const provider = useProvider();
   const address = account?.address;
 
   const { data: achievements } = useSWR<AchievementEarnedObject[]>(
@@ -36,9 +34,9 @@ export default function AccessoryItems({
     fetcher
   );
 
-  const hasFWB = useFWB(provider, address);
-  const hasNouns = useNounish(provider, address);
-  const { hasLoot, hasMLoot } = useLoot(provider, address);
+  const hasFWB = useFWB(address);
+  const hasNouns = useNounish(address);
+  const { hasLoot, hasMLoot } = useLoot(address);
   const getItemEnabled = (accessory: Accessory) => {
     if (
       accessory.validator === undefined ||

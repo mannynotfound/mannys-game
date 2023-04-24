@@ -1,4 +1,3 @@
-import type { Contract } from 'ethers';
 import Chat from '@/components/Chat';
 import type { Account, Token, TokenId } from '@/utils/types';
 import Info from '@/views/token/Footer/Info';
@@ -7,7 +6,6 @@ import ToolsMenu from '@/views/token/Tools/Menu';
 type Props = {
   account: Account;
   mannys: Token[];
-  mannyContract: Contract;
   bagOpen: boolean;
   cameraOpen: boolean;
   tokenId: TokenId;
@@ -17,7 +15,6 @@ type Props = {
 export default function Footer({
   account,
   mannys,
-  mannyContract,
   bagOpen,
   cameraOpen,
   tokenId,
@@ -32,11 +29,7 @@ export default function Footer({
         <div
           className={`flex-1 flex items-center justify-center text-center select-none`}
         >
-          <Info
-            tokenId={tokenId}
-            account={account}
-            mannyContract={mannyContract}
-          />
+          <Info tokenId={tokenId} account={account} />
         </div>
       )}
       <div className="flex-1 flex items-center text-right">

@@ -1,4 +1,3 @@
-import { useProvider } from 'wagmi';
 import useLoot from '@/hooks/useLoot';
 import { useAppDispatch } from '@/views/token/hooks';
 import { getTokenProps } from '@/utils';
@@ -14,8 +13,7 @@ type Props = {
 export default function OptionMood({ account, tokenId, mood }: Props) {
   const dispatch = useAppDispatch();
   const animationName = getTokenProps(tokenId)?.animationName;
-  const provider = useProvider();
-  const { hasLoot, hasMLoot } = useLoot(provider, account?.address);
+  const { hasLoot, hasMLoot } = useLoot(account?.address);
 
   return (
     <div className="flex w-full justify-between mb-2">

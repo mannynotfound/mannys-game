@@ -1,4 +1,3 @@
-import type { Contract } from 'ethers';
 import { useRouter } from 'next/router';
 import { useEnsName } from 'wagmi';
 import useTokenOwner from '@/hooks/useTokenOwner';
@@ -41,13 +40,12 @@ const Owner = ({ account, tokenId, tokenOwner }: OwnerProps) => {
 
 type Props = {
   account: Account;
-  mannyContract: Contract;
   tokenId: TokenId;
 };
 
-export default function Info({ account, mannyContract, tokenId }: Props) {
+export default function Info({ account, tokenId }: Props) {
   const router = useRouter();
-  const tokenOwner = useTokenOwner(mannyContract, tokenId);
+  const tokenOwner = useTokenOwner(tokenId);
   if (!tokenId) {
     const input = router.query.tokenId;
     return (

@@ -1,4 +1,6 @@
 import { useMemo } from 'react';
+import daoLogo from '@/public/misc/mannyDAOlogo.svg';
+import Image from 'next/image';
 import { useBalance } from 'wagmi';
 import { LinkOut } from '@/components/Svg';
 import useExchangePrice from '@/hooks/useExchangePrice';
@@ -39,12 +41,7 @@ export default function Holdings() {
   return (
     <div className="p-8 text-left">
       <div className="mb-4">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          className="w-4/5"
-          alt="manny dao logo"
-          src="/misc/mannyDAOlogo.svg"
-        />
+        <Image className="w-4/5" alt="manny dao logo" src={daoLogo} />
       </div>
       <h2 className="color-[darkgray]">
         The treasury for Mannys holders everywhere, focused on collecting and

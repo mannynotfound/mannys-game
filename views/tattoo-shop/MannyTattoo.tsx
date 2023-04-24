@@ -9,9 +9,7 @@ import {
 } from 'react';
 import { useTexture } from '@react-three/drei';
 import { useThree } from '@react-three/fiber';
-// TODO: add types to manny module
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
+// @ts-expect-error: add types to manny module
 import manny from 'manny';
 import {
   BufferAttribute,

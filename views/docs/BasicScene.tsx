@@ -1,7 +1,6 @@
 import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
+// @ts-expect-error: add types to manny module
 import manny from 'manny';
 
 const Manny = () => {

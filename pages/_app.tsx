@@ -20,7 +20,7 @@ const client = createClient(
 
 function Body({ Component, pageProps }: AppProps) {
   const web3 = useWeb3();
-  const mannys = useMannys(web3.mannyContract, web3.account.address);
+  const mannys = useMannys(web3.account.address);
 
   return <Component {...pageProps} web3={web3} mannys={mannys} />;
 }

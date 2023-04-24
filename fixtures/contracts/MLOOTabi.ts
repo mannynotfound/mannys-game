@@ -310,4 +310,4 @@ export default [
     stateMutability: 'nonpayable',
     type: 'function',
   },
-];
+] as const;

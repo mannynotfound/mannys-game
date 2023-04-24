@@ -1,5 +1,4 @@
 import type { GetAccountResult } from '@wagmi/core';
-import type { Contract } from 'ethers';
 import type { TokenId } from '@/utils/types/token';
 
 export * from '@/utils/types/token';
@@ -435,7 +434,6 @@ export const SkinsConfig: Record<Skin, SkinOptions> = {
 
 export type Web3 = {
   account: Account;
-  mannyContract: Contract;
 };
 
 export interface AppProps {

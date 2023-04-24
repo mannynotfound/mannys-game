@@ -51,7 +51,6 @@ function Token(props: Props) {
       <Footer
         account={props.web3.account}
         mannys={props.mannys ?? []}
-        mannyContract={props.web3.mannyContract}
         tokenId={tokenId}
         zoomedIn={zoomedIn}
         bagOpen={bagOpen}

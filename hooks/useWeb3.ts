@@ -1,11 +1,4 @@
-import {
-  useAccount,
-  useContract,
-  useEnsAvatar,
-  useEnsName,
-  useProvider,
-} from 'wagmi';
-import { MANNY_ABI, MANNY_CONTRACT } from 'utils/constants';
+import { useAccount, useEnsAvatar, useEnsName } from 'wagmi';
 
 export default function useWeb3() {
   const accountData = useAccount();
@@ -15,15 +8,8 @@ export default function useWeb3() {
     ...accountData,
     ens: { name, avatar },
   };
-  const provider = useProvider();
-  const mannyContract = useContract({
-    address: MANNY_CONTRACT,
-    abi: MANNY_ABI,
-    signerOrProvider: provider,
-  });
 
   return {
     account,
-    mannyContract,
   };
 }

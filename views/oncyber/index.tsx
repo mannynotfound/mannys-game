@@ -1,7 +1,10 @@
 import { useState } from 'react';
+import logo from '@/public/logo.png';
+import onCyberLogo from '@/public/logos/oncyber.png';
 import b64ToBlob from 'b64-to-blob';
 import { ConnectKitButton } from 'connectkit';
 import fileSaver from 'file-saver';
+import Image from 'next/image';
 import { useSignMessage } from 'wagmi';
 import Button from '@/components/Button';
 import { API_URL } from '@/utils/constants';
@@ -107,18 +110,16 @@ export default function OnCyber(props: AppProps) {
   return (
     <div className="p-8 rounded-xl bg-black bg-opacity-75">
       <div className="flex items-center justify-center mb-10">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           className="mr-4 h-[80px] w-auto"
           alt="mannys game logo"
-          src="/logo.png"
+          src={logo}
         />{' '}
         <span className="text-3xl opacity-50">X</span>{' '}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           className="ml-4 h-[70px] w-auto"
           alt="oncyber logo"
-          src="/logos/oncyber.png"
+          src={onCyberLogo}
         />
       </div>
       <div className="flex flex-col gap-y-4">

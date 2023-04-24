@@ -1,28 +1,15 @@
-import { useEffect, useState } from 'react';
-import type { Contract } from 'ethers';
-import type { EthAddress } from '@/utils/types';
+import { BigNumber } from 'ethers';
+import { useContractRead } from 'wagmi';
+import mannysGameAbi from '@/fixtures/contracts/MANNYSGAMEabi';
+import { MANNY_CONTRACT } from '@/utils/constants';
 
-export default function useTokenOwner(
-  mannyContract: Contract,
-  tokenId: number
-) {
-  const [tokenOwner, setTokenOwner] = useState<EthAddress>();
-
-  useEffect(() => {
-    const checkOwner = async () => {
-      if (mannyContract?.ownerOf && tokenId && tokenId <= 1616) {
-        try {
-          const tO: EthAddress = await mannyContract.ownerOf(tokenId);
-          setTokenOwner(tO);
-        } catch (e) {
-          console.error(e);
-        }
-      }
-    };
-
-    checkOwner();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tokenId, mannyContract?.ownerOf]);
+export default function useTokenOwner(tokenId: number) {
+  const { data: tokenOwner } = useContractRead({
+    address: MANNY_CONTRACT,
+    abi: mannysGameAbi,
+    functionName: 'ownerOf',
+    args: [BigNumber.from(tokenId)],
+  });
 
   return tokenOwner;
 }

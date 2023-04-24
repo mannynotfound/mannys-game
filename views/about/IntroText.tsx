@@ -10,7 +10,6 @@ export default function HoverText({ text }: Props) {
   return (
     <div className="flex items-center justify-center float">
       <h1 className="flex flex-wrap items-center justify-left tilt text-[64px] leading-none">
-        {/* eslint-disable react/no-array-index-key */}
         {text.split(' ').map((word, i, arr) => (
           <span className="flex" key={`${word}-${i}`}>
             {word.split('').map((letter, j) => {

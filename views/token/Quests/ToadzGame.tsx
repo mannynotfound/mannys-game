@@ -2,7 +2,7 @@ export default function QuestMode() {
   return (
     <div
       id="frogger-game"
-      className="fixed inset-0 flex items-center justify-center"
+      className="fixed inset-0 flex items-center justify-center hidden"
     >
       <div className="relative w-[480px] h-[640px]">
         <canvas
