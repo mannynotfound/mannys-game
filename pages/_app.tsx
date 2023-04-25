@@ -13,8 +13,7 @@ import { INFURA_ID } from '@/utils/constants';
 const client = createClient(
   getDefaultClient({
     appName: 'mannys.game',
-    // infuraId: INFURA_ID,
-    alchemyId: 'PjT72qifrAFZ4WV_drrd30N5onftY5VA',
+    infuraId: INFURA_ID,
     chains: [mainnet],
   })
 );
