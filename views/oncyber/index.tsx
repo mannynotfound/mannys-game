@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import logo from '@/public/logo.png';
 import onCyberLogo from '@/public/logos/oncyber.png';
+import { ConnectKitButton } from '@jmoxey/connectkit';
 import b64ToBlob from 'b64-to-blob';
-import { ConnectKitButton } from 'connectkit';
 import fileSaver from 'file-saver';
 import Image from 'next/image';
 import { useSignMessage } from 'wagmi';

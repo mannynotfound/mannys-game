@@ -1,6 +1,6 @@
 import { ChangeEvent, Dispatch, useState } from 'react';
-import { ethers } from 'ethers';
-import { useSigner } from 'wagmi';
+import { parseEther, stringToHex } from 'viem';
+import { useWalletClient } from 'wagmi';
 import Button from '@/components/Button';
 import { Account, Token } from '@/utils/types';
 import TattooEditor from '@/views/tattoo-shop/TattooEditor';
@@ -171,7 +171,7 @@ export const StepFour = ({
   label,
   jobType,
 }: StepFourProps) => {
-  const { data: signer } = useSigner();
+  const { data: walletClient } = useWalletClient();
   const [tip, setTip] = useState('');
   const [note, setNote] = useState('');
   const [voucherCode, setVoucherCode] = useState('');
@@ -275,16 +275,17 @@ export const StepFour = ({
                   <Button
                     className="w-full block py-[6px] px-[18px]"
                     onClick={async () => {
-                      if (!signer) {
-                        alert('Error getting account signer...');
+                      if (!walletClient) {
+                        alert('Error getting account...');
                         return;
                       }
-                      signer
+                      walletClient
                         .sendTransaction({
-                          to: 'mannynotdev.eth',
-                          value: ethers.utils.parseEther(`${total}`),
-                          data: ethers.utils.formatBytes32String(
-                            `${code}:${chosenManny}${note ? `:${note}` : ''}`
+                          to: '0xEca3B7627DEef983A4D4EEE096B0B33A2D880429',
+                          value: parseEther(`${total}`),
+                          data: stringToHex(
+                            `${code}:${chosenManny}${note ? `:${note}` : ''}`,
+                            { size: 32 }
                           ),
                         })
                         .then(() => {

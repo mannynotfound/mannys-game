@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Fade from 'react-reveal/Fade';
 import Pulse from 'react-reveal/Pulse';
-import { ConnectKitButton } from 'connectkit';
+import { ConnectKitButton } from '@jmoxey/connectkit';
 import Image from 'next/image';
 import Link from 'next/link';
 import { twMerge } from 'tailwind-merge';

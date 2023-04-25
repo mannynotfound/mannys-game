@@ -7,6 +7,7 @@ export default function useMannys(address: EthAddress): Token[] | undefined {
   const { data: allTokens } = useContractRead({
     address: MANNY_CONTRACT,
     abi: mannysGameAbi,
+    enabled: address !== undefined,
     functionName: 'tokensByOwner',
     args: address !== undefined ? [address] : undefined,
   });

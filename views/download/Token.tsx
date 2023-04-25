@@ -1,6 +1,6 @@
 import { useState } from 'react';
+import { ConnectKitButton } from '@jmoxey/connectkit';
 import b64ToBlob from 'b64-to-blob';
-import { ConnectKitButton } from 'connectkit';
 import fileSaver from 'file-saver';
 import { twMerge } from 'tailwind-merge';
 import { useSignMessage } from 'wagmi';
