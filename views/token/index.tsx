@@ -1,5 +1,6 @@
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import { twMerge } from 'tailwind-merge';
 import { useAppSelector } from '@/views/token/hooks';
 import { getTokenProps } from '@/utils';
 import { MANNY_TEXTURE_DEFAULT } from '@/utils/constants';
@@ -33,6 +34,8 @@ function Token(props: Props) {
     textureHD,
   } = tokenState;
 
+  const toolsClasses = 'absolute right-0 bottom-[140px] select-none text-green';
+
   return (
     <>
       <Scene
@@ -53,15 +56,17 @@ function Token(props: Props) {
         bagOpen={bagOpen}
         cameraOpen={cameraOpen}
       />
-      {bagOpen && (
+      <div className={twMerge(toolsClasses, cameraOpen && 'hidden')}>
         <BagTools
+          bagOpen={bagOpen}
           account={props.web3.account}
           tokenId={tokenId}
           accessories={accessories}
         />
-      )}
-      {cameraOpen && (
+      </div>
+      <div className={twMerge(toolsClasses, bagOpen && 'hidden')}>
         <CameraTools
+          cameraOpen={cameraOpen}
           account={props.web3.account}
           mood={mood}
           bgColor={bgColor}
@@ -70,7 +75,7 @@ function Token(props: Props) {
           textureHD={textureHD}
           tokenId={tokenId}
         />
-      )}
+      </div>
       {imageUploadOpen && <ImageUpload tokenId={tokenId} />}
     </>
   );

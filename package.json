@@ -23,6 +23,7 @@
     "connectkit": "^1.2.0",
     "ethers": "^5",
     "file-saver": "^2.0.5",
+    "framer-motion": "^10.12.4",
     "manny": "^3.2.3",
     "next": "13.1.6",
     "react": "18.2.0",
@@ -60,10 +61,10 @@
     "eslint-config-next": "13.1.6",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.0",
     "postcss": "^8.4.21",
     "prettier": "^2.8.4",
     "tailwindcss": "^3.2.7",
-    "typescript": "^4.9.5",
-    "husky": "^8.0.0"
+    "typescript": "^4.9.5"
   }
 }

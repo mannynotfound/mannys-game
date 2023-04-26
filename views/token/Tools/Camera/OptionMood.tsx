@@ -16,7 +16,7 @@ export default function OptionMood({ account, tokenId, mood }: Props) {
   const { hasLoot, hasMLoot } = useLoot(account?.address);
 
   return (
-    <div className="flex w-full justify-between mb-2">
+    <div className="flex w-full justify-between">
       <div className="flex items-center">
         <b>MOOD</b>
       </div>

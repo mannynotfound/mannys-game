@@ -7,7 +7,7 @@ type Props = {
 
 export default function OptionSave({ tokenId }: Props) {
   return (
-    <div className="flex w-full justify-between items-between">
+    <div className="flex w-full justify-between gap-x-2 items-between">
       <Button
         onClick={() => {
           const canvas = document.querySelector('canvas');

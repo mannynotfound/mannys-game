@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { twMerge } from 'tailwind-merge';
 import { Backpack, Camera } from '@/components/Svg';
 import { useAppDispatch } from '@/views/token/hooks';
@@ -28,7 +29,9 @@ export default function Menu({ tokenId, bagOpen, cameraOpen }: Props) {
 
   return (
     <div className="w-full flex items-center justify-end gap-2">
-      <div
+      <motion.button
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
         className={cameraClasses}
         onClick={() =>
           dispatch(
@@ -42,8 +45,10 @@ export default function Menu({ tokenId, bagOpen, cameraOpen }: Props) {
         <div className="flex items-center absolute inset-0">
           <Camera height={30} width={30} className="mx-auto" />
         </div>
-      </div>
-      <div
+      </motion.button>
+      <motion.button
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
         className={bagClasses}
         onClick={() =>
           dispatch(
@@ -55,7 +60,7 @@ export default function Menu({ tokenId, bagOpen, cameraOpen }: Props) {
         }
       >
         <Backpack height={40} width={20} className="mx-auto" />
-      </div>
+      </motion.button>
     </div>
   );
 }

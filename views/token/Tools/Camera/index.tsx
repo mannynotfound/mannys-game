@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from 'framer-motion';
 import { useAppDispatch } from '@/views/token/hooks';
 import type { Account, TokenId } from '@/utils/types';
 import OptionBackground from '@/views/token/Tools/Camera/OptionBackground';
@@ -10,6 +11,7 @@ import OptionZoomed from '@/views/token/Tools/Camera/OptionZoomed';
 import { toggleCameraOpen } from '@/views/token/reducer';
 
 type Props = {
+  cameraOpen: boolean;
   account: Account;
   tokenId: TokenId;
   mood: string;
@@ -20,6 +22,7 @@ type Props = {
 };
 
 export default function Camera({
+  cameraOpen,
   account,
   tokenId,
   mood,
@@ -29,35 +32,68 @@ export default function Camera({
   textureHD,
 }: Props) {
   const dispatch = useAppDispatch();
+  const cameraItems: [React.ElementType, Partial<Props>][] = [
+    [OptionMood, { account, tokenId, mood }],
+    [OptionBackground, { tokenId, bgColor }],
+    [OptionZoomed, { tokenId, zoomedIn }],
+    [OptionPaused, { tokenId, paused }],
+    [OptionTextureHD, { tokenId, textureHD }],
+    [OptionSave, { tokenId }],
+    [OptionEditNFT, { tokenId }],
+  ];
   return (
-    <div className="absolute right-0 px-8 text-green select-none bottom-[200px] max-w-[320px] w-full">
-      <div className="border p-4 border-green rounded-md relative z-10 flex flex-col gap-y-2">
-        <div
-          className="absolute top-0 right-0 text-yellow cursor-pointer z-0"
-          onClick={() =>
-            dispatch(
-              toggleCameraOpen({
-                tokenId,
-                value: false,
-              })
-            )
-          }
+    <AnimatePresence>
+      {cameraOpen && (
+        <motion.div
+          initial={{ height: 0 }}
+          animate={{ height: 'auto' }}
+          exit={{ height: 0, transition: { delay: 0.2 } }}
+          transition={{ duration: 0.25 }}
+          className="max-w-[320px] w-full overflow-hidden px-8"
         >
-          <div className="p-4 pb-0 text-2xl">
-            <b>x</b>
-          </div>
-        </div>
-        <div className="text-yellow text-xl">
-          <b>Camera</b>
-        </div>
-        <OptionMood account={account} tokenId={tokenId} mood={mood} />
-        <OptionBackground tokenId={tokenId} bgColor={bgColor} />
-        <OptionZoomed tokenId={tokenId} zoomedIn={zoomedIn} />
-        <OptionPaused tokenId={tokenId} paused={paused} />
-        <OptionTextureHD tokenId={tokenId} textureHD={textureHD} />
-        <OptionSave tokenId={tokenId} />
-        <OptionEditNFT tokenId={tokenId} />
-      </div>
-    </div>
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: '100%' }}
+            exit={{ width: 0, transition: { delay: 0.2 } }}
+            transition={{ duration: 0.25 }}
+            className="border p-4 pt-[45px] border-green rounded-md relative z-10 flex flex-col gap-y-2 float-right"
+          >
+            <motion.button
+              initial={{ scale: 0 }}
+              animate={{ scale: 1, transition: { delay: 0.4 } }}
+              exit={{ scale: 0 }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="absolute top-0 right-0 text-yellow cursor-pointer z-0"
+              onClick={() =>
+                dispatch(
+                  toggleCameraOpen({
+                    tokenId,
+                    value: false,
+                  })
+                )
+              }
+            >
+              <div className="px-4 pt-1 text-2xl font-bold">x</div>
+            </motion.button>
+            {cameraItems.map(([Component, props], i) => (
+              <div
+                className="flex items-center w-full h-[32px]"
+                key={`ci-${i}`}
+              >
+                <motion.div
+                  className="w-full"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1, transition: { delay: 0.2 } }}
+                  exit={{ scale: 0 }}
+                >
+                  <Component {...props} />
+                </motion.div>
+              </div>
+            ))}
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

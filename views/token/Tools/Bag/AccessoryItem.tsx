@@ -6,7 +6,7 @@ import type { SetTooltipArgs } from '@/views/token/Tools/Bag/Tooltip';
 type Props = {
   accessory: Accessory;
   imageUrl: string;
-  className: string;
+  className?: string;
   isActive: boolean;
   isEnabled: boolean;
   onClick: () => void;
