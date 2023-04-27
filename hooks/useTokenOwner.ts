@@ -1,4 +1,3 @@
-import { BigNumber } from 'ethers';
 import { useContractRead } from 'wagmi';
 import mannysGameAbi from '@/fixtures/contracts/MANNYSGAMEabi';
 import { MANNY_CONTRACT } from '@/utils/constants';
@@ -8,7 +7,7 @@ export default function useTokenOwner(tokenId: number) {
     address: MANNY_CONTRACT,
     abi: mannysGameAbi,
     functionName: 'ownerOf',
-    args: [BigNumber.from(tokenId)],
+    args: [BigInt(tokenId)],
   });
 
   return tokenOwner;

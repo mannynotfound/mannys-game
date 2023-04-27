@@ -2,7 +2,7 @@ import '@/styles/fonts.css';
 import '@/styles/globals.css';
 import '@/styles/misc.css';
 import '@/styles/stars.css';
-import { ConnectKitProvider, getDefaultClient } from 'connectkit';
+import { ConnectKitProvider, getDefaultClient } from '@jmoxey/connectkit';
 import type { AppProps } from 'next/app';
 import { WagmiConfig, createClient, mainnet } from 'wagmi';
 import useMannys from '@/hooks/useMannys';

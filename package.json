@@ -10,6 +10,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@jmoxey/connectkit": "^0.0.0-wagmi-v1.1",
     "@mdx-js/loader": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
     "@next/font": "13.1.6",
@@ -21,7 +22,6 @@
     "@reduxjs/toolkit": "^1.9.3",
     "b64-to-blob": "^1.2.19",
     "connectkit": "^1.2.0",
-    "ethers": "^5",
     "file-saver": "^2.0.5",
     "framer-motion": "^10.12.4",
     "manny": "^3.2.3",
@@ -43,7 +43,8 @@
     "three": "0.143.0",
     "three-stdlib": "2.12.1",
     "use-local-storage": "^2.3.6",
-    "wagmi": "^0.11.7"
+    "viem": "^0.3.11",
+    "wagmi": "0.0.0-20230425081218"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",

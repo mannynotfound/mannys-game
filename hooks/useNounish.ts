@@ -30,9 +30,9 @@ export default function useNounish(address: EthAddress) {
     args: address !== undefined ? [address] : undefined,
   });
 
-  const hasLilNouns = lilNounsBalance !== undefined && lilNounsBalance.gt(0);
-  const hasNouns = nounsBalance !== undefined && nounsBalance.gt(0);
-  const hasToadz = toadzBalance !== undefined && toadzBalance.gt(0);
+  const hasLilNouns = lilNounsBalance !== undefined && lilNounsBalance > 0n;
+  const hasNouns = nounsBalance !== undefined && nounsBalance > 0n;
+  const hasToadz = toadzBalance !== undefined && toadzBalance > 0n;
 
   return hasLilNouns || hasNouns || hasToadz;
 }

@@ -23,8 +23,8 @@ export default function useLoot(address: EthAddress) {
     enabled: address !== undefined,
   });
 
-  const hasLoot = lootBalance !== undefined && lootBalance.gt(0);
-  const hasMLoot = mLootBalance !== undefined && mLootBalance.gt(0);
+  const hasLoot = lootBalance !== undefined && lootBalance > 0n;
+  const hasMLoot = mLootBalance !== undefined && mLootBalance > 0n;
 
   return { hasLoot, hasMLoot };
 }
