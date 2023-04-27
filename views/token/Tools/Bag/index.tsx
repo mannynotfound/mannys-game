@@ -50,7 +50,7 @@ export default function Bag({ bagOpen, tokenId, account, accessories }: Props) {
                 )
               }
             >
-              <div className="p-4 text-2xl font-bold">x</div>
+              <div className="px-4 py-1 text-2xl font-bold">x</div>
             </motion.button>
             <AccessoryItems
               tokenId={tokenId}

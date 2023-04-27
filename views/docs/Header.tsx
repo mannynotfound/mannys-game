@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import Fade from 'react-reveal/Fade';
-import Pulse from 'react-reveal/Pulse';
 import Link from 'next/link';
 import { twMerge } from 'tailwind-merge';
 import { GitHub } from '@/components/Svg';
@@ -36,28 +34,24 @@ export default function Header({
     >
       {menuOpen && (
         <div className="absolute w-full transition-all z-20 left-0 top-[64px]">
-          <Pulse duration={500}>
-            <Fade duration={500}>
-              <div className="w-full h-full">
-                <div className="bg-gray-dark border-2 border-solid border-green p-8">
-                  <div
-                    className="absolute top-0 right-0 text-yellow cursor-pointer p-4 z-0"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    <div className="p-8 text-2xl font-bold">X</div>
-                  </div>
-                  <div className="max-w-[200px]">
-                    <Menu
-                      docsPath={docsPath}
-                      menuCfg={menuCfg}
-                      contentPath={contentPath}
-                      onClick={() => setMenuOpen(false)}
-                    />
-                  </div>
-                </div>
+          <div className="w-full h-full">
+            <div className="bg-gray-dark border-2 border-solid border-green p-8">
+              <div
+                className="absolute top-0 right-0 text-yellow cursor-pointer p-4 z-0"
+                onClick={() => setMenuOpen(false)}
+              >
+                <div className="p-8 text-2xl font-bold">X</div>
               </div>
-            </Fade>
-          </Pulse>
+              <div className="max-w-[200px]">
+                <Menu
+                  docsPath={docsPath}
+                  menuCfg={menuCfg}
+                  contentPath={contentPath}
+                  onClick={() => setMenuOpen(false)}
+                />
+              </div>
+            </div>
+          </div>
         </div>
       )}
       {menuOpen && (

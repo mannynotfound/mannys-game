@@ -6012,13 +6012,6 @@ react-redux@^8.0.5:
     react-is "^18.0.0"
     use-sync-external-store "^1.0.0"
 
-react-reveal@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/react-reveal/-/react-reveal-1.2.2.tgz#f47fbc44debc4c185ae2163a215a9e822c7adfef"
-  integrity sha512-JCv3fAoU6Z+Lcd8U48bwzm4pMZ79qsedSXYwpwt6lJNtj/v5nKJYZZbw3yhaQPPgYePo3Y0NOCoYOq/jcsisuw==
-  dependencies:
-    prop-types "^15.5.10"
-
 react-sticky-mouse-tooltip@^0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/react-sticky-mouse-tooltip/-/react-sticky-mouse-tooltip-0.0.1.tgz#9bf2f03f6168ffd3d9e34f42699979cf643faa80"

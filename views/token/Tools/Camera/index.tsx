@@ -74,7 +74,7 @@ export default function Camera({
                 )
               }
             >
-              <div className="px-4 pt-1 text-2xl font-bold">x</div>
+              <div className="px-4 py-1 text-2xl font-bold">x</div>
             </motion.button>
             {cameraItems.map(([Component, props], i) => (
               <div
@@ -83,7 +83,7 @@ export default function Camera({
               >
                 <motion.div
                   className="w-full"
-                  initial={{ scale: 0 }}
+                  initial={{ scale: 0, transformOrigin: 'right' }}
                   animate={{ scale: 1, transition: { delay: 0.2 } }}
                   exit={{ scale: 0 }}
                 >
