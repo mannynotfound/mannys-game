@@ -34,7 +34,7 @@ function Token(props: Props) {
     textureHD,
   } = tokenState;
 
-  const toolsClasses = 'absolute right-0 bottom-[140px] select-none text-green';
+  const toolsClasses = 'fixed right-0 bottom-[140px] select-none text-green';
 
   return (
     <>
