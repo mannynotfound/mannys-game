@@ -15,54 +15,43 @@ export const MANNY_FBX =
   'https://d2tm2f4d5v0kas.cloudfront.net/Manny_3.0.0.fbx';
 const CLIPS_HOST = 'https://d2tm2f4d5v0kas.cloudfront.net/clips';
 
-const idle = `${CLIPS_HOST}/idle_stand.fbx`;
-const cheering = `${CLIPS_HOST}/cheer.fbx`;
-const agony = `${CLIPS_HOST}/agony.fbx`;
-const bored = `${CLIPS_HOST}/bored.fbx`;
-const ecstatic = `${CLIPS_HOST}/ecstatic.fbx`;
-const drunk = `${CLIPS_HOST}/drunk.fbx`;
-const thankful = `${CLIPS_HOST}/thankful.fbx`;
-const bashful = `${CLIPS_HOST}/bashful.fbx`;
-const cocky = `${CLIPS_HOST}/cocky.fbx`;
-const victory = `${CLIPS_HOST}/cheer.fbx`;
-const spellcast = `${CLIPS_HOST}/spellcast.fbx`;
 const inwardslash = `${CLIPS_HOST}/inwardslash.fbx`;
 const downwardswing = `${CLIPS_HOST}/downwardswing.fbx`;
 const horizontalswing = `${CLIPS_HOST}/horizontalswing.fbx`;
 const thrust = `${CLIPS_HOST}/thrust.fbx`;
 const swordrun = `${CLIPS_HOST}/swordrun.fbx`;
+const spellcast = `${CLIPS_HOST}/spellcast.fbx`;
 const spellcast2h = `${CLIPS_HOST}/spellcast2h.fbx`;
 const battlecry = `${CLIPS_HOST}/battlecry.fbx`;
 const holdingHands = `${CLIPS_HOST}/holdinghandsv2.fbx`;
 const sitidle = `${CLIPS_HOST}/sitidle.fbx`;
-const float = `${CLIPS_HOST}/float.fbx`;
-const teeter = `${CLIPS_HOST}/teeter.fbx`;
-const waving = `${CLIPS_HOST}/waving.fbx`;
 
 export const LIBRARY: {
-  [name: string]: string;
+  [name: string]: {
+    url: string;
+    async?: boolean;
+  };
 } = {
-  idle,
-  cheering,
-  agony,
-  bored,
-  ecstatic,
-  spellcast,
-  drunk,
-  thankful,
-  bashful,
-  cocky,
-  victory,
-  'inward slash': inwardslash,
-  'downward swing': downwardswing,
-  thrust,
-  'horizontal swing': horizontalswing,
-  'sword run': swordrun,
-  'spellcast 2h': spellcast2h,
-  battlecry,
-  holdingHands,
-  sitidle,
-  float,
-  teeter,
-  waving,
+  'inward slash': {
+    url: inwardslash,
+    async: true,
+  },
+  'downward swing': {
+    url: downwardswing,
+    async: true,
+  },
+  thrust: {
+    url: thrust,
+    async: true,
+  },
+  'horizontal swing': {
+    url: horizontalswing,
+    async: true,
+  },
+  'sword run': { url: swordrun, async: true },
+  spellcast: { url: spellcast, async: true },
+  'spellcast 2h': { url: spellcast2h, async: true },
+  battlecry: { url: battlecry, async: true },
+  holdingHands: { url: holdingHands, async: true },
+  sitidle: { url: sitidle, async: true },
 };

@@ -360,3 +360,8 @@
 .react-dat-gui .cr.presets label select {
   width: 100%;
 }
+
+/* weirdly react-select doesnt let us target this container with classNames */
+.indicators-container > div {
+  padding: 2px !important;
+}

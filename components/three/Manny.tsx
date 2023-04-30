@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-// @ts-expect-error: add types to manny module
 import manny from 'manny';
-import { Euler, Group, Vector3 } from 'three';
+import { Euler, Object3D, Vector3 } from 'three';
 import type { Offset } from '@/fixtures/accessories';
 import useAccessories from '@/hooks/useAccessories';
 import { LIBRARY, MANNY_FBX, MANNY_TEXTURE_DEFAULT } from '@/utils/constants';
@@ -13,7 +12,7 @@ type Props = {
   };
   animation?: string;
   paused?: boolean;
-  onLoad?: (manny: Group) => void;
+  onLoad?: (manny: Object3D) => void;
   scale?: number;
   position?: number[];
   rotation?: number[];
@@ -34,18 +33,17 @@ function Manny({
   const [loaded, setLoaded] = useState(false);
 
   const animationOptions = {
-    active: animation,
+    animation,
     paused,
-    // only pass in selected path so initial load doesnt take forever
-    paths: {
-      [animation]: LIBRARY[animation],
+    library: {
+      ...LIBRARY,
     },
   };
 
   const mannyObj = manny({
     modelPath: MANNY_FBX,
     textureUrl,
-    animationOptions,
+    ...animationOptions,
   });
 
   useAccessories(mannyObj, accessories, datData);

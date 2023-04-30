@@ -36,8 +36,8 @@ export default function Camera({
     [OptionMood, { account, tokenId, mood }],
     [OptionBackground, { tokenId, bgColor }],
     [OptionZoomed, { tokenId, zoomedIn }],
-    [OptionPaused, { tokenId, paused }],
     [OptionTextureHD, { tokenId, textureHD }],
+    [OptionPaused, { tokenId, paused }],
     [OptionSave, { tokenId }],
     [OptionEditNFT, { tokenId }],
   ];
@@ -49,7 +49,7 @@ export default function Camera({
           animate={{ height: 'auto' }}
           exit={{ height: 0, transition: { delay: 0.2 } }}
           transition={{ duration: 0.25 }}
-          className="max-w-[320px] w-full overflow-hidden px-8"
+          className="max-w-[446px] w-full overflow-hidden px-8"
         >
           <motion.div
             initial={{ width: 0 }}

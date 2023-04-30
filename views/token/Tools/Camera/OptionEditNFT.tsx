@@ -1,4 +1,4 @@
-import Button from '@/components/Button';
+import { twMerge } from 'tailwind-merge';
 import { useAppDispatch } from '@/views/token/hooks';
 import type { TokenId } from '@/utils/types';
 import { openImageUpload } from '@/views/token/reducer';
@@ -11,13 +11,17 @@ export default function OptionEditNFT({ tokenId }: Props) {
   const dispatch = useAppDispatch();
   return (
     <div className="flex w-full">
-      <Button
-        className="w-full text-center hover:bg-yellow"
-        color="yellow"
+      <button
+        className={twMerge(
+          'button w-full cursor-pointer py-0.5 px-[12px]',
+          `text-white text-center hover:text-gray-dark`,
+          'border border-white rounded-sm',
+          'hover:bg-white'
+        )}
         onClick={() => dispatch(openImageUpload({ tokenId }))}
       >
-        <div className="mt-1">EDIT NFT IMAGE</div>
-      </Button>
+        EDIT NFT IMAGE
+      </button>
     </div>
   );
 }

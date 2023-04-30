@@ -9,7 +9,6 @@ import {
 } from 'react';
 import { useTexture } from '@react-three/drei';
 import { useThree } from '@react-three/fiber';
-// @ts-expect-error: add types to manny module
 import manny from 'manny';
 import {
   BufferAttribute,

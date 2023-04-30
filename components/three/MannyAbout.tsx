@@ -1,36 +1,28 @@
 import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-// @ts-expect-error: add types to manny module
 import manny from 'manny';
 import { Mesh, Vector3 } from 'three';
 import { getTokenProps } from '@/utils';
 import { LIBRARY, MANNY_FBX } from '@/utils/constants';
 import type { TokenId } from '@/utils/types';
 
+export type AboutAnim = 'idle' | 'float' | 'teeter' | 'victory';
+
 type Props = {
   tokenId: TokenId;
-  animation: string;
+  animation: AboutAnim;
   position: number[];
 };
 
 function Manny({ tokenId, animation, position }: Props) {
   const mannyRef = useRef(null);
 
-  const animationOptions = {
-    active: animation,
-    paths: {
-      float: LIBRARY.float,
-      teeter: LIBRARY.teeter,
-      victory: LIBRARY.victory,
-    },
-  };
-
   const textureUrl = getTokenProps(tokenId)?.textureUrl;
 
   const mannyObj = manny({
     modelPath: MANNY_FBX,
     textureUrl,
-    animationOptions,
+    animation,
   });
 
   useFrame(() => {

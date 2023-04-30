@@ -1,6 +1,5 @@
 import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-// @ts-expect-error: add types to manny module
 import manny from 'manny';
 
 const Manny = () => {

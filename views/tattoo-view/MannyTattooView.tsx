@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useThree } from '@react-three/fiber';
-// @ts-expect-error: add types to manny module
 import manny from 'manny';
 import {
   Euler,

@@ -2,6 +2,7 @@ import { Suspense, useEffect, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { NoToneMapping, sRGBEncoding } from 'three';
 import { Lighting, MannyAbout } from '@/components/three';
+import { AboutAnim } from '@/components/three/MannyAbout';
 import type { TokenId } from '@/utils/types';
 import Community from '@/views/about/Community';
 import Intro from '@/views/about/Intro';
@@ -11,7 +12,7 @@ import Tokens from '@/views/about/Tokens';
 
 type SectionsMap = {
   [key: string]: {
-    animation: string;
+    animation: AboutAnim;
     position: number[];
     start: () => number;
   };
@@ -42,7 +43,7 @@ export default function About() {
   }, []);
 
   // set animation + position
-  let animation = 'float';
+  let animation: AboutAnim = 'float';
   let position = [0, -110, 0];
 
   const offset = 80;

@@ -1,4 +1,4 @@
-import ToggleSwitch from '@/components/ToggleSwitch';
+import { Pause, Play } from '@/components/Svg';
 import { useAppDispatch } from '@/views/token/hooks';
 import type { TokenId } from '@/utils/types';
 import { setPaused } from '@/views/token/reducer';
@@ -15,21 +15,32 @@ export default function OptionPaused({ tokenId, paused }: Props) {
       <div className="flex items-center">
         <b>PAUSED</b>
       </div>
-      <div>
-        <ToggleSwitch
-          id="paused"
-          name="paused"
-          checked={paused}
-          onChange={() => {
-            dispatch(
-              setPaused({
-                tokenId,
-                value: !paused,
-              })
-            );
-          }}
-          disabled={false}
-        />
+      <div className="text-white cursor-pointer">
+        {paused ? (
+          <Play
+            height={20}
+            width={20}
+            onClick={() => {
+              dispatch(
+                setPaused({
+                  tokenId,
+                  value: false,
+                })
+              );
+            }}
+          />
+        ) : (
+          <Pause
+            onClick={() => {
+              dispatch(
+                setPaused({
+                  tokenId,
+                  value: true,
+                })
+              );
+            }}
+          />
+        )}
       </div>
     </div>
   );

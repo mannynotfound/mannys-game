@@ -1,3 +1,4 @@
+import { twMerge } from 'tailwind-merge';
 import Button from '@/components/Button';
 import type { TokenId } from '@/utils/types';
 
@@ -8,7 +9,13 @@ type Props = {
 export default function OptionSave({ tokenId }: Props) {
   return (
     <div className="flex w-full justify-between gap-x-2 items-between">
-      <Button
+      <button
+        className={twMerge(
+          'button cursor-pointer py-0.5 px-[12px]',
+          'text-white hover:text-gray-dark',
+          'border border-white rounded-sm',
+          'hover:bg-white'
+        )}
         onClick={() => {
           const canvas = document.querySelector('canvas');
           if (canvas === null) {
@@ -30,9 +37,15 @@ export default function OptionSave({ tokenId }: Props) {
           document.body.removeChild(link);
         }}
       >
-        <div className="mt-1">SAVE .PNG</div>
-      </Button>
-      <Button
+        SAVE .PNG
+      </button>
+      <button
+        className={twMerge(
+          'button cursor-pointer py-0.5 px-[12px]',
+          'text-white hover:text-gray-dark',
+          'border border-white rounded-sm',
+          'hover:bg-white'
+        )}
         onClick={() => {
           const canvas = document.querySelector('canvas');
           if (canvas === null) {
@@ -80,8 +93,8 @@ export default function OptionSave({ tokenId }: Props) {
           document.body.removeChild(link);
         }}
       >
-        <div className="mt-1">SAVE .JPG</div>
-      </Button>
+        SAVE .JPG
+      </button>
     </div>
   );
 }
