@@ -1,3 +1,5 @@
+import Code from '../../Code';
+
 # Configuration
 
 <>
@@ -21,14 +23,24 @@
         <td>manny_body_texture.jpg</td>
       </tr>
       <tr>
-        <td>onLoad</td>
-        <td>function</td>
-        <td>{'() => {}'}</td>
+        <td>animation</td>
+        <td>string</td>
+        <td>undefined</td>
       </tr>
       <tr>
-        <td>animationOptions</td>
+        <td>paused</td>
+        <td>boolean</td>
+        <td>false</td>
+      </tr>
+      <tr>
+        <td>clamp</td>
+        <td>boolean</td>
+        <td>false</td>
+      </tr>
+      <tr>
+        <td>library</td>
         <td>object</td>
-        <td>{'{}'}</td>
+        <td>undefined</td>
       </tr>
     </tbody>
   </table>
@@ -44,67 +56,74 @@ using your own custom model or hosting solution.
 Url for loading manny skin texture - defaults to the basic manny texture but useful if
 using a custom texture such as an NFT manny.
 
-## onLoad
+## animation
 
-Function is called after manny model has been loaded.
+string value of the current animation to play. if undefined manny will not be animated in 
+resting idle pose. If `animation` is provided and it is not present in the default
+manny animation library, you must provide a `library` object that defines the url to load
+the animation and it's loading behavior.
 
-## animationOptions
+### paused
+
+Toggle animations pause state.
+
+### clamp
+
+Toggle animation clamping (only playing one and pausing on end frame).
+
+## library
+
+object where each key defines an animation and it's value is an object configuring it's url
+and load behavior:
 
 <>
   <table>
     <thead>
       <tr>
-        <th align="center">Prop</th>
-        <th align="center">Type</th>
-        <th align="center">Default</th>
+        <th align="center">Key</th>
+        <th align="center">Value</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>paths</td>
-        <td>object</td>
-        <td>{`{ idle: 'idle.fbx' }`}</td>
-      </tr>
-      <tr>
-        <td>active</td>
+        <td>url</td>
         <td>string</td>
-        <td>undefined</td>
       </tr>
       <tr>
-        <td>fadeIn</td>
-        <td>float</td>
-        <td>0.2</td>
-      </tr>
-      <tr>
-        <td>fadeOut</td>
-        <td>float</td>
-        <td>0.2</td>
-      </tr>
-      <tr>
-        <td>paused</td>
+        <td>async</td>
         <td>boolean</td>
-        <td>false</td>
       </tr>
     </tbody>
   </table>
 </>
 
-### paths
+eg:
 
-Object where keys represent animation name, and values represent animation asset url to load.
+<Code language="js">
+{`const LIBRARY = {
+  "run fast": {
+    url: 'https://myhost.com/runfast.fbx',
+    async: false,
+  }
+  "walk": {
+    url: 'https://myhost.com/walk.fbx',
+    async: true
+  }
+}
 
-### active
+// ...
 
-Key of active animation to play.
+const Manny = ({ animation = 'run fast' }) => (
+  const mannyObj = manny({
+    animation,
+    library: LIBRARY,
+  })
 
-### fadeIn
-
-Duration in seconds to transition in new animation.
-
-### fadeOut
-
-Duration in seconds to transition out new animation.
-
-### paused
-
-Toggle animations pause state.
+  return (
+    <group position={[0, -90, 0]}>
+      <primitive object={mannyObj} dispose={null} />
+    </group>
+  )
+);
+`}
+</Code>

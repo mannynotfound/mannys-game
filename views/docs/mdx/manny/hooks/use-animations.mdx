@@ -9,12 +9,20 @@ animation mixer.
 
 <Code language="js">
   {`const mannyObj = manny();
-const paths = {
-  walk: 'https://myhost.com/walk.fbx',
-  run: 'https://myhost.com/run.fbx',
-  jump: 'https://myhost.com/jump.fbx',
+
+const LIBRARY = {
+  "run fast": {
+    url: 'https://myhost.com/runfast.fbx',
+    async: false,
+  }
+  "walk": {
+    url: 'https://myhost.com/walk.fbx',
+    async: true
+  }
 }
-const { actions } = useAnimations(mannyObj, paths);`}
+
+
+const { actions } = useAnimations(mannyObj, animation, library);`}
 </Code>
 
 ## Return Value

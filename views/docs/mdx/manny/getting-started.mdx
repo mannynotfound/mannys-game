@@ -34,12 +34,10 @@ Also, we'll add some lights so we can see our manny.
 import { Canvas } from "@react-three/fiber";
 
 const App = () => (
-
-{' '}
-<Canvas flat camera={{ fov: 45, position: [25, 100, 300] }}>
-  <hemisphereLight groundColor={0x444444} />
-  <directionalLight castShadow intensity={0.25} position={[0, 200, 100]} />
-</Canvas>
+  <Canvas flat camera={{ fov: 45, position: [25, 100, 300] }}>
+    <hemisphereLight groundColor={0x444444} />
+    <directionalLight castShadow intensity={0.25} position={[0, 200, 100]} />
+  </Canvas>
 );
 
 export default App;`}
@@ -63,23 +61,19 @@ import manny from "manny";
 import { Canvas } from "@react-three/fiber";
 
 const Manny = () => (
-
-{' '}
-<group position={[0, -90, 0]}>
-  <primitive object={manny()} dispose={null} />
-</group>
+  <group position={[0, -90, 0]}>
+    <primitive object={manny()} dispose={null} />
+  </group>
 );
 
 const App = () => (
-
-{' '}
-<Canvas flat camera={{ fov: 45, position: [25, 100, 200] }}>
-  <Suspense fallback={null}>
-    <Manny />
-  </Suspense>
-  <hemisphereLight groundColor={0x444444} />
-  <directionalLight castShadow intensity={0.25} position={[0, 200, 100]} />
-</Canvas>
+  <Canvas flat camera={{ fov: 45, position: [25, 100, 200] }}>
+    <Suspense fallback={null}>
+      <Manny />
+    </Suspense>
+    <hemisphereLight groundColor={0x444444} />
+    <directionalLight castShadow intensity={0.25} position={[0, 200, 100]} />
+  </Canvas>
 );
 
 export default App;`}
@@ -92,8 +86,42 @@ export default App;`}
 <BasicScene />
 
 That should everything needed to render a manny model on the page in a
-static pose - check out <Link href="/docs/using-animation">using animation</Link> and
-
-<Link href="/docs/adding-controls">adding controls</Link> to bring manny to life!{' '}
+static pose - check out <Link href="/docs/using-animation">using animation</Link> and <Link href="/docs/adding-controls">adding controls</Link> to bring manny to life!{' '}
 
 To see how the manny module is used on mannys.game, take a look at <a href="https://github.com/mannynotfound/mannys-game/tree/main/src/components/three" target="_blank">three components</a>.
+
+
+### Examples
+
+Manny with custom texture/model:
+
+<Code language="js">
+{`const mannyObj = manny({
+  modelPath: 'https://asd1337dsa.cloudfront.net/Manny_v2.fbx',
+  textureUrl: 'https://asd1337dsa.cloudfront.net/body_texture_inverted.jpg',  
+})
+`}
+</Code>
+
+Manny with default animation:
+
+<Code language="js">
+{`const mannyObj = manny({
+  animation: 'hurricane kick', // yes this is included by default
+})
+`}
+</Code>
+
+Manny with custom animation:
+
+<Code language="js">
+{`const mannyObj = manny({
+  animation: 'holding_hands',
+  library: {
+    holding_hands: {
+      url: 'https://asd1337dsa.cloudfront.net/holding_hands.fbx'
+    }
+  }
+})
+`}
+</Code>

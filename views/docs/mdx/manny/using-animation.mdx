@@ -4,18 +4,18 @@ import Code from '../../Code';
 
 manny is using the <a href="https://www.mixamo.com" target="_blank">mixamo</a> rig 
 and supports loading animations in .fbx or .glb format. To use your own animations,
-define them in the `paths` property of `animationOptions` with the animation name
-and url as key/value pairs.
+define them in the `library` property with the animation name as the key and it's value
+an object with it's `url` and `async` if it should be lazy loaded.
 
 <Code language="js">
 {`const Manny = () => {
   const mannyObj = manny({
-    animationOptions: {
-      active: 'idle',
-      paths: {
-        idle: 'https://yourhost.com/animations/idle.fbx',
-      },
-    },
+    animation: 'walk',
+    library: {
+      "walk": {
+        url: 'https://myhost.com/walk.fbx'
+      }
+    }
   });
 
   return (
@@ -27,27 +27,50 @@ and url as key/value pairs.
 
 </Code>
 
-If no `animationOptions` are provided, the returned manny object will not
+If no `animation` is provided, the returned manny object will not
 have an animation mixer and will be in a static default pose with arms resting
 at the side, useful if using custom animation state logic.
 
+## All Animations
+
+The manny module exports a list of every animation name in the default manny library
+as `animations`. Useful if wanting to cycle through all animations or see what's available.
+
+<Code language="js">
+  {`import { animations } from 'manny';
+console.log(animations);
+// ['agony', 'bored', 'cheer', etc..]
+`}
+</Code>
+<br />
+<a
+  href="https://threejs.org/docs/#api/en/animation/AnimationAction"
+  target="_blank"
+>
+  Read more about THREE.AnimationAction
+</a>
+
 ## Loading Animations Lazily
 
-Defining all possible animations in `paths` might make your manny bloated and slow to
-load, so to avoid this you can include just the `paths` you want to load, and manny
-will cache any loaded animations after rendering.
+Loading all animations in `library` might make your manny bloated and slow on 
+initial load, so to avoid this you can add `async`: `true` to any animation to 
+only load it once it's active.
 
 <Code language="js">
 {`const paths = { ... };
 
 const Manny = ({ animation }) => {
   const mannyObj = manny({
-    animationOptions: {
-      active: animation,
-      paths: {
-        [animation]: paths[animation],
+    animation,
+    library: {
+      "walk": {
+        url: 'https://myhost.com/walk.fbx'
       },
-    },
+      "run fast": {
+        url: 'https://myhost.com/runfast.fbx',
+        async: true, // only loaded when animation === "run fast"
+      }
+    }
   });
 
   return (
