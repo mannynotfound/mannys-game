@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import manny from 'manny';
 import { Mesh, Vector3 } from 'three';
 import { getTokenProps } from '@/utils';
-import { LIBRARY, MANNY_FBX } from '@/utils/constants';
+import { MANNY_FBX } from '@/utils/constants';
 import type { TokenId } from '@/utils/types';
 
 export type AboutAnim = 'idle' | 'float' | 'teeter' | 'victory';

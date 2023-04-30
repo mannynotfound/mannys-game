@@ -1,5 +1,4 @@
 import { twMerge } from 'tailwind-merge';
-import Button from '@/components/Button';
 import type { TokenId } from '@/utils/types';
 
 type Props = {
