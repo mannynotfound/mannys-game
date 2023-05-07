@@ -7,7 +7,7 @@ import { ForwardControls, Lighting } from '@/components/three';
 import { fetcher } from '@/utils';
 import { API_URL } from '@/utils/constants';
 import MannyTattoo from '@/views/tattoo-shop/MannyTattoo';
-import { TattooAPIResponse, TattooCoordinates } from './types';
+import { TattooAPIObject, TattooCoordinates } from './types';
 
 type Props = {
   tokenId: number;
@@ -23,7 +23,7 @@ const TattooEditor = ({
   showExisting,
 }: Props) => {
   const controlsRef = useRef<OrbitControlsImpl>(null);
-  const { data: tattooData } = useSWR<TattooAPIResponse>(
+  const { data: tattooData } = useSWR<TattooAPIObject[]>(
     showExisting ? `${API_URL}/tattoo-shop/view/${tokenId}` : null,
     fetcher
   );
@@ -51,7 +51,7 @@ const TattooEditor = ({
             decalTextureUrl={textureUrl}
             controlsRef={controlsRef}
             setTattooCoords={setTattooCoords}
-            existing={tattooData?.data}
+            existing={tattooData}
           />
         </Suspense>
         <ForwardControls

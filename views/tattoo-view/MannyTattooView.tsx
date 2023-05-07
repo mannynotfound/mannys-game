@@ -84,11 +84,12 @@ const MannyTattooView = ({ tokenId, position, existing }: Props) => {
         (texture) => {
           const material = decalMaterial.clone();
           material.map = texture;
-          const existingCords = JSON.parse(existingTat.coordinates) || {};
+          const existingCords = existingTat.coordinates;
+          // shouldnt happen but just in case
           if (
-            !existingCords?.position ||
-            !existingCords?.orientation ||
-            !existingCords?.size
+            !existingCords.position ||
+            !existingCords.orientation ||
+            !existingCords.size
           ) {
             console.log('missing coordinates for ', existingTat);
             return;
@@ -99,8 +100,8 @@ const MannyTattooView = ({ tokenId, position, existing }: Props) => {
             orientation: eOrient,
             size: eSize,
           } = existingCords;
-          const posVec = new Vector3(ePos?.x || 0, ePos?.y || 0, ePos?.z || 0);
-          const orEuler = new Euler(eOrient.x, eOrient.y, eOrient.z, 'XYZ');
+          const posVec = new Vector3(ePos.x ?? 0, ePos.y ?? 0, ePos.z ?? 0);
+          const orEuler = new Euler(eOrient._x, eOrient._y, eOrient._z, 'XYZ');
           const sizeVec = new Vector3(eSize.x, eSize.y, eSize.z);
           const m = new Mesh(
             new DecalGeometry(mesh, posVec, orEuler, sizeVec),

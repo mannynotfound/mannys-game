@@ -2,12 +2,11 @@ import { useState } from 'react';
 import logo from '@/public/logo.png';
 import onCyberLogo from '@/public/logos/oncyber.png';
 import { ConnectKitButton } from '@jmoxey/connectkit';
-import b64ToBlob from 'b64-to-blob';
 import fileSaver from 'file-saver';
 import Image from 'next/image';
 import { useSignMessage } from 'wagmi';
 import Button from '@/components/Button';
-import { API_URL } from '@/utils/constants';
+import { AWS_BASE } from '@/utils/constants';
 import { AppProps } from '@/utils/types';
 
 const NoMannys = () => (
@@ -85,19 +84,9 @@ export default function OnCyber(props: AppProps) {
       alert('Invalid Signature');
     }
 
-    fetch(`${API_URL}/download/oncyber`, {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        sig: signature,
-      }),
-    })
-      .then((resp) => resp.text())
-      .then((modelAsBase64) => {
-        const blob = b64ToBlob(modelAsBase64);
+    fetch(`${AWS_BASE}/oncyber/mannys_game_oncyber.glb`)
+      .then((resp) => resp.blob())
+      .then((blob) => {
         fileSaver.saveAs(blob, 'mannys_game_oncyber.glb');
         setDownloading(false);
       })

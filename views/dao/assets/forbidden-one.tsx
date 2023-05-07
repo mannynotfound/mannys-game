@@ -3,14 +3,13 @@ import useSWR from 'swr';
 import { twMerge } from 'tailwind-merge';
 import { fetcher } from '@/utils';
 import { API_URL } from '@/utils/constants';
-import { FractionsObject, FractionsResponse } from '@/utils/types';
+import { FractionsObject } from '@/utils/types';
 
 export default function ForbiddenOne() {
-  const { data: fractionsResp } = useSWR<FractionsResponse>(
+  const { data: fractions = [] } = useSWR<FractionsObject[]>(
     `${API_URL}/fractions/drop-1`,
     fetcher
   );
-  const fractions = fractionsResp?.fractions ?? [];
 
   const renderDropImages = () => {
     const images = [];

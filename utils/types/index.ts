@@ -11,10 +11,6 @@ export type FractionsObject = {
   message: string;
 };
 
-export interface FractionsResponse {
-  fractions: FractionsObject[];
-}
-
 export type LeaderboardObject = {
   owner: EthAddress;
   name: string;
@@ -27,15 +23,10 @@ export interface LeaderboardResponse {
   updated_at: number;
 }
 
-export type AchievementRequirement = {
-  tx_hash: EthAddress;
-  requirement_id: number;
-};
-
 export type AchievementEarnedObject = {
   achievement_id: number;
   date_earned?: number;
-  requirements?: AchievementRequirement[];
+  tx_hash?: string;
 };
 
 export type AchievementGamersResponseObject = {
@@ -43,7 +34,7 @@ export type AchievementGamersResponseObject = {
   name: string;
   achievement_id: number;
   date_earned: number;
-  requirements?: AchievementRequirement[];
+  tx_hash?: string;
 };
 
 export type EthAddress = `0x${string}` | undefined;
@@ -85,17 +76,14 @@ export type TokenMetadata = {
   attributes: MetadataAttribute[];
 };
 
-export type Requirement = {
-  id: number;
-  text: string;
-};
-
 export type Achievement = {
   id: number;
   title: string;
   type: string;
   date_created: number;
-  requirements: Requirement[];
+  requirement: {
+    text: string;
+  };
   image: string;
   points: number;
 };

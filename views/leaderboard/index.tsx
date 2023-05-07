@@ -95,7 +95,8 @@ export default function Leaderboard() {
       <>
         {leaderboard.updated_at && (
           <div className="TableUpdate w-full text-center mb-6 text-white">
-            Last Updated At: {new Date(leaderboard.updated_at).toLocaleString()}
+            Last Updated At:{' '}
+            {new Date(leaderboard.updated_at * 1000).toLocaleString()}
           </div>
         )}
         <table className="w-full">

@@ -1,4 +1,11 @@
-import { Dispatch, SyntheticEvent, useEffect, useRef, useState } from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  SyntheticEvent,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import ReactCrop, { centerCrop, makeAspectCrop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import type { Crop } from 'react-image-crop/dist/types';
@@ -11,9 +18,9 @@ const getCanvasImage = (useTransparent: boolean) => {
     return;
   }
 
-  canvas.getContext('experimental-webgl', {
-    preserveDrawingBuffer: true,
-  });
+  // canvas.getContext('experimental-webgl', {
+  //   preserveDrawingBuffer: true,
+  // });
 
   const destinationCanvas = document.createElement('canvas');
   destinationCanvas.width = canvas?.width ?? 0;
@@ -69,7 +76,7 @@ type Props = {
   tokenId: TokenId;
   setCompletedCrop: Dispatch<Crop>;
   canvasImages: CanvasImagesState | undefined;
-  setCanvasImages: Dispatch<CanvasImagesState>;
+  setCanvasImages: Dispatch<SetStateAction<CanvasImagesState | undefined>>;
   useTransparent: boolean;
 };
 
@@ -87,12 +94,12 @@ export default function PreviewImage({
   useEffect(() => {
     const image = getCanvasImage(useTransparent);
     if (image !== undefined) {
-      setCanvasImages({
-        ...canvasImages,
+      setCanvasImages((prev) => ({
+        ...prev,
         [tokenId]: image,
-      });
+      }));
     }
-  }, [tokenId, useTransparent, canvasImages, setCanvasImages]);
+  }, [tokenId, useTransparent, setCanvasImages]);
 
   const onImageLoad = (e: SyntheticEvent<HTMLImageElement, Event>) => {
     if (aspect && crop === undefined) {

@@ -6,7 +6,7 @@ import { LinearToneMapping, sRGBEncoding } from 'three';
 import { Controls, Lighting } from '@/components/three';
 import { fetcher } from '@/utils';
 import { API_URL } from '@/utils/constants';
-import { TattooAPIObject, TattooAPIResponse } from '@/views/tattoo-shop/types';
+import { TattooAPIObject } from '@/views/tattoo-shop/types';
 import MannyTattooView from '@/views/tattoo-view/MannyTattooView';
 
 type Props = {
@@ -46,7 +46,7 @@ const TattooViewer = ({ tokenId, existing }: Props) => (
 const TattooView = () => {
   const router = useRouter();
   const tokenId = router.query.tokenId;
-  const { data: tattooData } = useSWR<TattooAPIResponse>(
+  const { data: tattooData } = useSWR<TattooAPIObject[]>(
     tokenId ? `${API_URL}/tattoo-shop/view/${tokenId}` : null,
     fetcher
   );
@@ -57,11 +57,11 @@ const TattooView = () => {
 
   return (
     <div className="three-container fixed inset-0">
-      {tattooData?.data && (
+      {tattooData && (
         <TattooViewer
           key={tokenId.toString()}
           tokenId={parseInt(tokenId.toString(), 10)}
-          existing={tattooData?.data}
+          existing={tattooData}
         />
       )}
     </div>
