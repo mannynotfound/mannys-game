@@ -370,14 +370,14 @@ const MannyTattoo = ({
         (texture) => {
           const material = decalMaterial.clone();
           material.map = texture;
-          const existingCords = JSON.parse(existingTat.coordinates);
+          const existingCords = existingTat.coordinates;
           const {
             position: ePos,
             orientation: eOrient,
             size: eSize,
           } = existingCords;
           const posVec = new Vector3(ePos.x, ePos.y, ePos.z);
-          const orEuler = new Euler(eOrient.x, eOrient.y, eOrient.z, 'XYZ');
+          const orEuler = new Euler(eOrient._x, eOrient._y, eOrient._z, 'XYZ');
           const sizeVec = new Vector3(eSize.x, eSize.y, eSize.z);
           const m = new Mesh(
             new DecalGeometry(mesh, posVec, orEuler, sizeVec),

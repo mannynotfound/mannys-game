@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint \"*/**/*.{js,ts,tsx}\" --fix",
+    "lint": "tsc --project ./tsconfig.json --noEmit && eslint \"*/**/*.{js,ts,tsx}\" --fix",
     "prepare": "husky install"
   },
   "dependencies": {
