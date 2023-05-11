@@ -17,11 +17,25 @@ export type TattooAPIObject = {
   token_id: number;
   tattoo_url: string;
   owner: EthAddress;
-  coordinates: string;
-};
-
-export type TattooAPIResponse = {
-  data: TattooAPIObject[];
+  coordinates: {
+    size: {
+      x: number;
+      y: number;
+      z: number;
+    };
+    position: {
+      x: number;
+      y: number;
+      z: number;
+    };
+    orientation: {
+      _x: number;
+      _y: number;
+      _z: number;
+      _order: string;
+      isEuler: boolean;
+    };
+  };
 };
 
 export type TattooCoordinates = {

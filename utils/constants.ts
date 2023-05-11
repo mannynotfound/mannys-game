@@ -6,7 +6,7 @@ export const MANNY_CONTRACT = '0x2bd58A19C7E4AbF17638c5eE6fA96EE5EB53aed9';
 export const MANNY_DAO = '0xd0fA4e10b39f3aC9c95deA8151F90b20c497d187';
 export { default as MANNY_ABI } from '@/fixtures/contracts/MANNYSGAMEabi';
 
-const AWS_BASE = 'https://mannys-game.s3.us-east-1.amazonaws.com';
+export const AWS_BASE = 'https://mannys-game.s3.us-east-1.amazonaws.com';
 export const TEXTURES_HOST = `${AWS_BASE}/textures-small`;
 export const MODELS_HOST = `${AWS_BASE}/models`;
 export const ACCESSORIES_HOST = `${AWS_BASE}/accessories`;

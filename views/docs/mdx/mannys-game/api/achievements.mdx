@@ -21,12 +21,7 @@ An array of objects representing earned achievements.
   {
     achievement_id: integer,
     date_earned: integer, // unix timestamp
-    requirements: [
-      {
-        tx_hash: string,
-        requirement_id: integer,
-      }
-    ]
+    tx_hash: string | undefined
   }
 ]`}
 </Code>
@@ -52,12 +47,7 @@ An array of objects representing achievement earners.
     name: string, // friendly name of gamer
     achievement_id: integer,
     date_earned: integer, // unix timestamp
-    requirements: [
-      {
-        tx_hash: string,
-        requirement_id: integer,
-      }
-    ]
+    tx_hash: string | undefined,
   }
 ]`}
 </Code>

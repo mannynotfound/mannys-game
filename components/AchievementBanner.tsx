@@ -16,7 +16,7 @@ type Props = {
 };
 
 export default function Banner({ achievement, shiny, readOnly }: Props) {
-  const { achievement_id, date_earned, requirements } = achievement;
+  const { achievement_id, date_earned, tx_hash } = achievement;
   const aMatch = allAchievements.find((ach) => ach.id === achievement_id);
 
   if (aMatch === undefined) {
@@ -73,51 +73,44 @@ export default function Banner({ achievement, shiny, readOnly }: Props) {
             {aMatch.title}
           </h2>
         </Link>
-        {aMatch.requirements.map((r) => {
-          const earnedMatch = requirements?.find(
-            (_r) => _r.requirement_id === r.id
-          );
-          return (
-            <div key={r.id}>
-              <Link href={linkTo}>
-                <h4
-                  className="md:text-lg mb-2 mt-1 md:mt-0 tracking-tight leading-none"
-                  key={r.id}
+        <div>
+          <Link href={linkTo}>
+            <h4
+              className="md:text-lg mb-2 mt-1 md:mt-0 tracking-tight leading-none"
+              key={achievement_id}
+            >
+              {aMatch.requirement.text}
+            </h4>
+          </Link>
+          {date_earned !== undefined && (
+            <small className="flex text-xs items-center justify-center">
+              {tx_hash ? (
+                <a
+                  target="_blank"
+                  className="mr-2"
+                  rel="noopener noreferrer"
+                  href={getLink(tx_hash)}
                 >
-                  {r.text}
-                </h4>
-              </Link>
-              {earnedMatch !== undefined && date_earned !== undefined && (
-                <small className="flex text-xs items-center justify-center">
-                  {earnedMatch.tx_hash ? (
-                    <a
-                      target="_blank"
-                      className="mr-2"
-                      rel="noopener noreferrer"
-                      href={getLink(earnedMatch.tx_hash)}
-                    >
-                      {new Date(date_earned * 1000).toLocaleDateString()}
-                    </a>
-                  ) : (
-                    <span className="mr-2">
-                      {new Date(date_earned * 1000).toLocaleDateString()}
-                    </span>
-                  )}
-                  {earnedMatch.tx_hash && (
-                    <a
-                      className="relative top-[-1px]"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href={getLink(earnedMatch.tx_hash)}
-                    >
-                      <LinkOut />
-                    </a>
-                  )}
-                </small>
+                  {new Date(date_earned * 1000).toLocaleDateString()}
+                </a>
+              ) : (
+                <span className="mr-2">
+                  {new Date(date_earned * 1000).toLocaleDateString()}
+                </span>
               )}
-            </div>
-          );
-        })}
+              {tx_hash && (
+                <a
+                  className="relative top-[-1px]"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={getLink(tx_hash)}
+                >
+                  <LinkOut />
+                </a>
+              )}
+            </small>
+          )}
+        </div>
       </div>
       <div className="h-full flex items-center">
         <div className="flex flex-col justify-center items-center relative h-[80px] w-[80px]">
