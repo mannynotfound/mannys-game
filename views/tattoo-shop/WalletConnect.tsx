@@ -1,4 +1,4 @@
-import { ConnectKitButton } from '@jmoxey/connectkit';
+import { ConnectKitButton } from 'connectkit';
 
 export default function WalletConnect() {
   return (

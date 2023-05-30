@@ -2,18 +2,19 @@ import '@/styles/fonts.css';
 import '@/styles/globals.css';
 import '@/styles/misc.css';
 import '@/styles/stars.css';
-import { ConnectKitProvider, getDefaultClient } from '@jmoxey/connectkit';
+import { ConnectKitProvider, getDefaultConfig } from 'connectkit';
 import type { AppProps } from 'next/app';
-import { WagmiConfig, createClient, mainnet } from 'wagmi';
+import { WagmiConfig, createConfig, mainnet } from 'wagmi';
 import useMannys from '@/hooks/useMannys';
 import useWeb3 from '@/hooks/useWeb3';
 import connectKitTheme from '@/utils/connectKitTheme';
-import { INFURA_ID } from '@/utils/constants';
+import { INFURA_ID, WALLET_CONNECT_ID } from '@/utils/constants';
 
-const client = createClient(
-  getDefaultClient({
+const config = createConfig(
+  getDefaultConfig({
     appName: 'mannys.game',
     infuraId: INFURA_ID,
+    walletConnectProjectId: WALLET_CONNECT_ID ?? '',
     chains: [mainnet],
   })
 );
@@ -27,7 +28,7 @@ function Body({ Component, pageProps }: AppProps) {
 
 export default function App(appProps: AppProps) {
   return (
-    <WagmiConfig client={client}>
+    <WagmiConfig config={config}>
       <ConnectKitProvider
         theme="midnight"
         mode="dark"

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ConnectKitButton } from '@jmoxey/connectkit';
+import { ConnectKitButton } from 'connectkit';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
