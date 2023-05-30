@@ -74,7 +74,7 @@ export default function Leaderboard() {
             rel="noreferrer noopener"
             className="inline-block text-green overflow-hidden text-ellipsis max-w-[120px]"
           >
-            {shortenName(gamer.name)}
+            {shortenName(gamer.name ?? String(gamer.owner))}
           </a>
         </td>
         <td className="px-3 py-5">

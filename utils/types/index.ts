@@ -13,7 +13,7 @@ export type FractionsObject = {
 
 export type LeaderboardObject = {
   owner: EthAddress;
-  name: string;
+  name: string | null;
   tokens: number[];
   score: number;
 };
