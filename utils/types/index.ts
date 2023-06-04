@@ -51,6 +51,42 @@ export type Gamer = {
   tokens: number[];
 };
 
+export type CameraMeta = {
+  position: {
+    x: number;
+    y: number;
+    z: number;
+  };
+  rotation: {
+    x: number;
+    y: number;
+    z: number;
+  };
+  pfp_mode: boolean;
+};
+
+export type AnimationMeta = {
+  id: string;
+  frame: number;
+  paused: boolean;
+};
+
+export type AccessoriesMeta = {
+  [slot: string]: string[];
+};
+
+export type SceneMeta = {
+  background_color: string;
+  texture_hd: boolean;
+};
+
+export type TokenUserMetadata = {
+  camera: CameraMeta;
+  animation: AnimationMeta;
+  accessories: AccessoriesMeta;
+  scene: SceneMeta;
+};
+
 // used in this app to render manny tokens
 export type Token = {
   tokenId: TokenId;

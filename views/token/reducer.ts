@@ -1,5 +1,5 @@
 import { createAction, createSlice } from '@reduxjs/toolkit';
-import type { TokenId } from '@/utils/types';
+import type { TokenId, TokenUserMetadata } from '@/utils/types';
 
 export interface TokenState {
   bagOpen: boolean;
@@ -35,6 +35,10 @@ export const initialState: TokenState = {
   textureHD: false,
 };
 
+export const hydrateUserState = createAction<{
+  tokenId: TokenId;
+  value: Partial<TokenUserMetadata>;
+}>('HYDRATE_USER_STATE');
 export const toggleBagOpen = createAction<{ tokenId: TokenId; value: boolean }>(
   'TOGGLE_BAG_OPEN'
 );
@@ -78,6 +82,22 @@ const tokensSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(hydrateUserState, (state, action) => {
+        const { tokenId, value } = action.payload;
+        if (!state[tokenId]) state[tokenId] = initialState;
+        state[tokenId] = {
+          ...state[tokenId],
+          accessories: value.accessories ?? state[tokenId].accessories,
+          mood: value?.animation?.id ?? state[tokenId].mood,
+          camera: {
+            zoomedIn: value?.camera?.pfp_mode ?? state[tokenId].camera.zoomedIn,
+            paused: value?.animation?.paused ?? state[tokenId].camera.paused,
+            bgColor:
+              value?.scene?.background_color ?? state[tokenId].camera.bgColor,
+          },
+          textureHD: value?.scene?.texture_hd ?? state[tokenId].textureHD,
+        };
+      })
       .addCase(toggleBagOpen, (state, action) => {
         const { tokenId, value } = action.payload;
         if (!state[tokenId]) state[tokenId] = initialState;
