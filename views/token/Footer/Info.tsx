@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEnsName } from 'wagmi';
+import useHasMounted from '@/hooks/useHasMounted';
 import useTokenOwner from '@/hooks/useTokenOwner';
 import type { Account, EthAddress, TokenId } from '@/utils/types';
 
@@ -46,6 +47,8 @@ type Props = {
 export default function Info({ account, tokenId }: Props) {
   const router = useRouter();
   const tokenOwner = useTokenOwner(tokenId);
+  const hasMounted = useHasMounted();
+  if (!hasMounted) return null;
   if (!tokenId) {
     const input = router.query.tokenId;
     return (

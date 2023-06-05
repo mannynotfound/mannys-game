@@ -57,11 +57,6 @@ export type CameraMeta = {
     y: number;
     z: number;
   };
-  rotation: {
-    x: number;
-    y: number;
-    z: number;
-  };
   pfp_mode: boolean;
 };
 

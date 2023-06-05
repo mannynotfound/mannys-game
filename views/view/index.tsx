@@ -59,8 +59,11 @@ export default function View({ textureUrl, animationName }: Props) {
           <Controls target={controlsTarget} />
           <CameraZoom
             zoomedIn={zoomedIn}
-            zoomedInCameraPosition={zoomedInCameraPosition}
-            ogCameraPosition={ogCameraPosition}
+            ogCameraPosition={{
+              x: ogCameraPosition[0],
+              y: ogCameraPosition[1],
+              z: ogCameraPosition[2],
+            }}
           />
           <Lighting />
         </Canvas>

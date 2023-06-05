@@ -2,37 +2,41 @@ import { createAction, createSlice } from '@reduxjs/toolkit';
 import type { TokenId, TokenUserMetadata } from '@/utils/types';
 
 export interface TokenState {
-  bagOpen: boolean;
-  cameraOpen: boolean;
-  imageUploadOpen: boolean;
-  accessories?: {
-    [slot: string]: string[];
-  };
-  camera: {
-    zoomedIn: boolean;
-    paused: boolean;
-    bgColor: string;
-  };
+  zoomedIn: boolean;
+  paused: boolean;
+  bgColor: string;
+  accessories?: { [slot: string]: string[] };
   textureHD: boolean;
   mood: string;
 }
 
 export interface TokenPageState {
-  [tokenId: string]: TokenState;
+  bagOpen: boolean;
+  cameraOpen: boolean;
+  imageUploadOpen: boolean;
+  camera: {
+    position: { x: number; y: number; z: number };
+  };
+  tokens: { [tokenId: string]: TokenState };
 }
 
-export const initialState: TokenState = {
+export const initialTokenState: TokenState = {
+  zoomedIn: false,
+  paused: false,
+  bgColor: '#0e0e0e',
+  textureHD: false,
+  accessories: undefined,
+  mood: 'idle',
+};
+
+const initialState: TokenPageState = {
   bagOpen: false,
   cameraOpen: false,
   imageUploadOpen: false,
-  accessories: undefined,
-  mood: 'idle',
   camera: {
-    zoomedIn: false,
-    paused: false,
-    bgColor: '#0e0e0e',
+    position: { x: 0, y: 0, z: 0 },
   },
-  textureHD: false,
+  tokens: {},
 };
 
 export const hydrateUserState = createAction<{
@@ -75,98 +79,106 @@ export const setQuestMode = createAction<{
   tokenId: TokenId;
   value: string | undefined;
 }>('SET_QUEST_MODE');
+export const updateSceneCamera = createAction<{
+  value: Partial<TokenPageState['camera']>;
+}>('UPDATE_SCENE_CAMERA');
+
+const initializeToken = (state: TokenPageState, tokenId: TokenId) => {
+  if (!state.tokens[tokenId]) state.tokens[tokenId] = initialTokenState;
+};
 
 const tokensSlice = createSlice({
-  name: 'tokens',
-  initialState: {} as TokenPageState,
+  name: 'token-page',
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(hydrateUserState, (state, action) => {
         const { tokenId, value } = action.payload;
-        if (!state[tokenId]) state[tokenId] = initialState;
-        state[tokenId] = {
-          ...state[tokenId],
-          accessories: value.accessories ?? state[tokenId].accessories,
-          mood: value?.animation?.id ?? state[tokenId].mood,
-          camera: {
-            zoomedIn: value?.camera?.pfp_mode ?? state[tokenId].camera.zoomedIn,
-            paused: value?.animation?.paused ?? state[tokenId].camera.paused,
-            bgColor:
-              value?.scene?.background_color ?? state[tokenId].camera.bgColor,
-          },
-          textureHD: value?.scene?.texture_hd ?? state[tokenId].textureHD,
+        initializeToken(state, tokenId);
+        state.tokens[tokenId] = {
+          ...state.tokens[tokenId],
+          accessories: value.accessories ?? state.tokens[tokenId].accessories,
+          mood: value?.animation?.id ?? state.tokens[tokenId].mood,
+          zoomedIn: value?.camera?.pfp_mode ?? state.tokens[tokenId].zoomedIn,
+          paused: value?.animation?.paused ?? state.tokens[tokenId].paused,
+          bgColor:
+            value?.scene?.background_color ?? state.tokens[tokenId].bgColor,
+          textureHD:
+            value?.scene?.texture_hd ?? state.tokens[tokenId].textureHD,
         };
       })
       .addCase(toggleBagOpen, (state, action) => {
-        const { tokenId, value } = action.payload;
-        if (!state[tokenId]) state[tokenId] = initialState;
-        state[tokenId].bagOpen = value;
-        state[tokenId].cameraOpen = false;
+        const { value } = action.payload;
+        state.bagOpen = value;
+        state.cameraOpen = false;
       })
       .addCase(toggleCameraOpen, (state, action) => {
-        const { tokenId, value } = action.payload;
-        if (!state[tokenId]) state[tokenId] = initialState;
-        state[tokenId].cameraOpen = value;
-        state[tokenId].bagOpen = false;
+        const { value } = action.payload;
+        state.cameraOpen = value;
+        state.bagOpen = false;
       })
-      .addCase(openImageUpload, (state, action) => {
-        const { tokenId } = action.payload;
-        if (!state[tokenId]) state[tokenId] = initialState;
-        state[tokenId].imageUploadOpen = true;
-        state[tokenId].cameraOpen = false;
-        state[tokenId].bagOpen = false;
+      .addCase(openImageUpload, (state) => {
+        state.imageUploadOpen = true;
+        state.cameraOpen = false;
+        state.bagOpen = false;
       })
-      .addCase(closeImageUpload, (state, action) => {
-        const { tokenId } = action.payload;
-        if (!state[tokenId]) state[tokenId] = initialState;
-        state[tokenId].imageUploadOpen = false;
+      .addCase(closeImageUpload, (state) => {
+        state.imageUploadOpen = false;
       })
       .addCase(setMood, (state, action) => {
         const { tokenId, value } = action.payload;
-        if (!state[tokenId]) state[tokenId] = initialState;
-        state[tokenId].mood = value;
+        initializeToken(state, tokenId);
+        state.tokens[tokenId].mood = value;
       })
       .addCase(setZoom, (state, action) => {
         const { tokenId, value } = action.payload;
-        if (!state[tokenId]) state[tokenId] = initialState;
-        state[tokenId].camera.zoomedIn = value;
-        state[tokenId].camera.paused = value
+        initializeToken(state, tokenId);
+        state.tokens[tokenId].zoomedIn = value;
+        state.tokens[tokenId].paused = value
           ? true
-          : state[tokenId].camera.paused;
-        state[tokenId].mood = value ? 'idle' : state[tokenId].mood;
+          : state.tokens[tokenId].paused;
+        state.tokens[tokenId].mood = value
+          ? 'idle'
+          : state.tokens[tokenId].mood;
       })
       .addCase(setPaused, (state, action) => {
         const { tokenId, value } = action.payload;
-        if (!state[tokenId]) state[tokenId] = initialState;
-        state[tokenId].camera.paused = value;
+        initializeToken(state, tokenId);
+        state.tokens[tokenId].paused = value;
       })
       .addCase(setTextureHD, (state, action) => {
         const { tokenId, value } = action.payload;
-        if (!state[tokenId]) state[tokenId] = initialState;
-        state[tokenId].textureHD = value;
+        initializeToken(state, tokenId);
+        state.tokens[tokenId].textureHD = value;
       })
       .addCase(setBgColor, (state, action) => {
         const { tokenId, value } = action.payload;
-        if (!state[tokenId]) state[tokenId] = initialState;
-        state[tokenId].camera.bgColor = value;
+        initializeToken(state, tokenId);
+        state.tokens[tokenId].bgColor = value;
       })
       .addCase(toggleAccessory, (state, action) => {
         const { tokenId, value } = action.payload;
-        if (!state[tokenId]) state[tokenId] = initialState;
-        if (state[tokenId].accessories === undefined) {
-          state[tokenId].accessories = {};
+        initializeToken(state, tokenId);
+        if (state.tokens[tokenId].accessories === undefined) {
+          state.tokens[tokenId].accessories = {};
         }
         const { id, slot }: { id: string; slot: string } = value;
-        let newAccessories = state[tokenId].accessories?.[slot] ?? [];
+        let newAccessories = state.tokens[tokenId].accessories?.[slot] ?? [];
         if (newAccessories.includes(id)) {
           newAccessories = newAccessories.filter((acc) => acc !== id);
         } else {
           newAccessories = [id];
         }
-        state[tokenId].accessories = {
-          ...state[tokenId].accessories,
+        state.tokens[tokenId].accessories = {
+          ...state.tokens[tokenId].accessories,
           [slot]: newAccessories,
+        };
+      })
+      .addCase(updateSceneCamera, (state, action) => {
+        const { value } = action.payload;
+        state.camera = {
+          position: value.position ?? state.camera.position,
         };
       });
   },

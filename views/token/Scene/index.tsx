@@ -1,15 +1,18 @@
-import { Suspense, useMemo, useState } from 'react';
+import { Suspense, useCallback, useMemo, useState } from 'react';
 import { Environment } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { useRouter } from 'next/router';
 import { NoToneMapping, Vector3, sRGBEncoding } from 'three';
 import { CameraZoom, Controls, Lighting, Manny } from '@/components/three';
 import type { Offset } from '@/fixtures/accessories';
+import { useAppDispatch } from '@/views/token/hooks';
 import { getTextureURL } from '@/utils';
 import type { TokenId } from '@/utils/types';
+import { updateSceneCamera } from '@/views/token/reducer';
 import { AccessoryGUI } from '../Debug';
 
 type Props = {
+  initialCameraPosition?: { x: number; y: number; z: number };
   accessories?: {
     [slot: string]: string[];
   };
@@ -20,14 +23,15 @@ type Props = {
   paused: boolean;
   textureHD: boolean;
   zoomedIn: boolean;
+  onMannyLoad: () => void;
 };
 
 const zoomedInCameraPosition = [5, 72, 52];
-const ogCameraPosition = [25, 100, 300];
 const ogTarget = [0, 0, 0];
 const zoomedInTarget = [0, 70, 0];
 
 export default function Scene({
+  initialCameraPosition,
   accessories,
   textureUrl,
   mood,
@@ -35,21 +39,48 @@ export default function Scene({
   paused,
   textureHD,
   zoomedIn,
+  onMannyLoad,
 }: Props) {
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const { debug } = router.query;
   const [datData, setDatData] = useState<Offset>({});
-  const cameraPosition = useMemo(
-    () =>
-      zoomedIn
-        ? new Vector3(...zoomedInCameraPosition)
-        : new Vector3(...ogCameraPosition),
-    [zoomedIn]
-  );
+  const cameraPosition = useMemo(() => {
+    if (initialCameraPosition === undefined) {
+      return undefined;
+    }
+
+    return zoomedIn
+      ? new Vector3(...zoomedInCameraPosition)
+      : new Vector3(...Object.values(initialCameraPosition));
+  }, [zoomedIn, initialCameraPosition]);
+
   const controlsTarget = useMemo(
     () => (zoomedIn ? zoomedInTarget : ogTarget),
     [zoomedIn]
   );
+
+  const onCameraChange = useCallback(
+    (value: Vector3) => {
+      console.log('ON CAMERA CHANGE ', value);
+      dispatch(
+        updateSceneCamera({
+          value: {
+            position: {
+              x: value.x,
+              y: value.y,
+              z: value.z,
+            },
+          },
+        })
+      );
+    },
+    [dispatch]
+  );
+
+  if (cameraPosition === undefined) {
+    return null;
+  }
 
   return (
     <div
@@ -76,6 +107,7 @@ export default function Scene({
       >
         <Suspense fallback={null}>
           <Manny
+            key={textureUrl}
             scale={1}
             position={[0, -85, 0]}
             paused={paused}
@@ -83,14 +115,11 @@ export default function Scene({
             textureUrl={getTextureURL(textureUrl, textureHD)}
             accessories={accessories}
             datData={datData}
+            onLoad={onMannyLoad}
           />
         </Suspense>
-        <Controls target={controlsTarget} />
-        <CameraZoom
-          zoomedIn={zoomedIn}
-          zoomedInCameraPosition={zoomedInCameraPosition}
-          ogCameraPosition={ogCameraPosition}
-        />
+        <Controls target={controlsTarget} onChange={onCameraChange} />
+        <CameraZoom zoomedIn={zoomedIn} ogCameraPosition={cameraPosition} />
         <Lighting />
         <Environment preset="warehouse" />
       </Canvas>

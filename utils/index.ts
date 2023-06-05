@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import allAchievements from 'fixtures/achievements.json';
 import mannyTokens from 'fixtures/tokens.json';
 import {
@@ -80,3 +81,11 @@ export const getTextureURL = (textureUrl: string, textureHD: boolean) => {
   }
   return textureUrl;
 };
+
+export function usePrevious<T>(value: T, initialValue: T) {
+  const ref = useRef(initialValue);
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+}

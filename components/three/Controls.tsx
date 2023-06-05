@@ -1,5 +1,6 @@
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { OrbitControls } from '@react-three/drei';
+import { useThree } from '@react-three/fiber';
 import { Vector3 } from 'three';
 
 type Props = {
@@ -10,6 +11,7 @@ type Props = {
   maxDistance?: number;
   minDistance?: number;
   target?: number[];
+  onChange?: (position: Vector3) => void;
 };
 
 export default function Controls({
@@ -20,8 +22,13 @@ export default function Controls({
   maxDistance = 100000,
   minDistance = 20,
   target = [0, 0, 0],
+  onChange,
 }: Props) {
   const camTarget = useMemo(() => new Vector3(...target), [target]);
+  const { camera } = useThree();
+  const onControlsChange = useCallback(() => {
+    onChange?.(camera.position);
+  }, [onChange, camera]);
 
   return (
     <OrbitControls
@@ -33,6 +40,7 @@ export default function Controls({
       maxDistance={maxDistance}
       enableZoom={enableZoom}
       enablePan={enablePan}
+      onEnd={onControlsChange}
     />
   );
 }
