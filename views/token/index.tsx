@@ -1,11 +1,11 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
 import useSWR from 'swr';
 import { twMerge } from 'tailwind-merge';
 import { useSignMessage } from 'wagmi';
+import Loader from '@/components/Loader';
 import { useAppDispatch, useAppSelector } from '@/views/token/hooks';
-import { fetcher, getTokenProps } from '@/utils';
+import { fetcher, getTokenProps, usePrevious } from '@/utils';
 import { API_URL, MANNY_TEXTURE_DEFAULT } from '@/utils/constants';
 import { AppProps, TokenId, TokenUserMetadata } from '@/utils/types';
 import Footer from '@/views/token/Footer';
@@ -13,8 +13,8 @@ import Scene from '@/views/token/Scene';
 import BagTools from '@/views/token/Tools/Bag';
 import CameraTools from '@/views/token/Tools/Camera';
 import ImageUpload from '@/views/token/Tools/ImageUpload';
-import { hydrateUserState, initialState } from '@/views/token/reducer';
-import store, { persistor } from '@/views/token/store';
+import { hydrateUserState, initialTokenState } from '@/views/token/reducer';
+import store from '@/views/token/store';
 
 interface Props extends AppProps {
   tokenId: TokenId;
@@ -24,17 +24,23 @@ function Token(props: Props) {
   const tokenId = props.tokenId;
   const tokenMatch = getTokenProps(tokenId);
   const textureUrl = tokenMatch?.textureUrl ?? MANNY_TEXTURE_DEFAULT;
+  const [initialCameraPosition, setInitialCameraPosition] = useState<{
+    x: number;
+    y: number;
+    z: number;
+  }>();
+  const [loading, setLoading] = useState(true);
+  const [mannyLoaded, setMannyLoaded] = useState(false);
   const { signMessageAsync } = useSignMessage();
   const state = useAppSelector((state) => state.tokens);
   const dispatch = useAppDispatch();
-  const tokenState = state[tokenId] ?? initialState;
-  const { data: userMetadata } = useSWR<Partial<TokenUserMetadata>>(
-    `${API_URL}/nft/metadata/${tokenId}`,
-    fetcher
-  );
+  const tokenState = state.tokens[tokenId] ?? initialTokenState;
+  const { data: userMetadata, error: userMetadataError } = useSWR<
+    Partial<TokenUserMetadata>
+  >(`${API_URL}/nft/metadata/${tokenId}`, fetcher);
 
   useEffect(() => {
-    if (userMetadata !== undefined) {
+    if (userMetadata !== undefined && state.tokens[tokenId] === undefined) {
       console.log('GOT USER METADATA ', userMetadata);
       dispatch(
         hydrateUserState({
@@ -43,17 +49,47 @@ function Token(props: Props) {
         })
       );
     }
-  }, [tokenId, userMetadata, dispatch]);
+  }, [tokenId, userMetadata, dispatch, state]);
 
-  const {
-    camera: { zoomedIn, paused, bgColor },
-    bagOpen,
-    cameraOpen,
-    imageUploadOpen,
-    accessories,
-    mood,
-    textureHD,
-  } = tokenState;
+  useEffect(() => {
+    if (!loading) return;
+    if (userMetadata !== undefined) {
+      if (initialCameraPosition === undefined) {
+        const defaultCameraPosition = { x: 25, y: 100, z: 300 };
+        setInitialCameraPosition(
+          userMetadata?.camera?.position ?? defaultCameraPosition
+        );
+      }
+      if (mannyLoaded) {
+        setLoading(false);
+      }
+    }
+    if (userMetadataError !== undefined) {
+      console.error(userMetadataError);
+      setLoading(false);
+    }
+  }, [
+    loading,
+    userMetadata,
+    userMetadataError,
+    mannyLoaded,
+    initialCameraPosition,
+  ]);
+
+  const previousToken = usePrevious(tokenId, tokenId);
+  useEffect(() => {
+    if (previousToken !== tokenId && !loading) {
+      setLoading(true);
+    }
+  }, [tokenId, previousToken, loading]);
+
+  const { bagOpen, cameraOpen, imageUploadOpen, camera } = state;
+  const { zoomedIn, paused, bgColor, accessories, mood, textureHD } =
+    tokenState;
+
+  const onMannyLoad = useCallback(() => {
+    setMannyLoaded(true);
+  }, []);
 
   const saveUserMetadata = useCallback(async () => {
     const sig = await signMessageAsync({
@@ -70,16 +106,7 @@ function Token(props: Props) {
 
     const userMetadata: TokenUserMetadata = {
       camera: {
-        position: {
-          x: 0,
-          y: 0,
-          z: 0,
-        },
-        rotation: {
-          x: 0,
-          y: 0,
-          z: 0,
-        },
+        position: camera.position,
         pfp_mode: zoomedIn,
       },
       animation: {
@@ -119,6 +146,7 @@ function Token(props: Props) {
   }, [
     tokenId,
     zoomedIn,
+    camera.position,
     mood,
     paused,
     accessories,
@@ -132,6 +160,7 @@ function Token(props: Props) {
   return (
     <>
       <Scene
+        initialCameraPosition={initialCameraPosition}
         accessories={accessories}
         tokenId={tokenId}
         textureUrl={textureUrl}
@@ -140,6 +169,7 @@ function Token(props: Props) {
         paused={paused}
         textureHD={textureHD}
         zoomedIn={zoomedIn}
+        onMannyLoad={onMannyLoad}
       />
       <Footer
         account={props.web3.account}
@@ -171,6 +201,7 @@ function Token(props: Props) {
         />
       </div>
       {imageUploadOpen && <ImageUpload tokenId={tokenId} />}
+      {loading && <Loader />}
     </>
   );
 }
@@ -182,9 +213,7 @@ export default function TokenCheck(props: AppProps & { tokenId: TokenId }) {
 
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <Token {...props} />
-      </PersistGate>
+      <Token {...props} />
     </Provider>
   );
 }

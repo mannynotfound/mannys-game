@@ -3,32 +3,29 @@ import { useThree } from '@react-three/fiber';
 
 type Props = {
   zoomedIn: boolean;
-  zoomedInCameraPosition: number[];
-  ogCameraPosition: number[];
+  ogCameraPosition: { x: number; y: number; z: number };
 };
 
-export default function CameraZoom({
-  zoomedIn,
-  zoomedInCameraPosition,
-  ogCameraPosition,
-}: Props) {
+const zoomedInCameraPosition = { x: 5, y: 72, z: 52 };
+
+export default function CameraZoom({ zoomedIn, ogCameraPosition }: Props) {
   const { camera } = useThree();
 
   useEffect(() => {
     if (zoomedIn) {
       camera.position.set(
-        zoomedInCameraPosition[0],
-        zoomedInCameraPosition[1],
-        zoomedInCameraPosition[2]
+        zoomedInCameraPosition.x,
+        zoomedInCameraPosition.y,
+        zoomedInCameraPosition.z
       );
     } else {
       camera.position.set(
-        ogCameraPosition[0],
-        ogCameraPosition[1],
-        ogCameraPosition[2]
+        ogCameraPosition.x,
+        ogCameraPosition.y,
+        ogCameraPosition.z
       );
     }
-  }, [zoomedIn, ogCameraPosition, zoomedInCameraPosition, camera.position]);
+  }, [zoomedIn, ogCameraPosition, camera.position]);
 
   return null;
 }
