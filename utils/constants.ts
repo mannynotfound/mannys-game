@@ -1,4 +1,4 @@
-export const WALLET_CONNECT_ID = process.env.NEXT_WALLET_CONNECT_ID;
+export const WALLET_CONNECT_ID = process.env.NEXT_PUBLIC_WALLET_CONNECT_ID;
 export const INFURA_ID = process.env.NEXT_PUBLIC_INFURA_ID;
 export const ETHERSCAN_KEY = process.env.NEXT_PUBLIC_ETHERSCAN_KEY;
 export const API_URL = process.env.NEXT_PUBLIC_API_URL;
