@@ -52,7 +52,7 @@ const ImageUpload = ({ tokenId }: Props) => {
     }
 
     const signature = await signMessageAsync({
-      message: `Uploading image for manny #${tokenId}`,
+      message: `Saving manny #${tokenId}`,
     }).catch(console.error);
 
     if (!signature) {
