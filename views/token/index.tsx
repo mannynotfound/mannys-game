@@ -41,7 +41,6 @@ function Token(props: Props) {
 
   useEffect(() => {
     if (userMetadata !== undefined && state.tokens[tokenId] === undefined) {
-      console.log('GOT USER METADATA ', userMetadata);
       dispatch(
         hydrateUserState({
           tokenId,
@@ -91,69 +90,58 @@ function Token(props: Props) {
     setMannyLoaded(true);
   }, []);
 
-  const saveUserMetadata = useCallback(async () => {
-    const sig = await signMessageAsync({
-      message: `Updating metadata for manny #${tokenId}`,
-    }).catch((error) => {
-      console.error(error);
-      return undefined;
-    });
+  const saveUserMetadata = useCallback(
+    async (sig: `0x${string}`) => {
+      const userMetadata: TokenUserMetadata = {
+        camera: {
+          position: camera.position,
+          pfp_mode: zoomedIn,
+        },
+        animation: {
+          id: mood,
+          paused,
+          frame: 0,
+        },
+        accessories: accessories ?? {},
+        scene: {
+          background_color: bgColor,
+          texture_hd: textureHD,
+        },
+      };
 
-    // TODO: maybe show error if reject signature
-    if (sig === undefined) {
-      return;
-    }
-
-    const userMetadata: TokenUserMetadata = {
-      camera: {
-        position: camera.position,
-        pfp_mode: zoomedIn,
-      },
-      animation: {
-        id: mood,
-        paused,
-        frame: 0,
-      },
-      accessories: accessories ?? {},
-      scene: {
-        background_color: bgColor,
-        texture_hd: textureHD,
-      },
-    };
-
-    fetch(`${API_URL}/nft/metadata/update/${tokenId}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      mode: 'cors',
-      body: JSON.stringify({
-        sig,
-        ...userMetadata,
-      }),
-    })
-      .then(async (resp) => resp.json())
-      .then((json) => {
-        // TODO: handle success
-        alert('metadata.saved!');
-        console.log(json);
-      })
-      .catch((error) => {
+      const response = await fetch(
+        `${API_URL}/nft/metadata/update/${tokenId}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          mode: 'cors',
+          body: JSON.stringify({
+            sig,
+            ...userMetadata,
+          }),
+        }
+      ).catch((error) => {
         // TODO: handle error
         alert('metadata.fucked!');
         console.error(error);
       });
-  }, [
-    tokenId,
-    zoomedIn,
-    camera.position,
-    mood,
-    paused,
-    accessories,
-    bgColor,
-    textureHD,
-    signMessageAsync,
-  ]);
+
+      return response;
+    },
+    [
+      tokenId,
+      zoomedIn,
+      camera.position,
+      mood,
+      paused,
+      accessories,
+      bgColor,
+      textureHD,
+      signMessageAsync,
+    ]
+  );
 
   const toolsClasses = 'fixed right-0 bottom-[140px] select-none text-green';
 
@@ -197,10 +185,11 @@ function Token(props: Props) {
           paused={paused}
           textureHD={textureHD}
           tokenId={tokenId}
-          saveUserMetadata={saveUserMetadata}
         />
       </div>
-      {imageUploadOpen && <ImageUpload tokenId={tokenId} />}
+      {imageUploadOpen && (
+        <ImageUpload tokenId={tokenId} saveUserMetadata={saveUserMetadata} />
+      )}
       {loading && <Loader />}
     </>
   );

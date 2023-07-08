@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
 import { twMerge } from 'tailwind-merge';
-import { Backpack, Camera } from '@/components/Svg';
+import { Backpack, Camera, SaveIcon } from '@/components/Svg';
 import { useAppDispatch } from '@/views/token/hooks';
 import type { TokenId } from '@/utils/types';
 import { toggleBagOpen, toggleCameraOpen } from '@/views/token/reducer';
+import { openImageUpload } from '@/views/token/reducer';
 
 type Props = {
   tokenId: TokenId;
@@ -26,9 +27,20 @@ export default function Menu({ tokenId, bagOpen, cameraOpen }: Props) {
     baseClasses,
     cameraOpen ? 'border-yellow text-yellow' : 'border-green text-green'
   );
+  const saveClasses = twMerge(baseClasses, 'border-green text-green');
 
   return (
     <div className="w-full flex items-center justify-end gap-2">
+      <motion.button
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        className={saveClasses}
+        onClick={() => dispatch(openImageUpload({ tokenId }))}
+      >
+        <div className="flex items-center absolute inset-0">
+          <SaveIcon height={30} width={30} className="mx-auto" />
+        </div>
+      </motion.button>
       <motion.button
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}

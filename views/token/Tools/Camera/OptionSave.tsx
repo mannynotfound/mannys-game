@@ -36,7 +36,7 @@ export default function OptionSave({ tokenId }: Props) {
           document.body.removeChild(link);
         }}
       >
-        SAVE .PNG
+        EXPORT .PNG
       </button>
       <button
         className={twMerge(
@@ -92,7 +92,7 @@ export default function OptionSave({ tokenId }: Props) {
           document.body.removeChild(link);
         }}
       >
-        SAVE .JPG
+        EXPORT .JPG
       </button>
     </div>
   );

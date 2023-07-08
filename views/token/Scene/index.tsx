@@ -62,7 +62,6 @@ export default function Scene({
 
   const onCameraChange = useCallback(
     (value: Vector3) => {
-      console.log('ON CAMERA CHANGE ', value);
       dispatch(
         updateSceneCamera({
           value: {
@@ -118,7 +117,11 @@ export default function Scene({
             onLoad={onMannyLoad}
           />
         </Suspense>
-        <Controls target={controlsTarget} onChange={onCameraChange} />
+        <Controls
+          target={controlsTarget}
+          onChange={onCameraChange}
+          enablePan={false}
+        />
         <CameraZoom zoomedIn={zoomedIn} ogCameraPosition={cameraPosition} />
         <Lighting />
         <Environment preset="warehouse" />

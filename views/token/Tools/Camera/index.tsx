@@ -2,11 +2,9 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useAppDispatch } from '@/views/token/hooks';
 import type { Account, TokenId } from '@/utils/types';
 import OptionBackground from '@/views/token/Tools/Camera/OptionBackground';
-import OptionEditNFT from '@/views/token/Tools/Camera/OptionEditNFT';
 import OptionMood from '@/views/token/Tools/Camera/OptionMood';
 import OptionPaused from '@/views/token/Tools/Camera/OptionPaused';
 import OptionSave from '@/views/token/Tools/Camera/OptionSave';
-import OptionSaveNFT from '@/views/token/Tools/Camera/OptionSaveNFT';
 import OptionTextureHD from '@/views/token/Tools/Camera/OptionTextureHD';
 import OptionZoomed from '@/views/token/Tools/Camera/OptionZoomed';
 import { toggleCameraOpen } from '@/views/token/reducer';
@@ -20,7 +18,6 @@ type Props = {
   zoomedIn: boolean;
   paused: boolean;
   textureHD: boolean;
-  saveUserMetadata: () => void;
 };
 
 export default function Camera({
@@ -32,7 +29,6 @@ export default function Camera({
   zoomedIn,
   paused,
   textureHD,
-  saveUserMetadata,
 }: Props) {
   const dispatch = useAppDispatch();
   const cameraItems: [React.ElementType, Partial<Props>][] = [
@@ -42,8 +38,6 @@ export default function Camera({
     [OptionTextureHD, { tokenId, textureHD }],
     [OptionPaused, { tokenId, paused }],
     [OptionSave, { tokenId }],
-    [OptionEditNFT, { tokenId }],
-    [OptionSaveNFT, { saveUserMetadata }],
   ];
   return (
     <AnimatePresence>

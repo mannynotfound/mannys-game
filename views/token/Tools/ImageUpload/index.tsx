@@ -21,9 +21,10 @@ type SubmitState = {
 
 type Props = {
   tokenId: TokenId;
+  saveUserMetadata: (sig: `0x${string}`) => Promise<void | Response>;
 };
 
-const ImageUpload = ({ tokenId }: Props) => {
+const ImageUpload = ({ tokenId, saveUserMetadata }: Props) => {
   const dispatch = useAppDispatch();
   const [canvasImages, setCanvasImages] = useState<CanvasImagesState>();
   const [useTransparent, setUseTransaprent] = useState(false);
@@ -79,7 +80,10 @@ const ImageUpload = ({ tokenId }: Props) => {
           ...respJson,
         };
       })
-      .then((json) => {
+      .then(async (json) => {
+        const savedMetadataResp = await saveUserMetadata(signature);
+        console.log('SAVED METADATA RESPONSE!', savedMetadataResp);
+
         setSubmitResponse({
           type: json.status === 200 ? 'success' : 'failure',
           message: json.message,
@@ -148,7 +152,7 @@ const ImageUpload = ({ tokenId }: Props) => {
             color="yellow"
             className="w-auto bg-gray-dark flex items-center"
           >
-            <div className="px-6 text-lg font-bold">SET NFT IMAGE</div>
+            <div className="px-6 text-lg font-bold">SAVE NFT</div>
           </Button>
         </div>
       </div>
