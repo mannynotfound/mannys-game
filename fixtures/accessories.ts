@@ -647,17 +647,23 @@ const hackerGlasses: Accessory = {
   },
 };
 
-const holoLens: Accessory = {
-  id: 'eyes_eyes_holovisor',
-  description: 'Unlock mixed reality experiences with this 5lb headset.',
-  label: 'Hololens',
+const gamerPro: Accessory = {
+  id: 'eyes_eyes_gamer_pro',
+  description: 'A 3D camera for gamers to explore mixed reality experiences.',
+  label: 'Gamer Vision Pro',
   level: 42,
   category: 'eyes',
   slot: 'Eyes',
   rarity: 'rare',
   stats: {
-    XR: 50,
-    comfort: -20,
+    XR: 100,
+    'Bank Account': -3500,
+  },
+  offset: {
+    position: {
+      y: 7.5,
+      z: -6.5,
+    },
   },
 };
 
@@ -736,7 +742,7 @@ export const allAccessories = [
   rondoGlasses,
   hackerGlasses,
   monocle,
-  holoLens,
+  gamerPro,
   nounish,
   overTheTops,
   facemask,
