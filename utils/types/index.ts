@@ -62,7 +62,7 @@ export type CameraMeta = {
 
 export type AnimationMeta = {
   id: string;
-  frame: number;
+  time: number;
   paused: boolean;
 };
 

@@ -40,6 +40,15 @@ function Token(props: Props) {
   >(`${API_URL}/nft/metadata/${tokenId}`, fetcher);
 
   useEffect(() => {
+    if (mannyLoaded?.actions !== undefined && userMetadata?.animation?.time) {
+      const activeAction = mannyLoaded.actions?.[userMetadata.animation.id];
+      if (activeAction !== undefined) {
+        activeAction.time = userMetadata?.animation?.time;
+      }
+    }
+  }, [mannyLoaded, userMetadata]);
+
+  useEffect(() => {
     if (userMetadata !== undefined && state.tokens[tokenId] === undefined) {
       dispatch(
         hydrateUserState({
@@ -92,6 +101,7 @@ function Token(props: Props) {
   const saveUserMetadata = useCallback(
     async (sig: `0x${string}`) => {
       setLoading(true);
+      const activeAction = mannyLoaded?.actions?.[mood];
       const userMetadata: TokenUserMetadata = {
         camera: {
           position: camera.position,
@@ -100,7 +110,7 @@ function Token(props: Props) {
         animation: {
           id: mood,
           paused,
-          frame: 0,
+          time: activeAction?.time ?? 0,
         },
         accessories: accessories ?? {},
         scene: {
@@ -141,6 +151,7 @@ function Token(props: Props) {
       accessories,
       bgColor,
       textureHD,
+      mannyLoaded,
     ]
   );
 

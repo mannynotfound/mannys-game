@@ -61,11 +61,11 @@ function Manny({
   useAccessories(mannyProps.manny, accessories, datData);
 
   useEffect(() => {
-    if (!loaded) {
+    if (!loaded && mannyProps.actions?.[animation] !== undefined) {
       setLoaded(true);
       if (onLoad) onLoad(mannyProps);
     }
-  }, [mannyProps, loaded, onLoad]);
+  }, [mannyProps, loaded, onLoad, animation]);
 
   return (
     <group
