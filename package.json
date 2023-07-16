@@ -23,7 +23,7 @@
     "connectkit": "^1.4.0",
     "file-saver": "^2.0.5",
     "framer-motion": "^10.12.4",
-    "manny": "^4.0.3",
+    "manny": "^4.0.4",
     "next": "13.1.6",
     "react": "18.2.0",
     "react-dat-gui": "^4.1.1",

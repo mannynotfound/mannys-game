@@ -4,6 +4,7 @@ import { Canvas } from '@react-three/fiber';
 import { useRouter } from 'next/router';
 import { NoToneMapping, Vector3, sRGBEncoding } from 'three';
 import { CameraZoom, Controls, Lighting, Manny } from '@/components/three';
+import { MannyProps } from '@/components/three/Manny';
 import type { Offset } from '@/fixtures/accessories';
 import { useAppDispatch } from '@/views/token/hooks';
 import { getTextureURL } from '@/utils';
@@ -23,7 +24,7 @@ type Props = {
   paused: boolean;
   textureHD: boolean;
   zoomedIn: boolean;
-  onMannyLoad: () => void;
+  onMannyLoad: (mannyProps: MannyProps) => void;
 };
 
 const zoomedInCameraPosition = [5, 72, 52];

@@ -3,10 +3,10 @@ import { Canvas } from '@react-three/fiber';
 import manny from 'manny';
 
 const Manny = () => {
-  const newManny = manny({});
+  const mannyProps = manny({});
   return (
     <group position={[0, -90, 0]}>
-      <primitive object={newManny} dispose={null} />
+      <primitive object={mannyProps.manny} dispose={null} />
     </group>
   );
 };

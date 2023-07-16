@@ -19,7 +19,7 @@ function Manny({ tokenId, animation, position }: Props) {
 
   const textureUrl = getTokenProps(tokenId)?.textureUrl;
 
-  const mannyObj = manny({
+  const mannyProps = manny({
     modelPath: MANNY_FBX,
     textureUrl,
     animation,
@@ -35,7 +35,7 @@ function Manny({ tokenId, animation, position }: Props) {
 
   return (
     <group position={[0, -110, 0]} ref={mannyRef}>
-      <primitive object={mannyObj} dispose={null} />
+      <primitive object={mannyProps.manny} dispose={null} />
     </group>
   );
 }

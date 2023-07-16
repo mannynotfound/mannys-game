@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react';
 import manny from 'manny';
-import { Euler, Object3D, Vector3 } from 'three';
+import {
+  AnimationAction,
+  AnimationMixer,
+  Euler,
+  Object3D,
+  Vector3,
+} from 'three';
 import type { Offset } from '@/fixtures/accessories';
 import useAccessories from '@/hooks/useAccessories';
 import { LIBRARY, MANNY_FBX, MANNY_TEXTURE_DEFAULT } from '@/utils/constants';
@@ -12,11 +18,17 @@ type Props = {
   };
   animation?: string;
   paused?: boolean;
-  onLoad?: (manny: Object3D) => void;
+  onLoad?: (props: MannyProps) => void;
   scale?: number;
   position?: number[];
   rotation?: number[];
   datData?: Offset;
+};
+
+export type MannyProps = {
+  manny: Object3D;
+  actions: Record<string, AnimationAction> | undefined;
+  mixer: AnimationMixer;
 };
 
 function Manny({
@@ -40,20 +52,20 @@ function Manny({
     },
   };
 
-  const mannyObj = manny({
+  const mannyProps = manny({
     modelPath: MANNY_FBX,
     textureUrl,
     ...animationOptions,
   });
 
-  useAccessories(mannyObj, accessories, datData);
+  useAccessories(mannyProps.manny, accessories, datData);
 
   useEffect(() => {
     if (!loaded) {
       setLoaded(true);
-      if (onLoad) onLoad(mannyObj);
+      if (onLoad) onLoad(mannyProps);
     }
-  }, [mannyObj, loaded, onLoad]);
+  }, [mannyProps, loaded, onLoad]);
 
   return (
     <group
@@ -61,7 +73,7 @@ function Manny({
       rotation={new Euler(...rotation)}
       scale={scale}
     >
-      <primitive object={mannyObj} dispose={null} />
+      <primitive object={mannyProps.manny} dispose={null} />
     </group>
   );
 }

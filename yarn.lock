@@ -4757,10 +4757,10 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
-manny@^4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/manny/-/manny-4.0.3.tgz#5c31c7677f9e716ad57f21c66c63958e7163980b"
-  integrity sha512-gkccROxNMz2b+8QcmccqJJnpskfcQTeJ3VJavGZqbg7ctysfopY3Uo5u+NYLlQ70XO44R7EdZ3kEwgHpnaf0Jw==
+manny@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/manny/-/manny-4.0.4.tgz#9afb76fba10d980bcb3816a37be3484eee94dbee"
+  integrity sha512-9gN/smcLqfUj0bt41fcIFKXJf+ybwVNKdiMdlWCKoSoMKAZ/ViWSE+L12YoDmxSuK/wAPw3rdSx8kfAPi0a0Pg==
 
 markdown-extensions@^1.0.0:
   version "1.1.1"

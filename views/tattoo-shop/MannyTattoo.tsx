@@ -61,7 +61,7 @@ const MannyTattoo = ({
   const domElement = gl.domElement;
   const [mesh, setMesh] = useState<Mesh>();
   const textureUrl = getTokenProps(tokenId)?.textureUrl;
-  const ogManny = manny({
+  const mannyProps = manny({
     // TODO: figure out why 3.0.0 model doesnt work with .pose()
     modelPath: 'https://d2tm2f4d5v0kas.cloudfront.net/Manny.fbx',
     textureUrl,
@@ -69,7 +69,7 @@ const MannyTattoo = ({
 
   // make a new fbx clone of manny model, resetting any animation pose
   const mannyObj = useMemo(() => {
-    const _clone = clone(ogManny);
+    const _clone = clone(mannyProps.manny);
 
     _clone.name = `tattoo-${tokenId}`;
 
@@ -81,7 +81,7 @@ const MannyTattoo = ({
     });
 
     return _clone;
-  }, [ogManny, tokenId]);
+  }, [mannyProps.manny, tokenId]);
 
   // set "mesh" in state to be the body mesh of manny model
   useEffect(() => {

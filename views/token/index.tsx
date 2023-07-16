@@ -4,6 +4,7 @@ import useSWR from 'swr';
 import { twMerge } from 'tailwind-merge';
 import Loader from '@/components/Loader';
 import { defaultCameraPosition } from '@/components/three/CameraZoom';
+import { MannyProps } from '@/components/three/Manny';
 import { useAppDispatch, useAppSelector } from '@/views/token/hooks';
 import { fetcher, getTokenProps, usePrevious } from '@/utils';
 import { API_URL, MANNY_TEXTURE_DEFAULT } from '@/utils/constants';
@@ -30,7 +31,7 @@ function Token(props: Props) {
     z: number;
   }>();
   const [loading, setLoading] = useState(true);
-  const [mannyLoaded, setMannyLoaded] = useState(false);
+  const [mannyLoaded, setMannyLoaded] = useState<MannyProps>();
   const state = useAppSelector((state) => state.tokens);
   const dispatch = useAppDispatch();
   const tokenState = state.tokens[tokenId] ?? initialTokenState;
@@ -57,7 +58,7 @@ function Token(props: Props) {
           userMetadata?.camera?.position ?? defaultCameraPosition
         );
       }
-      if (mannyLoaded) {
+      if (mannyLoaded !== undefined) {
         setLoading(false);
       }
     }
@@ -84,8 +85,8 @@ function Token(props: Props) {
   const { zoomedIn, paused, bgColor, accessories, mood, textureHD } =
     tokenState;
 
-  const onMannyLoad = useCallback(() => {
-    setMannyLoaded(true);
+  const onMannyLoad = useCallback((mannyProps: MannyProps) => {
+    setMannyLoaded(mannyProps);
   }, []);
 
   const saveUserMetadata = useCallback(
