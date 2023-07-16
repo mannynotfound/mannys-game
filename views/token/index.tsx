@@ -31,6 +31,7 @@ function Token(props: Props) {
     z: number;
   }>();
   const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
   const [mannyLoaded, setMannyLoaded] = useState<MannyProps>();
   const state = useAppSelector((state) => state.tokens);
   const dispatch = useAppDispatch();
@@ -126,7 +127,6 @@ function Token(props: Props) {
           headers: {
             'Content-Type': 'application/json',
           },
-          mode: 'cors',
           body: JSON.stringify({
             sig,
             ...userMetadata,
@@ -200,9 +200,13 @@ function Token(props: Props) {
         />
       </div>
       {imageUploadOpen && (
-        <ImageUpload tokenId={tokenId} saveUserMetadata={saveUserMetadata} />
+        <ImageUpload
+          tokenId={tokenId}
+          saveUserMetadata={saveUserMetadata}
+          setLoading={setSaving}
+        />
       )}
-      {loading && <Loader />}
+      {(loading || saving) && <Loader />}
     </>
   );
 }

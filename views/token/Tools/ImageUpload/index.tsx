@@ -22,9 +22,10 @@ type SubmitState = {
 type Props = {
   tokenId: TokenId;
   saveUserMetadata: (sig: `0x${string}`) => Promise<void | Response>;
+  setLoading: (loading: boolean) => void;
 };
 
-const ImageUpload = ({ tokenId, saveUserMetadata }: Props) => {
+const ImageUpload = ({ tokenId, saveUserMetadata, setLoading }: Props) => {
   const dispatch = useAppDispatch();
   const [canvasImages, setCanvasImages] = useState<CanvasImagesState>();
   const [useTransparent, setUseTransaprent] = useState(false);
@@ -61,6 +62,8 @@ const ImageUpload = ({ tokenId, saveUserMetadata }: Props) => {
       return;
     }
 
+    setLoading(true);
+
     // add data to form
     const data = new FormData();
     data.append('token', tokenId.toString());
@@ -81,14 +84,14 @@ const ImageUpload = ({ tokenId, saveUserMetadata }: Props) => {
         };
       })
       .then(async (json) => {
-        const savedMetadataResp = await saveUserMetadata(signature);
-        console.log('SAVED METADATA RESPONSE!', savedMetadataResp);
+        await saveUserMetadata(signature);
 
         setSubmitResponse({
           type: json.status === 200 ? 'success' : 'failure',
           message: json.message,
         });
         setIsUploadingImage(false);
+        setLoading(false);
       })
       .catch((error) => {
         setSubmitResponse({
@@ -96,6 +99,7 @@ const ImageUpload = ({ tokenId, saveUserMetadata }: Props) => {
           message: String(error),
         });
         setIsUploadingImage(false);
+        setLoading(false);
       });
   };
 

@@ -53,7 +53,7 @@ function MannyHead(props: SVGAttributes<SVGSVGElement>) {
 
 export default function Loader() {
   return (
-    <div className="fixed inset-0 pointer-events-none z-50">
+    <div className="fixed inset-0 pointer-events-none z-[100]">
       <div className="flex items-center justify-center absolute inset-0">
         <MannyHead className="w-20 h-auto text-yellow" />
       </div>
