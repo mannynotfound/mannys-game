@@ -1,4 +1,5 @@
 import { createAction, createSlice } from '@reduxjs/toolkit';
+import { defaultCameraPosition } from '@/components/three/CameraZoom';
 import type { TokenId, TokenUserMetadata } from '@/utils/types';
 
 export interface TokenState {
@@ -34,7 +35,7 @@ const initialState: TokenPageState = {
   cameraOpen: false,
   imageUploadOpen: false,
   camera: {
-    position: { x: 0, y: 0, z: 0 },
+    position: defaultCameraPosition,
   },
   tokens: {},
 };
