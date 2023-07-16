@@ -1,15 +1,17 @@
 import { useEffect } from 'react';
 import { useThree } from '@react-three/fiber';
+import { usePrevious } from '@/utils';
 
 type Props = {
   zoomedIn: boolean;
-  ogCameraPosition: { x: number; y: number; z: number };
 };
 
 const zoomedInCameraPosition = { x: 5, y: 72, z: 52 };
+export const defaultCameraPosition = { x: 25, y: 100, z: 300 };
 
-export default function CameraZoom({ zoomedIn, ogCameraPosition }: Props) {
+export default function CameraZoom({ zoomedIn }: Props) {
   const { camera } = useThree();
+  const previousZoomIn = usePrevious(zoomedIn, zoomedIn);
 
   useEffect(() => {
     if (zoomedIn) {
@@ -18,14 +20,14 @@ export default function CameraZoom({ zoomedIn, ogCameraPosition }: Props) {
         zoomedInCameraPosition.y,
         zoomedInCameraPosition.z
       );
-    } else {
+    } else if (previousZoomIn && !zoomedIn) {
       camera.position.set(
-        ogCameraPosition.x,
-        ogCameraPosition.y,
-        ogCameraPosition.z
+        defaultCameraPosition.x,
+        defaultCameraPosition.y,
+        defaultCameraPosition.z
       );
     }
-  }, [zoomedIn, ogCameraPosition, camera.position]);
+  }, [zoomedIn, previousZoomIn, camera.position]);
 
   return null;
 }

@@ -1,8 +1,9 @@
-import { Fragment, Suspense } from 'react';
+import { Fragment, Suspense, useCallback, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import useSWR from 'swr';
 import { NoToneMapping, sRGBEncoding } from 'three/src/constants';
 import Chat from '@/components/Chat';
+import Loader from '@/components/Loader';
 import { Controls, Lighting, Manny, Text3D } from '@/components/three';
 import { fetcher, findRarestManny, getTokenProps } from '@/utils';
 import { API_URL } from '@/utils/constants';
@@ -18,9 +19,8 @@ type SceneProps = {
 };
 
 const Scene = ({ topThree }: SceneProps) => {
-  if (topThree == undefined) {
-    return null;
-  }
+  const [, setMannysLoaded] = useState(0);
+  const [loadingMannys, setLoadingMannys] = useState(true);
 
   const mannyPositions = [
     [0, -80, 0],
@@ -34,46 +34,63 @@ const Scene = ({ topThree }: SceneProps) => {
     [50, 100, -35],
   ];
 
+  const onMannyLoad = useCallback(() => {
+    setMannysLoaded((prev: number) => {
+      if (prev >= 2) {
+        setLoadingMannys(false);
+      }
+      return prev + 1;
+    });
+  }, []);
+
+  if (topThree == undefined) {
+    return null;
+  }
+
   return (
-    <div className="three-container fixed inset-0">
-      <Canvas
-        linear
-        camera={{
-          fov: 45,
-          near: 1,
-          far: 2000,
-          position: [25, 100, 300],
-        }}
-        gl={{
-          antialias: true,
-          alpha: true,
-          preserveDrawingBuffer: true,
-        }}
-        onCreated={({ gl }) => {
-          gl.toneMapping = NoToneMapping;
-          gl.outputEncoding = sRGBEncoding;
-        }}
-      >
-        {topThree.map((gamer, idx) => (
-          <Fragment key={gamer.rarestManny}>
-            <Suspense fallback={null}>
-              <Text3D
-                text={`${idx + 1}. ${gamer.name}`}
-                position={textPositions[idx]}
-              />
-              <Manny
-                scale={1}
-                position={mannyPositions[idx]}
-                textureUrl={getTokenProps(gamer.rarestManny)?.textureUrl}
-                paused
-              />
-            </Suspense>
-          </Fragment>
-        ))}
-        <Controls target={[0, 15, 0]} />
-        <Lighting />
-      </Canvas>
-    </div>
+    <>
+      <div className="three-container fixed inset-0">
+        <Canvas
+          linear
+          camera={{
+            fov: 45,
+            near: 1,
+            far: 2000,
+            position: [25, 100, 300],
+          }}
+          gl={{
+            antialias: true,
+            alpha: true,
+            preserveDrawingBuffer: true,
+          }}
+          onCreated={({ gl }) => {
+            gl.toneMapping = NoToneMapping;
+            gl.outputEncoding = sRGBEncoding;
+          }}
+        >
+          {topThree.map((gamer, idx) => (
+            <Fragment key={gamer.rarestManny}>
+              <Suspense fallback={null}>
+                <Text3D
+                  text={`${idx + 1}. ${gamer.name}`}
+                  position={textPositions[idx]}
+                />
+                <Manny
+                  scale={1}
+                  position={mannyPositions[idx]}
+                  textureUrl={getTokenProps(gamer.rarestManny)?.textureUrl}
+                  onLoad={onMannyLoad}
+                  paused
+                />
+              </Suspense>
+            </Fragment>
+          ))}
+          <Controls target={[0, 15, 0]} />
+          <Lighting />
+        </Canvas>
+      </div>
+      {loadingMannys && <Loader />}
+    </>
   );
 };
 

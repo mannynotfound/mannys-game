@@ -45,6 +45,7 @@ export default function Scene({
   const router = useRouter();
   const { debug } = router.query;
   const [datData, setDatData] = useState<Offset>({});
+
   const cameraPosition = useMemo(() => {
     if (initialCameraPosition === undefined) {
       return undefined;
@@ -122,7 +123,7 @@ export default function Scene({
           onChange={onCameraChange}
           enablePan={false}
         />
-        <CameraZoom zoomedIn={zoomedIn} ogCameraPosition={cameraPosition} />
+        <CameraZoom zoomedIn={zoomedIn} />
         <Lighting />
         <Environment preset="warehouse" />
       </Canvas>

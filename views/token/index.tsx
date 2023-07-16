@@ -2,8 +2,8 @@ import { useCallback, useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
 import useSWR from 'swr';
 import { twMerge } from 'tailwind-merge';
-import { useSignMessage } from 'wagmi';
 import Loader from '@/components/Loader';
+import { defaultCameraPosition } from '@/components/three/CameraZoom';
 import { useAppDispatch, useAppSelector } from '@/views/token/hooks';
 import { fetcher, getTokenProps, usePrevious } from '@/utils';
 import { API_URL, MANNY_TEXTURE_DEFAULT } from '@/utils/constants';
@@ -31,7 +31,6 @@ function Token(props: Props) {
   }>();
   const [loading, setLoading] = useState(true);
   const [mannyLoaded, setMannyLoaded] = useState(false);
-  const { signMessageAsync } = useSignMessage();
   const state = useAppSelector((state) => state.tokens);
   const dispatch = useAppDispatch();
   const tokenState = state.tokens[tokenId] ?? initialTokenState;
@@ -54,7 +53,6 @@ function Token(props: Props) {
     if (!loading) return;
     if (userMetadata !== undefined) {
       if (initialCameraPosition === undefined) {
-        const defaultCameraPosition = { x: 25, y: 100, z: 300 };
         setInitialCameraPosition(
           userMetadata?.camera?.position ?? defaultCameraPosition
         );
@@ -92,6 +90,7 @@ function Token(props: Props) {
 
   const saveUserMetadata = useCallback(
     async (sig: `0x${string}`) => {
+      setLoading(true);
       const userMetadata: TokenUserMetadata = {
         camera: {
           position: camera.position,
@@ -124,10 +123,12 @@ function Token(props: Props) {
         }
       ).catch((error) => {
         // TODO: handle error
-        alert('metadata.fucked!');
+        setLoading(false);
+        alert('Somethings fucked up, please bug Manny to fix.');
         console.error(error);
       });
 
+      setLoading(false);
       return response;
     },
     [
@@ -139,7 +140,6 @@ function Token(props: Props) {
       accessories,
       bgColor,
       textureHD,
-      signMessageAsync,
     ]
   );
 
